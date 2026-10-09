@@ -1,0 +1,11 @@
+name: Spliceforms Packages
+generated: '2026-10-09'
+method: none
+source:
+- https://registry.npmjs.org/spliceforms (404)
+- https://registry.npmjs.org/apibanking (404)
+- https://pypi.org/pypi/spliceforms/json (404)
+- https://pypi.org/pypi/apibanking/json (404)
+- https://api.github.com/orgs/spliceforms/repos
+packages: []
+note: No first-party client library found. npm search for "spliceforms" returns no related package; the GitHub org holds only stoplight-projects (OpenAPI + Spectral ruleset), devportal and spliceforms.github.io. apibanking.com advertises SDKs as a product it builds for bank customers, not as a published Spliceforms SDK.

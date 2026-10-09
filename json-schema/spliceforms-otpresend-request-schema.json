@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-otpresend-request-schema.json",
+  "title": "OTPResendRequest",
+  "description": "Request for resending OTP  ",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPResendRequest",
+  "x-stoplight": {
+    "id": "sfzvrc1f6tv7q"
+  },
+  "type": "object",
+  "required": [
+    "session"
+  ],
+  "properties": {
+    "session": {
+      "$ref": "#/$defs/OTPAuthSession",
+      "x-stoplight": {
+        "id": "fg52rp1kugcmt"
+      }
+    }
+  },
+  "$defs": {
+    "OTPAuthSession": {
+      "type": "string",
+      "title": "OTPAuthSession",
+      "description": "Encrypted string that contains OTP Auth session information",
+      "pattern": "^.*$",
+      "minLength": 1,
+      "maxLength": 1000,
+      "x-stoplight": {
+        "id": "hlir38dud4lqd"
+      }
+    }
+  }
+}

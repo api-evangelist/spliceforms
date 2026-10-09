@@ -1,0 +1,417 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/spliceforms-auth-services-openapi.yml
+- openapi/spliceforms-capture-services-openapi.yml
+- openapi/spliceforms-data-services-openapi.yml
+- openapi/spliceforms-inquiry-services-openapi.yml
+- openapi/spliceforms-processing-service-openapi.yml
+vocabulary:
+  name: Spliceforms Domain Vocabulary
+  description: 'Terms declared by Spliceforms''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-09'
+  terms:
+  - term: OTP Auth
+    definition: API endpoints for token issuance on successful OTP authentication
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-auth-services-openapi.yml
+  - term: token-issue
+    definition: API endpoints for token issuance on successful authentication
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-capture-services-openapi.yml
+  - term: form-capture
+    definition: API endpoints for filling the application form information and submit for processing
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-capture-services-openapi.yml
+  - term: status-tracking
+    definition: API endpoints for tracking the status of application processing
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-capture-services-openapi.yml
+  - term: branches
+    definition: Endpoints for retrieving and managing bank branch information.
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-data-services-openapi.yml
+  - term: codesets
+    definition: Endpoints to retrieve codesets information
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-data-services-openapi.yml
+  - term: consents
+    definition: Endpoints dealing with consent management and definitions.
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-data-services-openapi.yml
+  - term: location
+    definition: Endpoints related to geographical locations, including states and cities.
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-data-services-openapi.yml
+  - term: account data inquiry
+    definition: Endpoints to inquire customer accounts information
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-inquiry-services-openapi.yml
+  - term: calculators
+    definition: Endpoints to fetch calculator results
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-inquiry-services-openapi.yml
+  - term: data validations
+    definition: Endpoints to verify customer information
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-inquiry-services-openapi.yml
+  - term: submission
+    definition: API endpoints to initiate the application processing
+    tags:
+    - Resource Group
+    source: openapi/spliceforms-processing-service-openapi.yml
+  - term: OTPChallengeRequest
+    definition: 'Object declared by the contract with fields: channelId, identity.'
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPChallengeRequest
+  - term: MobileAndDob
+    definition: 'Object declared by the contract with fields: mobileNo, dob.'
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/MobileAndDob
+  - term: MobileAndPan
+    definition: 'Object declared by the contract with fields: mobileNo, pan.'
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/MobileAndPan
+  - term: OTPChallengeResponse
+    definition: 'Object declared by the contract with fields: expiresAt, remainingAttempts, session.'
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPChallengeResponse
+  - term: OTPAuthSession
+    definition: Encrypted string that contains OTP Auth session information
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPAuthSession
+  - term: OTPChallengeAnswer
+    definition: 'Object declared by the contract with fields: session, otp.'
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPChallengeAnswer
+  - term: OTPAuthResponse
+    definition: 'Object declared by the contract with fields: accessToken, idToken.'
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPAuthResponse
+  - term: OTPResendRequest
+    definition: Request for resending OTP
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPResendRequest
+  - term: ProblemJson
+    definition: Problem Error Json
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/ProblemJson
+  - term: ValidationError
+    definition: Validation Error
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/ValidationError
+  - term: AccessToken
+    definition: The access tokem
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/AccessToken
+  - term: IDToken
+    definition: The ID token
+    tags:
+    - Object
+    source: openapi/spliceforms-auth-services-openapi.yml#/components/schemas/IDToken
+  - term: FDAccountWithOptionalPayout
+    definition: Represents the preferences for FD account. Optionally payout preferences also can be provided
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/FDAccountWithOptionalPayout
+  - term: FDPayout
+    definition: Specifies the methods to payout FD interest and/or principal on maturity
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/FDPayout
+  - term: InternalBankAccount
+    definition: Specifies the internal bank account details
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/InternalBankAccount
+  - term: ExternalBankAccount
+    definition: Contains details of the NEFT instrument.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ExternalBankAccount
+  - term: AccountSerialNo
+    definition: Indicates the serial number of the account which is added to the application
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/AccountSerialNo
+  - term: PayinSourcePreference
+    definition: Payment source preference for the application
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PayinSourcePreference
+  - term: PayinSourceType
+    definition: Indicates the type of source for the payin
+    tags:
+    - Enumeration
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PayinSourceType
+  - term: InternalFundingPreference
+    definition: Funds drawn from an account within the bank.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/InternalFundingPreference
+  - term: ExternalFundingPreference
+    definition: Funds sourced from an external bank account.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ExternalFundingPreference
+  - term: CombinedFundingPreference
+    definition: Funds are sourced from both internal and external accounts.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/CombinedFundingPreference
+  - term: Payin
+    definition: Contains the funding details, including the amount and payment method.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Payin
+  - term: InternalFunding
+    definition: Funds drawn from an account within the bank.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/InternalFunding
+  - term: ExternalFunding
+    definition: Funds sourced from an external bank account.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ExternalFunding
+  - term: Upi
+    definition: Contains details of the UPI instrument.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Upi
+  - term: Netbanking
+    definition: Contains details of the netbanking instrument.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Netbanking
+  - term: CombinedFunding
+    definition: Funds are sourced from both internal and external accounts.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/CombinedFunding
+  - term: PayinRequest
+    definition: Payin request
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PayinRequest
+  - term: ExternalFundingRequest
+    definition: Funds sourced from an external bank account.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ExternalFundingRequest
+  - term: UpiPaymentRequest
+    definition: Contains details of the UPI payment request
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/UpiPaymentRequest
+  - term: NetbankingPaymentRequest
+    definition: Contains details of the netbanking payment request.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/NetbankingPaymentRequest
+  - term: Device
+    definition: It captures details about the device initiating the request
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Device
+  - term: PayinInitiationResponse
+    definition: Response for the payin request
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PayinInitiationResponse
+  - term: PaymentLink
+    definition: Payment Link information
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PaymentLink
+  - term: PaymentStatusRequest
+    definition: 'Object declared by the contract with fields: requestReferenceNo.'
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PaymentStatusRequest
+  - term: PayinStatusResponse
+    definition: 'Object declared by the contract with fields: status.'
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PayinStatusResponse
+  - term: ETBFDApplicationForm
+    definition: Represents the application form to open FD account for ETB customers
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ETBFDApplicationForm
+  - term: FDApplication
+    definition: Contains the common fields for FD applications
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/FDApplication
+  - term: Declaration
+    definition: A declaration may include consent for compliance, acknowledgment of policies, and confirmation of provided details.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Declaration
+  - term: ETBIndividualApplicant
+    definition: It includes essential information of an individual
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ETBIndividualApplicant
+  - term: FDAccount
+    definition: Represents the preferences for FD account
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/FDAccount
+  - term: ETBFDApplicationStatus
+    definition: Processing status for ETB FD application
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ETBFDApplicationStatus
+  - term: AccountOpeningResult
+    definition: Account opening result
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/AccountOpeningResult
+  - term: FDAccountOpeningResult
+    definition: 'Object declared by the contract with fields: accountSerialNo, accountNo, accountType.'
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/FDAccountOpeningResult
+  - term: ApplicationInitiationRequest
+    definition: 'Object declared by the contract with fields: applicant, staff.'
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ApplicationInitiationRequest
+  - term: ApplicationInitiationResponse
+    definition: 'Object declared by the contract with fields: applicationId.'
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ApplicationInitiationResponse
+  - term: Nominee
+    definition: Specifies the personal information of the nominee designated by the account holder.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Nominee
+  - term: NomineeAddress
+    definition: Specifies the complete address details of the nominee.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/NomineeAddress
+  - term: Guardian
+    definition: It refers to the information related to the person who will act as a legal guardian for the nominee in case the nominee is a minor
+      or unable to manage their own affairs.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Guardian
+  - term: GuardianAddress
+    definition: Specifies the complete address details of the guardian.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/GuardianAddress
+  - term: Staff
+    definition: It captures key details of a bank staff involved in processing an application
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Staff
+  - term: FDTenure
+    definition: This indicates the duration for which the Fixed Deposit (FD) is held, expressed in days, months and years.
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/FDTenure
+  - term: ExternalFundingMethodType
+    definition: Options through which applicant can make a deposit using external bank accounts
+    tags:
+    - Enumeration
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/ExternalFundingMethodType
+  - term: Application
+    definition: Common/base model for application with common attributes. Concrete models for specific channel application forms should extend
+      this (using allOff construct)
+    tags:
+    - Object
+    source: openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Application
+  - term: PaginatedResponse
+    definition: 'Object declared by the contract with fields: totalRecords, totalPages, pageNo, pageSize.'
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/PaginatedResponse
+  - term: Branch
+    definition: 'Object declared by the contract with fields: code, name, ifsc, category, geoLocation, address.'
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/Branch
+  - term: GeoLocation
+    definition: Represents the geographical location
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/GeoLocation
+  - term: BranchAddress
+    definition: Specifies the complete address details of branch
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/BranchAddress
+  - term: BranchState
+    definition: Specifies the details of state where bank branch is available
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/BranchState
+  - term: BranchCity
+    definition: It specifies the details of City where bank branch is available
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/BranchCity
+  - term: BranchDistrict
+    definition: It specifies the details of District where bank branch is available
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/BranchDistrict
+  - term: ConsentDefinition
+    definition: It represents the structure of customer consent
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/ConsentDefinition
+  - term: State
+    definition: Specifies the details of state and country
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/State
+  - term: City
+    definition: Specifies the details of city, state and country.
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/City
+  - term: Codeset
+    definition: It represents a standardized collection of related codes used within the system
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/Codeset
+  - term: Code
+    definition: Code against active Codeset
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/Code
+  - term: Bank
+    definition: The bank
+    tags:
+    - Object
+    source: openapi/spliceforms-data-services-openapi.yml#/components/schemas/Bank

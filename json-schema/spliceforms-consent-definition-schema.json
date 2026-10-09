@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-consent-definition-schema.json",
+  "title": "ConsentDefinition",
+  "description": "It represents the structure of customer consent",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-data-services-openapi.yml#/components/schemas/ConsentDefinition",
+  "type": "object",
+  "x-stoplight": {
+    "id": "4i96ikl8k2mrf"
+  },
+  "required": [
+    "consentId",
+    "consentText",
+    "purpose"
+  ],
+  "properties": {
+    "consentId": {
+      "type": "integer",
+      "x-stoplight": {
+        "id": "zw7uzhi7ibo4t"
+      },
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 10000,
+      "description": "A unique identifier assigned to a consent request."
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the consent",
+      "pattern": "^\\d+(\\.\\d+)*$",
+      "minLength": 1,
+      "maxLength": 10,
+      "x-stoplight": {
+        "id": "4a4nfarsk6roe"
+      }
+    },
+    "consentText": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9.,'\"()&\\-\\[\\]\\s\\/]{10,500}$",
+      "minLength": 5,
+      "maxLength": 500,
+      "x-stoplight": {
+        "id": "c1df2li2vle9m"
+      },
+      "description": "A detailed statement that defines the terms of the consent"
+    },
+    "purpose": {
+      "type": "array",
+      "x-stoplight": {
+        "id": "yzzamluoghi2r"
+      },
+      "description": "List of applicable purpose codes for the consent definition",
+      "items": {
+        "x-stoplight": {
+          "id": "jvrysdu3j9nwi"
+        },
+        "type": "string",
+        "pattern": "^[A-Za-z0-9 .:]+$",
+        "minLength": 1,
+        "maxLength": 10
+      }
+    }
+  }
+}

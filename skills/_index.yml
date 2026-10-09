@@ -1,0 +1,16 @@
+generated: '2026-10-09'
+method: generated
+source: openapi/
+skills:
+- name: spliceforms-otp-authentication
+  file: skills/spliceforms-otp-authentication.md
+  api: openapi/spliceforms-auth-services-openapi.yml
+- name: spliceforms-application-form-capture
+  file: skills/spliceforms-application-form-capture.md
+  api: openapi/spliceforms-capture-services-openapi.yml
+- name: spliceforms-reference-data-lookup
+  file: skills/spliceforms-reference-data-lookup.md
+  api: openapi/spliceforms-data-services-openapi.yml
+- name: spliceforms-customer-verification
+  file: skills/spliceforms-customer-verification.md
+  api: openapi/spliceforms-inquiry-services-openapi.yml

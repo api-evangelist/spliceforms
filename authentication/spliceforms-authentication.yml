@@ -1,0 +1,6 @@
+name: Spliceforms Stitch Authentication
+generated: '2026-10-09'
+method: none
+source: openapi/spliceforms-auth-services-openapi.yml
+schemes: []
+note: Checked all five published OpenAPI contracts; none declares securitySchemes or a security requirement, and there are no public docs describing authentication. The auth service exposes OTP endpoints (initiateAuthentication, resendOTP, verifyOTPAndIssueToken) that return access and ID tokens to the end customer, but the API-level scheme is undocumented.

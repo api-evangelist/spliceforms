@@ -1,0 +1,16 @@
+title: VPAOwnershipCheckRequest
+x-stoplight:
+  id: hxu1n2hr57ezy
+type: object
+required:
+  - vpa
+  - customerName
+properties:
+  vpa:
+    $ref: 'stoplight://resources/overrides/ruVStTpk5p0'
+    x-stoplight:
+      id: ogg3sdxmlm5hp
+  customerName:
+    $ref: 'stoplight://resources/overrides/5yNhk1Hgfig'
+    x-stoplight:
+      id: onxexpulw73dr

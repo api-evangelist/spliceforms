@@ -1,0 +1,33 @@
+generated: '2026-10-09'
+method: none
+probe: true
+source:
+  - https://spliceforms.com/
+  - https://apibanking.com/
+note: >-
+  Checked, nothing published. spliceforms.com (200) is a single page naming Spliceforms
+  Enterprise Solutions (U72200MH2022PTC395237) whose only outbound link is apibanking.com,
+  its registered trademark. Neither site links any privacy, terms, legal, trust, security,
+  accessibility or subprocessor page. The apibanking.com WordPress page index
+  (wp-json/wp/v2/pages, 200) lists only partner-portal, contact-us, about-us, blog,
+  docs-content-platform, api-factory and home. Conventional paths all returned 404.
+probes:
+  - {url: https://spliceforms.com/, http_status: 200, fetched: '2026-10-09'}
+  - {url: https://apibanking.com/, http_status: 200, fetched: '2026-10-09'}
+  - {url: 'https://apibanking.com/wp-json/wp/v2/pages?per_page=100', http_status: 200, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/privacy, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/privacy-policy, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/terms, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/legal, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/accessibility, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/trust, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/security, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/legal/subprocessors, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://spliceforms.com/legal/dpa, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://apibanking.com/privacy, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://apibanking.com/privacy-policy, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://apibanking.com/terms, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://apibanking.com/legal, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://apibanking.com/security, http_status: 404, fetched: '2026-10-09'}
+  - {url: https://apibanking.com/trust, http_status: 404, fetched: '2026-10-09'}
+signals: {}

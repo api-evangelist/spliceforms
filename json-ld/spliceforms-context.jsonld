@@ -1,0 +1,567 @@
+{
+  "@context": {
+    "@vocab": "https://spliceforms.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "spliceforms": "https://spliceforms.com/schema#",
+    "OTPChallengeRequest": "spliceforms:OTPChallengeRequest",
+    "channelId": {
+      "@id": "spliceforms:channelId"
+    },
+    "identity": {
+      "@id": "spliceforms:identity"
+    },
+    "MobileAndDob": "spliceforms:MobileAndDob",
+    "mobileNo": {
+      "@id": "spliceforms:mobileNo"
+    },
+    "dob": {
+      "@id": "spliceforms:dob"
+    },
+    "MobileAndPan": "spliceforms:MobileAndPan",
+    "pan": {
+      "@id": "spliceforms:pan"
+    },
+    "OTPChallengeResponse": "spliceforms:OTPChallengeResponse",
+    "expiresAt": {
+      "@id": "spliceforms:expiresAt"
+    },
+    "remainingAttempts": {
+      "@id": "spliceforms:remainingAttempts",
+      "@type": "xsd:integer"
+    },
+    "session": {
+      "@id": "spliceforms:session",
+      "@type": "@id"
+    },
+    "OTPChallengeAnswer": "spliceforms:OTPChallengeAnswer",
+    "otp": {
+      "@id": "spliceforms:otp"
+    },
+    "OTPAuthResponse": "spliceforms:OTPAuthResponse",
+    "accessToken": {
+      "@id": "spliceforms:accessToken",
+      "@type": "@id"
+    },
+    "idToken": {
+      "@id": "spliceforms:idToken",
+      "@type": "@id"
+    },
+    "OTPResendRequest": "spliceforms:OTPResendRequest",
+    "ProblemJson": "spliceforms:ProblemJson",
+    "title": {
+      "@id": "spliceforms:title",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "spliceforms:status",
+      "@type": "xsd:integer"
+    },
+    "detail": {
+      "@id": "spliceforms:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "spliceforms:instance",
+      "@type": "@id"
+    },
+    "validationErrors": {
+      "@id": "spliceforms:validationErrors",
+      "@container": "@list"
+    },
+    "ValidationError": "spliceforms:ValidationError",
+    "message": {
+      "@id": "spliceforms:message",
+      "@type": "xsd:string"
+    },
+    "fields": {
+      "@id": "spliceforms:fields",
+      "@container": "@list"
+    },
+    "severity": {
+      "@id": "spliceforms:severity",
+      "@type": "xsd:string"
+    },
+    "AccessToken": "spliceforms:AccessToken",
+    "token": {
+      "@id": "spliceforms:token"
+    },
+    "IDToken": "spliceforms:IDToken",
+    "FDAccountWithOptionalPayout": "spliceforms:FDAccountWithOptionalPayout",
+    "branchCode": {
+      "@id": "spliceforms:branchCode"
+    },
+    "amount": {
+      "@id": "spliceforms:amount"
+    },
+    "interestPayoutTreatment": {
+      "@id": "spliceforms:interestPayoutTreatment"
+    },
+    "maturityInstruction": {
+      "@id": "spliceforms:maturityInstruction"
+    },
+    "tenure": {
+      "@id": "spliceforms:tenure",
+      "@type": "@id"
+    },
+    "payout": {
+      "@id": "spliceforms:payout",
+      "@type": "@id"
+    },
+    "accountSerialNo": {
+      "@id": "spliceforms:accountSerialNo",
+      "@type": "@id"
+    },
+    "FDPayout": "spliceforms:FDPayout",
+    "mode": {
+      "@id": "spliceforms:mode"
+    },
+    "instrument": {
+      "@id": "spliceforms:instrument"
+    },
+    "InternalBankAccount": "spliceforms:InternalBankAccount",
+    "accountNo": {
+      "@id": "spliceforms:accountNo"
+    },
+    "ExternalBankAccount": "spliceforms:ExternalBankAccount",
+    "accountType": {
+      "@id": "spliceforms:accountType"
+    },
+    "ifsc": {
+      "@id": "spliceforms:ifsc"
+    },
+    "PayinSourcePreference": "spliceforms:PayinSourcePreference",
+    "sourceType": {
+      "@id": "spliceforms:sourceType",
+      "@type": "@id"
+    },
+    "source": {
+      "@id": "spliceforms:source"
+    },
+    "PayinSourceType": "spliceforms:PayinSourceType",
+    "InternalFundingPreference": "spliceforms:InternalFundingPreference",
+    "account": {
+      "@id": "spliceforms:account",
+      "@type": "@id"
+    },
+    "ExternalFundingPreference": "spliceforms:ExternalFundingPreference",
+    "Payin": "spliceforms:Payin",
+    "InternalFunding": "spliceforms:InternalFunding",
+    "ExternalFunding": "spliceforms:ExternalFunding",
+    "method": {
+      "@id": "spliceforms:method",
+      "@type": "@id"
+    },
+    "Upi": "spliceforms:Upi",
+    "vpa": {
+      "@id": "spliceforms:vpa"
+    },
+    "paymentReferenceNo": {
+      "@id": "spliceforms:paymentReferenceNo"
+    },
+    "Netbanking": "spliceforms:Netbanking",
+    "CombinedFunding": "spliceforms:CombinedFunding",
+    "internal": {
+      "@id": "spliceforms:internal",
+      "@type": "@id"
+    },
+    "external": {
+      "@id": "spliceforms:external",
+      "@type": "@id"
+    },
+    "PayinRequest": "spliceforms:PayinRequest",
+    "requestReferenceNo": {
+      "@id": "spliceforms:requestReferenceNo"
+    },
+    "device": {
+      "@id": "spliceforms:device",
+      "@type": "@id"
+    },
+    "ExternalFundingRequest": "spliceforms:ExternalFundingRequest",
+    "UpiPaymentRequest": "spliceforms:UpiPaymentRequest",
+    "NetbankingPaymentRequest": "spliceforms:NetbankingPaymentRequest",
+    "Device": "spliceforms:Device",
+    "ipAddress": {
+      "@id": "spliceforms:ipAddress",
+      "@type": "xsd:string"
+    },
+    "userAgent": {
+      "@id": "spliceforms:userAgent",
+      "@type": "xsd:string"
+    },
+    "PayinInitiationResponse": "spliceforms:PayinInitiationResponse",
+    "link": {
+      "@id": "spliceforms:link",
+      "@type": "@id"
+    },
+    "orderId": {
+      "@id": "spliceforms:orderId"
+    },
+    "transactionId": {
+      "@id": "spliceforms:transactionId"
+    },
+    "PaymentLink": "spliceforms:PaymentLink",
+    "httpMethod": {
+      "@id": "spliceforms:httpMethod"
+    },
+    "url": {
+      "@id": "spliceforms:url"
+    },
+    "params": {
+      "@id": "spliceforms:params"
+    },
+    "PaymentStatusRequest": "spliceforms:PaymentStatusRequest",
+    "PayinStatusResponse": "spliceforms:PayinStatusResponse",
+    "ETBFDApplicationForm": "spliceforms:ETBFDApplicationForm",
+    "application": {
+      "@id": "spliceforms:application",
+      "@type": "@id"
+    },
+    "applicant": {
+      "@id": "spliceforms:applicant",
+      "@type": "@id"
+    },
+    "Declaration": "spliceforms:Declaration",
+    "isNominationOpted": {
+      "@id": "spliceforms:isNominationOpted",
+      "@type": "xsd:boolean"
+    },
+    "da1Nomination": {
+      "@id": "spliceforms:da1Nomination",
+      "@type": "@id"
+    },
+    "consentReferenceId": {
+      "@id": "spliceforms:consentReferenceId"
+    },
+    "ETBIndividualApplicant": "spliceforms:ETBIndividualApplicant",
+    "FDAccount": "spliceforms:FDAccount",
+    "ETBFDApplicationStatus": "spliceforms:ETBFDApplicationStatus",
+    "accountOpeningResult": {
+      "@id": "spliceforms:accountOpeningResult",
+      "@type": "@id"
+    },
+    "AccountOpeningResult": "spliceforms:AccountOpeningResult",
+    "accounts": {
+      "@id": "spliceforms:accounts",
+      "@container": "@list"
+    },
+    "FDAccountOpeningResult": "spliceforms:FDAccountOpeningResult",
+    "ApplicationInitiationRequest": "spliceforms:ApplicationInitiationRequest",
+    "staff": {
+      "@id": "spliceforms:staff",
+      "@type": "@id"
+    },
+    "ApplicationInitiationResponse": "spliceforms:ApplicationInitiationResponse",
+    "applicationId": {
+      "@id": "spliceforms:applicationId"
+    },
+    "Nominee": "spliceforms:Nominee",
+    "name": {
+      "@id": "spliceforms:name"
+    },
+    "address": {
+      "@id": "spliceforms:address",
+      "@type": "@id"
+    },
+    "relationshipWithApplicant": {
+      "@id": "spliceforms:relationshipWithApplicant"
+    },
+    "guardian": {
+      "@id": "spliceforms:guardian",
+      "@type": "@id"
+    },
+    "sharePercentage": {
+      "@id": "spliceforms:sharePercentage"
+    },
+    "NomineeAddress": "spliceforms:NomineeAddress",
+    "line": {
+      "@id": "spliceforms:line"
+    },
+    "cityCode": {
+      "@id": "spliceforms:cityCode"
+    },
+    "stateCode": {
+      "@id": "spliceforms:stateCode"
+    },
+    "countryCode": {
+      "@id": "spliceforms:countryCode"
+    },
+    "pinCode": {
+      "@id": "spliceforms:pinCode"
+    },
+    "Guardian": "spliceforms:Guardian",
+    "relationshipWithNominee": {
+      "@id": "spliceforms:relationshipWithNominee"
+    },
+    "GuardianAddress": "spliceforms:GuardianAddress",
+    "Staff": "spliceforms:Staff",
+    "lgCode": {
+      "@id": "spliceforms:lgCode"
+    },
+    "lcCode": {
+      "@id": "spliceforms:lcCode"
+    },
+    "FDTenure": "spliceforms:FDTenure",
+    "days": {
+      "@id": "spliceforms:days",
+      "@type": "xsd:integer"
+    },
+    "months": {
+      "@id": "spliceforms:months",
+      "@type": "xsd:integer"
+    },
+    "years": {
+      "@id": "spliceforms:years",
+      "@type": "xsd:integer"
+    },
+    "ExternalFundingMethodType": "spliceforms:ExternalFundingMethodType",
+    "Application": "spliceforms:Application",
+    "PaginatedResponse": "spliceforms:PaginatedResponse",
+    "totalRecords": {
+      "@id": "spliceforms:totalRecords",
+      "@type": "xsd:integer"
+    },
+    "totalPages": {
+      "@id": "spliceforms:totalPages",
+      "@type": "xsd:integer"
+    },
+    "pageNo": {
+      "@id": "spliceforms:pageNo",
+      "@type": "xsd:integer"
+    },
+    "pageSize": {
+      "@id": "spliceforms:pageSize",
+      "@type": "xsd:integer"
+    },
+    "Branch": "spliceforms:Branch",
+    "code": {
+      "@id": "spliceforms:code"
+    },
+    "category": {
+      "@id": "spliceforms:category",
+      "@type": "xsd:string"
+    },
+    "geoLocation": {
+      "@id": "spliceforms:geoLocation",
+      "@type": "@id"
+    },
+    "GeoLocation": "spliceforms:GeoLocation",
+    "latitude": {
+      "@id": "spliceforms:latitude"
+    },
+    "longitude": {
+      "@id": "spliceforms:longitude"
+    },
+    "BranchAddress": "spliceforms:BranchAddress",
+    "line1": {
+      "@id": "spliceforms:line1"
+    },
+    "line2": {
+      "@id": "spliceforms:line2"
+    },
+    "line3": {
+      "@id": "spliceforms:line3"
+    },
+    "cityName": {
+      "@id": "spliceforms:cityName"
+    },
+    "districtCode": {
+      "@id": "spliceforms:districtCode"
+    },
+    "districtName": {
+      "@id": "spliceforms:districtName"
+    },
+    "stateName": {
+      "@id": "spliceforms:stateName"
+    },
+    "countryName": {
+      "@id": "spliceforms:countryName"
+    },
+    "BranchState": "spliceforms:BranchState",
+    "BranchCity": "spliceforms:BranchCity",
+    "BranchDistrict": "spliceforms:BranchDistrict",
+    "ConsentDefinition": "spliceforms:ConsentDefinition",
+    "consentId": {
+      "@id": "spliceforms:consentId",
+      "@type": "xsd:integer"
+    },
+    "version": {
+      "@id": "spliceforms:version",
+      "@type": "xsd:string"
+    },
+    "consentText": {
+      "@id": "spliceforms:consentText",
+      "@type": "xsd:string"
+    },
+    "purpose": {
+      "@id": "spliceforms:purpose",
+      "@container": "@list"
+    },
+    "State": "spliceforms:State",
+    "City": "spliceforms:City",
+    "Codeset": "spliceforms:Codeset",
+    "codes": {
+      "@id": "spliceforms:codes",
+      "@container": "@list"
+    },
+    "Code": "spliceforms:Code",
+    "Bank": "spliceforms:Bank",
+    "OtherBankBranch": "spliceforms:OtherBankBranch",
+    "VPAOwnershipCheckRequest": "spliceforms:VPAOwnershipCheckRequest",
+    "customerName": {
+      "@id": "spliceforms:customerName"
+    },
+    "VPAOwnershipCheckResponse": "spliceforms:VPAOwnershipCheckResponse",
+    "isValid": {
+      "@id": "spliceforms:isValid",
+      "@type": "xsd:boolean"
+    },
+    "BankAccountOwnershipCheckRequest": "spliceforms:BankAccountOwnershipCheckRequest",
+    "accountHolderName": {
+      "@id": "spliceforms:accountHolderName"
+    },
+    "bankCode": {
+      "@id": "spliceforms:bankCode"
+    },
+    "BankAccountOwnershipCheckResponse": "spliceforms:BankAccountOwnershipCheckResponse",
+    "NomineeInquiryRequest": "spliceforms:NomineeInquiryRequest",
+    "FDMaturityCalculationRequest": "spliceforms:FDMaturityCalculationRequest",
+    "productType": {
+      "@id": "spliceforms:productType"
+    },
+    "AmountWithCurrency": "spliceforms:AmountWithCurrency",
+    "currency": {
+      "@id": "spliceforms:currency"
+    },
+    "FDMaturity": "spliceforms:FDMaturity",
+    "maturityAmount": {
+      "@id": "spliceforms:maturityAmount",
+      "@type": "xsd:decimal"
+    },
+    "interestRate": {
+      "@id": "spliceforms:interestRate",
+      "@type": "xsd:decimal"
+    },
+    "depositStartDate": {
+      "@id": "spliceforms:depositStartDate",
+      "@type": "xsd:date"
+    },
+    "maturityDate": {
+      "@id": "spliceforms:maturityDate",
+      "@type": "xsd:date"
+    },
+    "Form92828": "spliceforms:Form92828",
+    "Application92828": "spliceforms:Application92828",
+    "initiation": {
+      "@id": "spliceforms:initiation",
+      "@type": "@id"
+    },
+    "payin": {
+      "@id": "spliceforms:payin",
+      "@type": "@id"
+    },
+    "declaration": {
+      "@id": "spliceforms:declaration",
+      "@type": "@id"
+    },
+    "bankUse": {
+      "@id": "spliceforms:bankUse",
+      "@type": "@id"
+    },
+    "ApplicationStatus92828": "spliceforms:ApplicationStatus92828",
+    "TDS": "spliceforms:TDS",
+    "isTdsDeductionOpted": {
+      "@id": "spliceforms:isTdsDeductionOpted",
+      "@type": "xsd:boolean"
+    },
+    "tdsWaiverProofType": {
+      "@id": "spliceforms:tdsWaiverProofType",
+      "@type": "@id"
+    },
+    "TDSWaiverProofType": "spliceforms:TDSWaiverProofType",
+    "FDInternalPayout": "spliceforms:FDInternalPayout",
+    "interestPayoutAccountNo": {
+      "@id": "spliceforms:interestPayoutAccountNo",
+      "@type": "@id"
+    },
+    "principalPayoutAccountNo": {
+      "@id": "spliceforms:principalPayoutAccountNo",
+      "@type": "@id"
+    },
+    "RDAccount": "spliceforms:RDAccount",
+    "productCode": {
+      "@id": "spliceforms:productCode"
+    },
+    "operatingInstruction": {
+      "@id": "spliceforms:operatingInstruction"
+    },
+    "tds": {
+      "@id": "spliceforms:tds",
+      "@type": "@id"
+    },
+    "RDPayout": "spliceforms:RDPayout",
+    "ConvertToFD": "spliceforms:ConvertToFD",
+    "principalType": {
+      "@id": "spliceforms:principalType",
+      "@type": "@id"
+    },
+    "RDToFDConversionPrincipalType": "spliceforms:RDToFDConversionPrincipalType",
+    "Initiation": "spliceforms:Initiation",
+    "formId": {
+      "@id": "spliceforms:formId"
+    },
+    "formVersion": {
+      "@id": "spliceforms:formVersion"
+    },
+    "issuedAt": {
+      "@id": "spliceforms:issuedAt"
+    },
+    "InternalFundingMethodType": "spliceforms:InternalFundingMethodType",
+    "Cheque": "spliceforms:Cheque",
+    "chequeNo": {
+      "@id": "spliceforms:chequeNo"
+    },
+    "UPI": "spliceforms:UPI",
+    "BankUse": "spliceforms:BankUse",
+    "bankOfficerName": {
+      "@id": "spliceforms:bankOfficerName"
+    },
+    "valueDate": {
+      "@id": "spliceforms:valueDate"
+    },
+    "DA1Nomination": "spliceforms:DA1Nomination",
+    "nominee": {
+      "@id": "spliceforms:nominee",
+      "@type": "@id"
+    },
+    "ExistingNomination": "spliceforms:ExistingNomination",
+    "Witness": "spliceforms:Witness",
+    "place": {
+      "@id": "spliceforms:place",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "spliceforms:date",
+      "@type": "xsd:date"
+    },
+    "IndividualNameWithPrefix": "spliceforms:IndividualNameWithPrefix",
+    "prefix": {
+      "@id": "spliceforms:prefix"
+    },
+    "fullName": {
+      "@id": "spliceforms:fullName"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Spliceforms API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Spliceforms's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-09) from openapi/spliceforms-auth-services-openapi.yml, openapi/spliceforms-capture-services-openapi.yml, openapi/spliceforms-data-services-openapi.yml.",
+  "dcterms:created": "2026-10-09",
+  "dcterms:source": [
+    "openapi/spliceforms-auth-services-openapi.yml",
+    "openapi/spliceforms-capture-services-openapi.yml",
+    "openapi/spliceforms-data-services-openapi.yml",
+    "openapi/spliceforms-inquiry-services-openapi.yml",
+    "openapi/spliceforms-processing-service-openapi.yml"
+  ]
+}

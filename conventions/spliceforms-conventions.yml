@@ -1,0 +1,62 @@
+name: Spliceforms Stitch API Conventions
+generated: '2026-10-09'
+method: derived
+source:
+- openapi/spliceforms-auth-services-openapi.yml
+- openapi/spliceforms-capture-services-openapi.yml
+- openapi/spliceforms-data-services-openapi.yml
+- openapi/spliceforms-inquiry-services-openapi.yml
+- openapi/spliceforms-processing-service-openapi.yml
+note: Derived only from the five OpenAPI 3 contracts published in github.com/spliceforms/stoplight-projects. No public developer documentation exists for these APIs (apibanking.com is a marketing site with no docs host, pricing or reference pages), so nothing here is backed by prose docs.
+auth:
+  style: undeclared
+  description: None of the five contracts declares components.securitySchemes or a top-level security requirement. The auth service (verifyOTPAndIssueToken, POST /v1/otp/token) returns an access token and ID token after OTP verification, but how that token is presented to the other services is not specified.
+  see: authentication/spliceforms-authentication.yml
+idempotency:
+  coverage: none
+  description: No Idempotency-Key or equivalent header or body field is declared on any write operation in any contract.
+pagination:
+  style: page-number
+  params:
+  - pageNo
+  - pageSize
+  operations:
+  - fetchBranches
+  - fetchBranchStates
+  - fetchBranchCities
+  - fetchBranchDistricts
+  - fetchConsentDefinitions
+  - fetchStates
+  - fetchCities
+  - fetchCodesets
+  description: Data-services list operations take pageNo and pageSize query parameters.
+errors:
+  format: application/json body using a ProblemJson schema (RFC 7807-style fields type, title, status, detail, instance, plus validationErrors in examples)
+  content_type_declared: application/json
+  exceptions: The processing service declares a different 400 body (status, errorCode fields in its example) rather than ProblemJson.
+request_id: none declared
+versioning:
+  style: URI path prefix
+  description: Every path begins with /v1/; each contract has info.version 1.0.
+rate_limit_signaling: none declared
+reversibility:
+  status: documented
+  description: The capture API lets an application-form draft's components be removed before submission via DELETE operations. No operation cancels or withdraws a submitted application, reverses a payin, or undoes submission, and no window is stated anywhere.
+  surfaces:
+  - write: saveAccountNomination
+    reversal: deleteAccountNomination
+    window: null
+  - write: savePayinPreferences
+    reversal: deletePayinPreferences
+    window: null
+  - write: saveStaff
+    reversal: deleteStaff
+    window: null
+  - write: submitApplicationForm
+    reversal: null
+    window: null
+  - write: initiatePayin
+    reversal: null
+    window: null
+dry_run:
+  description: validateApplicationForm (POST /v1/application-forms/{applicationId}/validation) validates the form before submitApplicationForm; it is a validation step, not a general dry-run mode.

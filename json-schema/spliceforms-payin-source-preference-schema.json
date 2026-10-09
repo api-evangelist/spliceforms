@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-payin-source-preference-schema.json",
+  "title": "PayinSourcePreference",
+  "description": "Payment source preference for the application  ",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PayinSourcePreference",
+  "type": "object",
+  "properties": {
+    "sourceType": {
+      "$ref": "#/$defs/PayinSourceType"
+    },
+    "source": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/InternalFundingPreference"
+        },
+        {
+          "$ref": "#/$defs/ExternalFundingPreference"
+        },
+        {
+          "$ref": "#/$defs/CombinedFundingPreference"
+        }
+      ]
+    }
+  },
+  "required": [
+    "sourceType",
+    "source"
+  ],
+  "x-stoplight": {
+    "id": "okkw9jkejlgpl"
+  },
+  "$defs": {
+    "CombinedFundingPreference": {
+      "title": "CombinedFundingPreference",
+      "description": "Funds are sourced from both internal and external accounts.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/InternalFundingPreference"
+        },
+        {
+          "$ref": "#/$defs/ExternalFundingPreference"
+        }
+      ],
+      "x-stoplight": {
+        "id": "v0x3zc4toa407"
+      }
+    },
+    "ExternalBankAccount": {
+      "type": "object",
+      "title": "ExternalBankAccount",
+      "description": "Contains details of the NEFT instrument.",
+      "x-package": "payment.instrument",
+      "x-stoplight": {
+        "id": "jp29joi2rdyw4"
+      },
+      "required": [
+        "accountType",
+        "accountNo",
+        "ifsc"
+      ],
+      "properties": {
+        "accountType": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/tCwO6x9ZNk0"
+        },
+        "accountNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/swJoliwLU7s"
+        },
+        "ifsc": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5js4tqEmILQ"
+        }
+      }
+    },
+    "ExternalFundingPreference": {
+      "type": "object",
+      "title": "ExternalFundingPreference",
+      "description": "Funds sourced from an external bank account.",
+      "x-stoplight": {
+        "id": "o3q2qk9qvxa1k"
+      },
+      "required": [
+        "amount",
+        "account"
+      ],
+      "properties": {
+        "amount": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/wbgPBBXK2qY"
+        },
+        "account": {
+          "$ref": "#/$defs/ExternalBankAccount"
+        }
+      }
+    },
+    "InternalBankAccount": {
+      "type": "object",
+      "title": "InternalBankAccount",
+      "description": "Specifies the internal bank account details",
+      "x-stoplight": {
+        "id": "cqj717kedsbpl"
+      },
+      "required": [
+        "accountNo"
+      ],
+      "properties": {
+        "accountNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/swJoliwLU7s"
+        }
+      }
+    },
+    "InternalFundingPreference": {
+      "type": "object",
+      "title": "InternalFundingPreference",
+      "description": "Funds drawn from an account within the bank.",
+      "x-stoplight": {
+        "id": "gx4gqeyebnbjy"
+      },
+      "required": [
+        "amount",
+        "account"
+      ],
+      "properties": {
+        "amount": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/wbgPBBXK2qY"
+        },
+        "account": {
+          "$ref": "#/$defs/InternalBankAccount"
+        }
+      }
+    },
+    "PayinSourceType": {
+      "type": "string",
+      "enum": [
+        "INTERNAL",
+        "EXTERNAL",
+        "COMBINED"
+      ],
+      "title": "PayinSourceType",
+      "description": "Indicates the type of source for the payin",
+      "pattern": "^[A-Z_]+",
+      "minLength": 8,
+      "maxLength": 8,
+      "x-stoplight": {
+        "id": "5nyt7q7ez37fc"
+      }
+    }
+  }
+}

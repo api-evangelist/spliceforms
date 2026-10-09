@@ -1,0 +1,33 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/spliceforms-auth-services-openapi.yml
+- openapi/spliceforms-capture-services-openapi.yml
+- openapi/spliceforms-data-services-openapi.yml
+- openapi/spliceforms-inquiry-services-openapi.yml
+- openapi/spliceforms-processing-service-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: ProblemJson
+coverage:
+  operations: 39
+  statuses_declared: 2
+problems:
+- status: 400
+  title: Bad Request
+  description: This status code indicates that the server could not understand or process the request due to invalid
+    syntax or parameters. The client shoul
+  operations: 36
+  media_types:
+  - application/json
+  schema: ProblemJson
+- status: 500
+  title: Internal Server Error
+  description: This status code means the server ran into an unexpected problem while processing your request. It
+    indicates an issue on the server side, no
+  operations: 38
+  media_types:
+  - application/json
+  schema: ProblemJson

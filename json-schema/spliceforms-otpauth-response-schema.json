@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-otpauth-response-schema.json",
+  "title": "OTPAuthResponse",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPAuthResponse",
+  "type": "object",
+  "x-stoplight": {
+    "id": "8gfzq9ydu7h4h"
+  },
+  "required": [
+    "accessToken"
+  ],
+  "properties": {
+    "accessToken": {
+      "$ref": "#/$defs/AccessToken"
+    },
+    "idToken": {
+      "$ref": "#/$defs/IDToken"
+    }
+  },
+  "$defs": {
+    "AccessToken": {
+      "type": "object",
+      "title": "AccessToken",
+      "description": "The access tokem",
+      "x-stoplight": {
+        "id": "htg0m1yjnmnmt"
+      },
+      "required": [
+        "token",
+        "expiresAt"
+      ],
+      "properties": {
+        "token": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/ZTFcuZFw8X0"
+        },
+        "expiresAt": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/Dudc9ZZNUk4"
+        }
+      }
+    },
+    "IDToken": {
+      "type": "object",
+      "title": "IDToken",
+      "description": "The ID token",
+      "x-stoplight": {
+        "id": "q19i5cca208yy"
+      },
+      "required": [
+        "token",
+        "expiresAt"
+      ],
+      "properties": {
+        "token": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/ZTFcuZFw8X0"
+        },
+        "expiresAt": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/Dudc9ZZNUk4"
+        }
+      }
+    }
+  }
+}

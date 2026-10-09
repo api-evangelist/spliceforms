@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-fdmaturity-calculation-request-schema.json",
+  "title": "FDMaturityCalculationRequest",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-inquiry-services-openapi.yml#/components/schemas/FDMaturityCalculationRequest",
+  "type": "object",
+  "required": [
+    "mobileNo",
+    "accountNo",
+    "amount",
+    "dob",
+    "productType",
+    "interestPayoutTreatment",
+    "tenure",
+    "maturityInstruction"
+  ],
+  "properties": {
+    "mobileNo": {
+      "description": "Specifies the contact mobile number for an individual.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/LT9qrA1aRC4"
+    },
+    "accountNo": {
+      "description": "Specifies the bank account from which funds are debited.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/swJoliwLU7s"
+    },
+    "amount": {
+      "description": "The original deposit amount upon maturity or withdrawal.",
+      "$ref": "#/$defs/AmountWithCurrency"
+    },
+    "dob": {
+      "description": "The exact date on which the individual was born, including the day, month, and year.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/UEKAfGKnXtA"
+    },
+    "productType": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/eZOUNbW4Dy0"
+    },
+    "interestPayoutTreatment": {
+      "x-stoplight": {
+        "id": "27bwffgdncfw6"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GIH20YnXrJk"
+    },
+    "tenure": {
+      "$ref": "#/$defs/FDTenure"
+    },
+    "maturityInstruction": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/hNcvI153XgU"
+    }
+  },
+  "$defs": {
+    "AmountWithCurrency": {
+      "title": "AmountWithCurrency",
+      "x-stoplight": {
+        "id": "sbp1q7zyp9lec"
+      },
+      "type": "object",
+      "description": "Amount with currency code",
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "properties": {
+        "amount": {
+          "x-stoplight": {
+            "id": "zfs2glt3vns73"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/wbgPBBXK2qY"
+        },
+        "currency": {
+          "x-stoplight": {
+            "id": "trn7cym9swchs"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/euAvzUucCGw"
+        }
+      }
+    },
+    "FDTenure": {
+      "type": "object",
+      "title": "FDTenure",
+      "description": "This indicates the duration for which the Fixed Deposit (FD) is held, expressed in days, months and years.",
+      "x-stoplight": {
+        "id": "b8a8yencrf6fn"
+      },
+      "required": [
+        "days",
+        "months",
+        "years"
+      ],
+      "properties": {
+        "days": {
+          "type": "integer",
+          "description": "Tenure expressed in days",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "months": {
+          "type": "integer",
+          "description": "Tenure expressed in months",
+          "format": "int32",
+          "minimum": 6,
+          "maximum": 11
+        },
+        "years": {
+          "type": "integer",
+          "description": "Tenure expressed in years",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 10
+        }
+      }
+    }
+  }
+}

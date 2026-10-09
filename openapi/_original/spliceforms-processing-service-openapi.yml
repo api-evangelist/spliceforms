@@ -1,0 +1,1199 @@
+# x-archived-from: spliceforms-processing-service-openapi.yml
+# x-archived-on: 2026-10-09
+openapi: 3.1.0
+x-stoplight:
+  id: ya8ap8tak6e4t
+info:
+  version: '1.0'
+  title: Application Processing Service
+  summary: The processing service API is designed to process liability account opening applications
+  description: This API endpoint enables customers to submit a liability account opening applications.
+  contact:
+    name: akhilesh
+    email: api@apibanking.com
+    url: https://spliceforms.com/
+  license:
+    url: https://spliceforms.com/
+    name: Commercial
+servers:
+- url: https://api.stitch.com/processing
+paths:
+  /v1/applications/submit:
+    post:
+      summary: Submit Application
+      description: 'Single API endpoint to receive different types of application forms to open liability accounts. '
+      operationId: submitApplicationForm
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Form92828'
+            examples: {}
+      responses:
+        '200':
+          description: This status code indicates that the request was received, understood, and processed successfully by the server. The response body will contain the data requested by the client.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Indicates the overall outcome of the API request.
+                    pattern: ^success$
+                    minLength: 7
+                    maxLength: 7
+                    examples:
+                    - success
+                  message:
+                    type: string
+                    description: Provides a human-readable summary or additional details regarding the result of the FD application submission.
+                    pattern: ^FD Application submitted successfully$
+                    minLength: 1
+                    maxLength: 100
+                    examples:
+                    - FD Application submitted successfully
+                  referenceNo:
+                    type: string
+                    description: Represents the unique identifier assigned to the FD application, which can be used for tracking or referencing the submission.
+                    pattern: ^FD[A-Z]\d{9}$
+                    minLength: 12
+                    maxLength: 12
+                    examples:
+                    - FDA000000001
+                  timestamp:
+                    type: string
+                    description: Records the date and time when the response was generated.
+                    format: date-time
+                    pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$
+                    minLength: 5
+                    maxLength: 25
+                    examples:
+                    - '2024-12-15T09:30:00Z'
+                x-examples:
+                  Example 1:
+                    status: success
+                    message: FD Application submitted successfully.
+                    applicationId: AU1600000001
+                    timestamp: '2024-12-15T09:30:00Z'
+              examples:
+                Example 1:
+                  value:
+                    status: success
+                    message: FD Application submitted successfully
+                    referenceNo: FDA000000001
+                    timestamp: '2024-12-15T09:30:00Z'
+                Example 2:
+                  value:
+                    status: success
+                    message: FD Application submitted successfully
+                    referenceNo: FDA000000001
+                    timestamp: '2024-12-15T09:30:00Z'
+        '400':
+          description: This status code indicates that the server could not understand or process the request due to invalid syntax or parameters. The client should modify the request and retry.
+          content:
+            application/json:
+              schema:
+                x-examples:
+                  Example 1:
+                    status: error
+                    errorCode: '400'
+                    message: 'Invalid request data: Missing required field ''issuedAt''.'
+                    timestamp: '2024-12-15T09:35:00Z'
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: https://example.com/resources
+                    title: Unauthorized
+                    status: 200
+                    detail: api_key missing
+                    instance: https://example.com/resource
+                    validationErrors:
+                    - message: fields can not be empty
+                      properties:
+                      - '23212322'
+                      severity: ERROR
+      servers:
+      - url: https://api.stitch.com/v1
+      x-stoplight:
+        id: azqo4n2mzt8j6
+      tags:
+      - submission
+  /v1/applications/status:
+    post:
+      summary: Get Processing Status
+      description: Fetch application processing status for the given application id
+      tags:
+      - status-tracking
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatus92828'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+      operationId: get-v1-applications-status
+      x-stoplight:
+        id: ctl6btupqyab4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                applicationId:
+                  x-stoplight:
+                    id: xr6887as5tqlj
+                  x-unresolved-stoplight-ref: stoplight://resources/overrides/iHQHzZ1iQtY
+components:
+  schemas:
+    Form92828:
+      type: object
+      description: FIXED DEPOSIT / RECURRING DEPOSIT PAYIN SLIP (FD/RD) APPLICABLE FOR RESIDENT AND NON RESIDENT CUSTOMERS
+      x-stoplight:
+        id: rilisn4v2qqzp
+      title: Form92828
+      examples:
+      - applicationDetails:
+          initiation:
+            formId: '92828'
+            formVersion: '113'
+            applicationId: MB2300000001
+            channelId: '10907'
+            issuedAt: '1998-01-12'
+          payin:
+          - internalFunding:
+              amount: 1000
+              method: cheque
+              instrument:
+                chequeNo: 10293847
+          declaration:
+            optForNomination: true
+            nominationForDa1:
+              showNomineeNameOnFdAdvice: true
+              appointExistingNominee: true
+              nominee:
+                name: Ranbir Rishi Kapoor
+                dob: '1998-02-01'
+                address:
+                  line1: C 701 Lodha Belair, Vaishali Nagar
+                  cityCode: Mumbai
+                  stateCode: Maharashtra
+                  countryCode: India
+                  pinCode: '400102'
+                branchCode: '10555'
+                residenceTelephone: 2226781798
+                relationship: brother
+                guardian:
+                  name: Ranbir Rishi Kapoor
+                  age: 20
+                  address: C 701 Lodha Belair, Vaishali Nagar
+            witness:
+            - name: Ranbir Rishi Kapoor
+              address: C 701 Lodha Belair, Vaishali Nagar
+              place: Mumbai
+              date: '1998-01-12'
+          bankUse:
+            lgCode: H109
+            lcCode: H109
+            bankOfficerName: Ranbir Rishi Kapoor
+            valueDate: '2022-01-12'
+            branchCode: '10555'
+            accountNo: '102001053410'
+        applicantDetails:
+          customerId: 116728060
+          identity:
+            name:
+              prefix: Mr
+              fullName: Ranbir Rishi Kapoor
+            dob: '1998-02-01'
+            panNo: BFWPC9721A
+            isForm60Attached: true
+        accountDetails:
+          productId: '193'
+          operatingInstruction: single
+          tenure: P6M5D
+          interestRate: 9.5
+          interestPaymentFrequency: monthly
+          maturityInstruction: renewPrincipleAndInterest
+          tds:
+            isTdsDeductionOpted: true
+            tdsWaiverAttachment: form15_G_H
+          optForSweepin: true
+          payout:
+            payoutProduct: fdMaturity
+            payoutDetails:
+              transferType: internalMaturity
+              transferDetails:
+                interestAccountNo: '102001053410'
+                principalAccountNo: '102001053410'
+      required:
+      - application
+      - applicant
+      - account
+      properties:
+        application:
+          $ref: '#/components/schemas/Application92828'
+          x-stoplight:
+            id: n8ue67dzitnuh
+        applicant:
+          $ref: '#/components/schemas/ETBIndividualApplicant'
+          x-stoplight:
+            id: 0800vpaosbjg1
+        account:
+          x-stoplight:
+            id: b49sn4dhfw10g
+          oneOf:
+          - x-stoplight:
+              id: on7sl98uqmuh1
+            $ref: '#/components/schemas/FDAccount'
+          - x-stoplight:
+              id: modtf6ds1qwoa
+            $ref: '#/components/schemas/RDAccount'
+    Application92828:
+      type: object
+      title: Application92828
+      x-package: application
+      description: Represents the Application object for application form 92828
+      x-stoplight:
+        id: taydkhnrmfgqm
+      required:
+      - initiation
+      - payin
+      - declaration
+      - bankUse
+      properties:
+        initiation:
+          $ref: '#/components/schemas/Initiation'
+        payin:
+          $ref: '#/components/schemas/Payin'
+        declaration:
+          $ref: '#/components/schemas/Declaration'
+        bankUse:
+          $ref: '#/components/schemas/BankUse'
+    Declaration:
+      type: object
+      title: Declaration
+      x-package: application
+      description: A declaration may include consent for compliance, acknowledgment of policies, and confirmation of provided details.
+      x-stoplight:
+        id: d2kmi0eogtgsx
+      required:
+      - isNominationOpted
+      - nomination
+      - showNomineeNameOnFdAdvice
+      properties:
+        isNominationOpted:
+          x-stoplight:
+            id: 7dbc8qm3fmpn9
+          description: This indicates whether the account holder chooses to nominate a beneficiary who will receive the funds in the account in the event of the account holder’s demise. If boolean is true
+            then details in "nominationForDa1" has to be filled
+          type: boolean
+        nomination:
+          x-stoplight:
+            id: gdq2khgfux9po
+          oneOf:
+          - x-stoplight:
+              id: ixe4g35q3vdvs
+            $ref: '#/components/schemas/DA1Nomination'
+          - x-stoplight:
+              id: 8ybtph53cz6fu
+            $ref: '#/components/schemas/ExistingNomination'
+        showNomineeNameOnFdAdvice:
+          type: boolean
+          x-stoplight:
+            id: 2xg6amxsakpu2
+          description: Indicates whether the nominee's name should be displayed on the Fixed Deposit advice.
+        witnesses:
+          x-stoplight:
+            id: tfd5ar1r0bhcl
+          $ref: '#/components/schemas/WitnessList'
+    ETBIndividualApplicant:
+      type: object
+      title: ETBIndividualApplicant
+      x-package: applicant
+      description: Applicant includes essential information of an individual
+      x-stoplight:
+        id: nditubbu7u5h5
+      required:
+      - customerId
+      properties:
+        customerId:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/ajUxCNykrmw
+        name:
+          $ref: '#/components/schemas/IndividualNameWithPrefix'
+        dob:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/aG0y4UYcP4U
+        panNo:
+          x-stoplight:
+            id: 5mae4tbz01btr
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/MjXTu6jFfGs
+        isForm60Attached:
+          description: Indicates whether Form 60 is attached in cases where a PAN is not provided.
+          type: boolean
+    ApplicationStatus92828:
+      type: object
+      title: ApplicationStatus92828
+      description: Processing status for application
+      x-stoplight:
+        id: tmhi5v9yp9q61
+      required:
+      - status
+      properties:
+        status:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/RL5rpdrZO8o
+        accountOpeningResult:
+          oneOf:
+          - x-stoplight:
+              id: ussk8kva66n8w
+            $ref: '#/components/schemas/FDAccountOpeningResult'
+    ProblemJson:
+      type: object
+      x-stoplight:
+        id: oooamay5pgk0b
+      title: ProblemJson
+      description: Problem Error Json
+      required:
+      - title
+      - status
+      properties:
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive
+            content negotiation; see [RFC7231], Section 3.4).
+          pattern: ^[A-Za-z0-9-_]+
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Unauthorized
+          x-stoplight:
+            id: qp048dxgamcyv
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+          minimum: 1
+          maximum: 1000
+          examples:
+          - 200
+          x-stoplight:
+            id: mppplj2ikgpo5
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 5
+          maxLength: 2043
+          examples:
+          - api_key missing
+          x-stoplight:
+            id: 05ie4179zj1s5
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          format: uri
+          pattern: ^(https?|http):\/\/[^\s/$.?#].[^\s]*$
+          minLength: 5
+          maxLength: 2083
+          examples:
+          - https://example.com/resource
+          x-stoplight:
+            id: f0d9smdiysl1b
+        validationErrors:
+          type: array
+          description: Validation Errors
+          items:
+            x-stoplight:
+              id: 7vcjnrvdy7wos
+            $ref: '#/components/schemas/ValidationError'
+          x-stoplight:
+            id: uxclbrhmspafm
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    FDAccount:
+      type: object
+      title: FDAccount
+      x-package: account.fd
+      description: Represents the preferences for FD account
+      x-stoplight:
+        id: e7ex796rckz0f
+      required:
+      - operatingInstruction
+      - tenure
+      - interestRate
+      - interestPayoutTreatment
+      - maturityInstruction
+      - tds
+      - isSweepinOpted
+      - payout
+      properties:
+        productCode:
+          x-stoplight:
+            id: oe4k7frccnlnd
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/vmNsQaC93oc
+        operatingInstruction:
+          description: 'The rules or authority under which the account will be managed and operated.
+
+            The allowed values will have to comply with the values of codeset.'
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/rObdOUlIxpI
+        tenure:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/csQZLhwrNyY
+        interestRate:
+          x-stoplight:
+            id: hpzhw9b9g993c
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/XFoE2fFIVew
+        interestPayoutTreatment:
+          x-stoplight:
+            id: p8zx9hkaj4d9d
+          description: 'The interval at which interest earned on a deposit is paid out to the account holder.
+
+            The allowed values will have to comply with the values of codeset.'
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/CzwbIK795PY
+        maturityInstruction:
+          description: 'The directive given for what should happen to a deposit when it reaches the end of its term.
+
+            The allowed values will have to comply with the values of codeset.'
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/enqvw6TDHlY
+        tds:
+          $ref: '#/components/schemas/TDS'
+        isSweepinOpted:
+          description: Indicates whether the customer has opted for the Sweep In option.
+          type: boolean
+          x-stoplight:
+            id: af4fis8eryt6f
+        payout:
+          $ref: '#/components/schemas/FDPayout'
+    TDS:
+      type: object
+      title: TDS
+      x-package: account
+      description: Captures tds information such as to deduct tds yes/no and if no then attach relevant document.
+      x-stoplight:
+        id: 26t5urz0hi245
+      required:
+      - isTdsDeductionOpted
+      properties:
+        isTdsDeductionOpted:
+          type: boolean
+          description: 'Indicates whether TDS should be deducted on the interest earned from the Fixed Deposit (FD) or Recurring Deposit (RD).
+
+            If False, TdsWaiver are expected in "attach"'
+          x-stoplight:
+            id: 58fh8ae77gjnp
+        tdsWaiverProofType:
+          x-stoplight:
+            id: 6n2cexp5qwhf2
+          description: 'The tds waiver document to be selected in case when customer doesn''t want to get tds deducted.
+
+            The allowed values will have to comply with the values of codeset.'
+          $ref: '#/components/schemas/TDSWaiverProofType'
+    TDSWaiverProofType:
+      title: TDSWaiverProofType
+      type: string
+      description: Indicates the type of document proof that is attached with the application form for getting waiver on TDS.
+      x-stoplight:
+        id: gw33xz3ftldrn
+      examples:
+      - FORM_15GH
+      enum:
+      - FORM_15GH
+      - TAX_EXEMPT_LETTER
+      - CUST_ID_WAIVER
+      minLength: 9
+      maxLength: 17
+      pattern: ^[A-Z0-9_]+$
+    FDPayout:
+      title: FDPayout
+      x-package: account.fd
+      description: Specifies the methods to payout FD interest and/or principal on maturity
+      x-stoplight:
+        id: 8cv6pv3c6nh2w
+      type: object
+      required:
+      - mode
+      - instrument
+      properties:
+        mode:
+          x-stoplight:
+            id: 7qgl706xptrk5
+          description: Options provided to the applicant for maturity payout
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/xxTjGnx2gTk
+        instrument:
+          x-stoplight:
+            id: yiae4q1tjkswt
+          oneOf:
+          - $ref: '#/components/schemas/FDInternalPayout'
+          - x-stoplight:
+              id: zj96y0vp5dne1
+            $ref: '#/components/schemas/ExternalBankAccount'
+    FDInternalPayout:
+      type: object
+      title: FDInternalPayout
+      x-package: account.fd
+      x-stoplight:
+        id: 0zj03c7cha5w0
+      required:
+      - interestPayoutAccountNo
+      - principalPayoutAccountNo
+      properties:
+        interestPayoutAccountNo:
+          x-stoplight:
+            id: s32q8l8ljtsnl
+          $ref: '#/components/schemas/InternalBankAccount'
+        principalPayoutAccountNo:
+          x-stoplight:
+            id: 59ktjr8pzh64n
+          $ref: '#/components/schemas/InternalBankAccount'
+    InternalBankAccount:
+      type: object
+      title: InternalBankAccount
+      x-package: payment.instrument
+      description: Specifies the internal bank account details
+      examples:
+      - accountNo: '002001053410'
+      x-stoplight:
+        id: q5waebxxnruk6
+      required:
+      - accountNo
+      properties:
+        accountNo:
+          description: A unique identifier number assigned to a bank account.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/CXUS5RjjXpQ
+    ExternalBankAccount:
+      type: object
+      title: ExternalBankAccount
+      x-package: payment.instrument
+      description: Contains details of the NEFT instrument.
+      x-stoplight:
+        id: 7inww1mr2xuw0
+      required:
+      - accountNo
+      - ifsc
+      properties:
+        accountType:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/R8MDJ7uw3Ao
+        accountNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/CXUS5RjjXpQ
+        ifsc:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/oIlUghMdKYs
+    RDAccount:
+      type: object
+      title: RDAccount
+      x-package: account.rd
+      description: Represents the preferences for RD account
+      x-stoplight:
+        id: o6xp762tyy471
+      required:
+      - operatingInstruction
+      - tenure
+      - interestRate
+      - tds
+      - payout
+      properties:
+        productCode:
+          x-stoplight:
+            id: oe4k7msccnlnd
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/vmNsQaC93oc
+        operatingInstruction:
+          description: 'The rules or authority under which the account will be managed and operated.
+
+            The allowed values will have to comply with the values of codeset.'
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/rObdOUlIxpI
+        tenure:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/csQZLhwrNyY
+        interestRate:
+          x-stoplight:
+            id: hpzhw9b7g993c
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/XFoE2fFIVew
+        tds:
+          $ref: '#/components/schemas/TDS'
+        payout:
+          $ref: '#/components/schemas/RDPayout'
+    RDPayout:
+      type: object
+      title: RDPayout
+      x-package: account.rd
+      description: Specifies the method for disbursing the RD maturity proceeds, including both the principal and accrued interest.
+      x-stoplight:
+        id: yzab1vrzzie8f
+      required:
+      - mode
+      - instrument
+      properties:
+        mode:
+          description: Specifies the method for disbursing the RD maturity proceeds, including both the principal and accrued interest.
+          x-stoplight:
+            id: nm3gow16l09zr
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/WlSjRrHFStQ
+        instrument:
+          x-stoplight:
+            id: 0qtyb3ybwgu3v
+          oneOf:
+          - x-stoplight:
+              id: 9yx4v9a554wo3
+            $ref: '#/components/schemas/InternalBankAccount'
+          - x-stoplight:
+              id: i0nh8lp6aknmv
+            $ref: '#/components/schemas/ExternalBankAccount'
+          - x-stoplight:
+              id: 4sybmjtrdi045
+            $ref: '#/components/schemas/ConvertToFD'
+    ConvertToFD:
+      type: object
+      title: ConvertToFD
+      x-package: account.rd
+      description: Indicates the customer's choice for converting the amount to a Fixed Deposit for a tenure of 1 year and 1 day.
+      x-stoplight:
+        id: og94oxa4e6u0b
+      required:
+      - principalType
+      properties:
+        principalType:
+          description: If the customer's choice for converting the amount to a Fixed Deposit for a tenure of 1 year and 1 day is true then whether it should be only for Principal or Principal + Interest
+          $ref: '#/components/schemas/RDToFDConversionPrincipalType'
+    RDToFDConversionPrincipalType:
+      title: RDToFDConversionPrincipalType
+      type: string
+      enum:
+      - ONLY_PRINCIPAL
+      - PRINCIPAL_AND_INTEREST
+      example: ONLY_PRINCIPAL
+      pattern: ^[A-Za-z0-9_]+$
+      minLength: 2
+      maxLength: 25
+      description: Specifies the method for disbursing the RD maturity proceeds, including both the principal and accrued interest.
+      x-stoplight:
+        id: uts4z3ym7ldmh
+    Initiation:
+      type: object
+      title: Initiation
+      x-package: application
+      description: Captures metadata and submission details such as the form id, form's version, application id, issuance date, and the channel id through which the application was initiated.
+      x-stoplight:
+        id: e3u9cq6d6ezcg
+      required:
+      - formId
+      - formVersion
+      - applicationId
+      - channelId
+      - issuedAt
+      properties:
+        formId:
+          x-stoplight:
+            id: k6lnt5mpgxzv9
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/iiGPrB32Ank
+        formVersion:
+          x-stoplight:
+            id: wd47vaeyyvt78
+          description: A form version is a specific iteration of a form, identified by a version number
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/VLQ0aAoMnm0
+        applicationId:
+          x-stoplight:
+            id: m68hhd8de6gf8
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/iHQHzZ1iQtY
+        channelId:
+          x-stoplight:
+            id: oit18uxk7dn7u
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/eOB5R23etBA
+        issuedAt:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/np1JeqRzOfA
+    Payin:
+      title: Payin
+      x-package: payment
+      description: Contains the funding details, including the amount and payment method.
+      x-stoplight:
+        id: y0zcoi6f08pap
+      type: object
+      additionalProperties: false
+      required:
+      - sourceType
+      - source
+      properties:
+        sourceType:
+          x-stoplight:
+            id: vosih9eb07mr0
+          description: Indicates the type of source for the payin
+          $ref: '#/components/schemas/PayinSourceType'
+        source:
+          x-stoplight:
+            id: m3td8x1aggtc3
+          oneOf:
+          - x-stoplight:
+              id: 77vfug44rwurk
+            $ref: '#/components/schemas/InternalFunding'
+          - x-stoplight:
+              id: 6b6waes1nu7dn
+            $ref: '#/components/schemas/ExternalFunding'
+          - x-stoplight:
+              id: 90uiznbqkde7v
+            $ref: '#/components/schemas/CombinedFunding'
+    PayinSourceType:
+      title: PayinSourceType
+      description: Indicates the type of source for the payin
+      type: string
+      x-stoplight:
+        id: 7za683yp010l3
+      enum:
+      - INTERNAL
+      - EXTERNAL
+      - COMBINED
+      pattern: ^[A-Z_]+
+      minLength: 8
+      maxLength: 8
+      examples:
+      - EXTERNAL
+    InternalFunding:
+      type: object
+      title: InternalFunding
+      x-package: payment
+      description: Funds drawn from an account within the bank.
+      x-stoplight:
+        id: z37a0pyqwppgp
+      required:
+      - amount
+      - internalFundingMethod
+      - instrument
+      properties:
+        amount:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/MZwicoWokxU
+        internalFundingMethod:
+          x-stoplight:
+            id: epnbdr7i6r4t6
+          description: Options through which applicant can make a deposit with HDFC account
+          $ref: '#/components/schemas/InternalFundingMethodType'
+        instrument:
+          oneOf:
+          - $ref: '#/components/schemas/Cheque'
+          - $ref: '#/components/schemas/InternalBankAccount'
+          x-stoplight:
+            id: lhw06zs0u8esj
+    InternalFundingMethodType:
+      description: Options through which applicant can make a deposit with HDFC account
+      title: InternalFundingMethodType
+      type: string
+      x-stoplight:
+        id: h6xd7r9bk3vnm
+      enum:
+      - BANK_ACCOUNT
+      - CHEQUE
+      pattern: ^[A-Z_]+
+      minLength: 6
+      maxLength: 12
+      examples:
+      - EXTERNAL
+    Cheque:
+      type: object
+      title: Cheque
+      x-package: payment.instrument
+      description: Contains details of the cheque instrument.
+      x-stoplight:
+        id: j12nczs7clue4
+      required:
+      - chequeNo
+      properties:
+        chequeNo:
+          description: Specifies the unique numeric identifier printed on a cheque used for tracking and processing cheque-based transactions.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/BW9k4iY6NTQ
+    ExternalFunding:
+      type: object
+      title: ExternalFunding
+      x-package: payment
+      description: Funds sourced from an external bank account.
+      x-stoplight:
+        id: hx2fyfbcile37
+      required:
+      - amount
+      - externalFundingMethod
+      - instrument
+      properties:
+        amount:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/MZwicoWokxU
+        externalFundingMethod:
+          x-stoplight:
+            id: etqhsz8ky9dwq
+          description: Possible methods for getting funds from external accounts
+          $ref: '#/components/schemas/ExternalFundingMethodType'
+        instrument:
+          oneOf:
+          - $ref: '#/components/schemas/UPI'
+          - $ref: '#/components/schemas/Netbanking'
+          x-stoplight:
+            id: jmwh4nu0rw4hy
+    ExternalFundingMethodType:
+      description: Options through which applicant can make a deposit using external bank accounts
+      title: ExternalFundingMethodType
+      type: string
+      x-stoplight:
+        id: juqy97cplinyp
+      enum:
+      - UPI
+      - NETBANKING
+      pattern: ^[A-Z_]+
+      minLength: 3
+      maxLength: 10
+      examples:
+      - UPI
+    UPI:
+      type: object
+      title: UPI
+      x-package: payment.instrument
+      description: Contains details of the UPI instrument.
+      x-stoplight:
+        id: 5hkobctoawsjs
+      required:
+      - vpa
+      - account
+      properties:
+        vpa:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/3RlN1EaYMPw
+        account:
+          x-stoplight:
+            id: t9embtv36wxpz
+          $ref: '#/components/schemas/ExternalBankAccount'
+        paymentReferenceNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/6IgGrkcnBSA
+    Netbanking:
+      type: object
+      title: Netbanking
+      x-package: payment.instrument
+      description: Contains details of the netbanking instrument.
+      x-stoplight:
+        id: invjj1sx222ij
+      required:
+      - account
+      properties:
+        account:
+          x-stoplight:
+            id: dslgw91ocw3xf
+          $ref: '#/components/schemas/ExternalBankAccount'
+        paymentReferenceNo:
+          x-stoplight:
+            id: 5t3zyszady6nh
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/6IgGrkcnBSA
+    CombinedFunding:
+      title: CombinedFunding
+      description: Funds are sourced from both internal and external accounts.
+      x-stoplight:
+        id: nztq8dlqfxcxw
+      type: object
+      required:
+      - internal
+      - external
+      properties:
+        internal:
+          x-stoplight:
+            id: e4woy7sko96a8
+          $ref: '#/components/schemas/InternalFunding'
+        external:
+          x-stoplight:
+            id: e2pzhjp9emz40
+          $ref: '#/components/schemas/ExternalFunding'
+    BankUse:
+      type: object
+      x-stoplight:
+        id: 3ecnic72quaq4
+      title: BankUse
+      x-package: application
+      description: Specifies internal processing details and configurations used by the bank to handle the application.
+      required:
+      - valueDate
+      - branchCode
+      - accountNo
+      properties:
+        lgCode:
+          x-stoplight:
+            id: ccy9abfq1c3ey
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/h7aJH8CGqzs
+        lcCode:
+          x-stoplight:
+            id: xid4enzj7s0hb
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/XW1N92Wte4U
+        bankOfficerName:
+          description: Bank officer name who has assisted to open an account.
+          x-stoplight:
+            id: 0l0q596mm4aqf
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GBJp3DRz5Pc
+        valueDate:
+          x-stoplight:
+            id: hbzqedkw72zji
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/wm3wXYPgwSw
+        branchCode:
+          x-stoplight:
+            id: 0g4xh03ysn5mz
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/LjM7P7Qb4YA
+        accountNo:
+          description: Specifies the unique FD/RD account number assigned by the bank.
+          x-stoplight:
+            id: j6rdaftzupvuy
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/CXUS5RjjXpQ
+    DA1Nomination:
+      type: object
+      title: DA1Nomination
+      x-package: nomination
+      description: This form allows the account holder to specify a nominee.
+      x-stoplight:
+        id: f7l0pty1nx2i2
+      required:
+      - nominee
+      properties:
+        nominee:
+          x-stoplight:
+            id: u02shblgh8ej4
+          $ref: '#/components/schemas/Nominee'
+    Nominee:
+      type: object
+      title: Nominee
+      x-package: nomination
+      description: Specifies the personal information of the nominee designated by the account holder.
+      x-stoplight:
+        id: r69uqmh912x15
+      required:
+      - name
+      - dob
+      - address
+      - relationshipWithApplicant
+      properties:
+        name:
+          description: The full name of the individual nominated by the account holder to receive the benefits or proceeds of the account in the event of the account holder's demise.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GBJp3DRz5Pc
+        dob:
+          description: 'If nominee dob is less than 18yrs then guardian details in "guardian" has to be filled. '
+          x-stoplight:
+            id: e05ddffkcsbm6
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/aG0y4UYcP4U
+        address:
+          $ref: '#/components/schemas/NomineeAddress'
+        residenceTelephone:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/fBBveAyoqsk
+        relationshipWithApplicant:
+          x-stoplight:
+            id: 24kl1oxueeazg
+          description: 'Relationship of Nominee with Applicant/Depositor.
+
+            The allowed values will have to comply with the values of codeset'
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/dsdUUFuCV9k
+        guardian:
+          x-stoplight:
+            id: c3lxozz4q7mpz
+          $ref: '#/components/schemas/Guardian'
+    NomineeAddress:
+      type: object
+      title: NomineeAddress
+      x-package: nomination
+      description: Specifies the complete address details of the nominee.
+      x-stoplight:
+        id: 1qk1rt4rsfmap
+      required:
+      - line
+      - cityCode
+      - stateCode
+      - countryCode
+      - pinCode
+      properties:
+        line:
+          x-stoplight:
+            id: hlaqyghqmce16
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/mcFgUXbPKRw
+        cityCode:
+          x-stoplight:
+            id: tz2wyx67123dx
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/bllicKRv1IY
+        stateCode:
+          x-stoplight:
+            id: qrttuyfw447yd
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/o75BCEyPNls
+        countryCode:
+          x-stoplight:
+            id: c6v183c9m7sgb
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/XZwWWNhbNiQ
+        pinCode:
+          x-stoplight:
+            id: p6ebi59fjn101
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/oieLAlWljDg
+    Guardian:
+      type: object
+      title: Guardian
+      x-package: nomination
+      description: It refers to the information related to the person who will act as a legal guardian for the nominee in case the nominee is a minor or unable to manage their own affairs.
+      x-stoplight:
+        id: c0cac19i4oixc
+      required:
+      - name
+      - age
+      - address
+      properties:
+        name:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GBJp3DRz5Pc
+        age:
+          description: 'Guardian cannot be a minor i.e age of guardian will be greater or equal to 18 years.
+
+            '
+          x-stoplight:
+            id: 6xs6wjst5lf6r
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/BwKc6HdGJu0
+        address:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/mcFgUXbPKRw
+    ExistingNomination:
+      title: ExistingNomination
+      x-package: nomination
+      x-stoplight:
+        id: wiz3cxtcuf9um
+      type: object
+      description: 'Indicates if existing nomination is to be copied  '
+      required:
+      - accountNo
+      properties:
+        accountNo:
+          x-stoplight:
+            id: crb3omw63whoy
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/CXUS5RjjXpQ
+    WitnessList:
+      type: array
+      title: WitnessList
+      description: Witness details are captured when applicant assigns a nominee and doesn't know how to signature
+      minItems: 1
+      maxItems: 2
+      x-stoplight:
+        id: juodh53fpdzb9
+      items:
+        $ref: '#/components/schemas/Witness'
+    Witness:
+      type: object
+      title: Witness
+      x-package: application
+      description: Specifies the information of the witness required to validate and authenticate the application.
+      x-stoplight:
+        id: e5miu1hmugc2f
+      required:
+      - name
+      - address
+      - place
+      properties:
+        name:
+          description: Witness full name
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GBJp3DRz5Pc
+        address:
+          description: Witness complete address
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/mcFgUXbPKRw
+        place:
+          description: Specifies the physical location or venue relevant to the context.
+          type: string
+          minLength: 1
+          pattern: ^[A-Za-z0-9_]+$
+          example: Mumbai
+          maxLength: 20
+        date:
+          type: string
+          x-stoplight:
+            id: lsugzgf7h9oy0
+          format: date
+          pattern: ^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+          minLength: 10
+          maxLength: 10
+          example: '1998-01-12'
+          description: The date at which witness information is captured in the application
+    IndividualNameWithPrefix:
+      type: object
+      title: IndividualFullNameWithPrefix
+      x-package: applicant.individual
+      description: Individual full name with prefix
+      x-stoplight:
+        id: fyj4qz65qcm1s
+      required:
+      - prefix
+      - fullName
+      properties:
+        prefix:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/wbEq5OXsCHU
+        fullName:
+          x-stoplight:
+            id: lwmz56uvhdum2
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GBJp3DRz5Pc
+    FDAccountOpeningResult:
+      type: object
+      title: FDAccountOpeningResult
+      x-stoplight:
+        id: p30gaesnmzwua
+      required:
+      - accountSerialNo
+      - accountNo
+      properties:
+        accountSerialNo:
+          $ref: '#/components/schemas/AccountSerialNumber'
+        accountNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/CXUS5RjjXpQ
+        accountType:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/R8MDJ7uw3Ao
+    AccountSerialNumber:
+      type: integer
+      title: AccountSerialNumber
+      description: Indicates the serial number of the account which is added to the application
+      format: int32
+      minimum: 1
+      maximum: 1
+      examples:
+      - 1
+      x-stoplight:
+        id: myofrfpy3wo2a
+tags:
+- name: submission
+  description: API endpoints to initiate the application processing
+- name: status-tracking
+  description: API endpoints to track the status of application processing
+x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-processing-services/processing-service-v1.0.yaml
+x-bundled-from: openapi/_original/stitch-processing-services/processing-service-v1.0.yaml (./models refs inlined into components/schemas; stoplight:// platform overrides are not resolvable outside Stoplight
+  and are kept as x-unresolved-stoplight-ref)

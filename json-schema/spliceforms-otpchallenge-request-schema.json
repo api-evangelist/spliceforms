@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-otpchallenge-request-schema.json",
+  "title": "OTPChallengeRequest",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-auth-services-openapi.yml#/components/schemas/OTPChallengeRequest",
+  "type": "object",
+  "x-stoplight": {
+    "id": "r7ybne8md89ak"
+  },
+  "required": [
+    "channelId",
+    "identity"
+  ],
+  "properties": {
+    "channelId": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GirFFZFRFvU"
+    },
+    "identity": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/MobileAndDob"
+        },
+        {
+          "$ref": "#/$defs/MobileAndPan"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "MobileAndDob": {
+      "type": "object",
+      "title": "MobileAndDob",
+      "x-stoplight": {
+        "id": "mupp5eht54exo"
+      },
+      "required": [
+        "mobileNo",
+        "dob"
+      ],
+      "properties": {
+        "mobileNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/LT9qrA1aRC4"
+        },
+        "dob": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/UEKAfGKnXtA"
+        }
+      }
+    },
+    "MobileAndPan": {
+      "type": "object",
+      "title": "MobileAndPan",
+      "x-stoplight": {
+        "id": "w09k4eguwygih"
+      },
+      "required": [
+        "mobileNo",
+        "pan"
+      ],
+      "properties": {
+        "mobileNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/LT9qrA1aRC4"
+        },
+        "pan": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/iQ8vF5vM3JE"
+        }
+      }
+    }
+  }
+}

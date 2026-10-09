@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-fdaccount-with-optional-payout-schema.json",
+  "title": "FDAccountWithOptionalPayout",
+  "description": "Represents the preferences for FD account. Optionally payout preferences also can be provided  ",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-capture-services-openapi.yml#/components/schemas/FDAccountWithOptionalPayout",
+  "type": "object",
+  "x-stoplight": {
+    "id": "kmnqbs2c1nykz"
+  },
+  "required": [
+    "branchCode",
+    "amount",
+    "interestPayoutTreatment",
+    "maturityInstruction",
+    "tenure"
+  ],
+  "properties": {
+    "branchCode": {
+      "description": "The unique code representing the specific branch of the bank. The allowed values will have to comply with the values of \"branchCode\" codeset.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/DkpDaBt77Zw"
+    },
+    "amount": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/wbgPBBXK2qY"
+    },
+    "interestPayoutTreatment": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GIH20YnXrJk"
+    },
+    "maturityInstruction": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/hNcvI153XgU"
+    },
+    "tenure": {
+      "$ref": "#/$defs/FDTenure"
+    },
+    "payout": {
+      "$ref": "#/$defs/FDPayout"
+    },
+    "accountSerialNo": {
+      "$ref": "#/$defs/AccountSerialNo"
+    }
+  },
+  "$defs": {
+    "AccountSerialNo": {
+      "type": "integer",
+      "title": "AccountSerialNo",
+      "description": "Indicates the serial number of the account which is added to the application",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 1,
+      "x-stoplight": {
+        "id": "myofrfpy3wo2a"
+      }
+    },
+    "ExternalBankAccount": {
+      "type": "object",
+      "title": "ExternalBankAccount",
+      "description": "Contains details of the NEFT instrument.",
+      "x-package": "payment.instrument",
+      "x-stoplight": {
+        "id": "jp29joi2rdyw4"
+      },
+      "required": [
+        "accountType",
+        "accountNo",
+        "ifsc"
+      ],
+      "properties": {
+        "accountType": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/tCwO6x9ZNk0"
+        },
+        "accountNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/swJoliwLU7s"
+        },
+        "ifsc": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5js4tqEmILQ"
+        }
+      }
+    },
+    "FDPayout": {
+      "type": "object",
+      "title": "FDPayout",
+      "description": "Specifies the methods to payout FD interest and/or principal on maturity",
+      "x-package": "account.fd",
+      "x-stoplight": {
+        "id": "zi0w6z8evo404"
+      },
+      "required": [
+        "mode",
+        "instrument"
+      ],
+      "properties": {
+        "mode": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/1Ll91UtXZ2s"
+        },
+        "instrument": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/InternalBankAccount"
+            },
+            {
+              "$ref": "#/$defs/ExternalBankAccount"
+            }
+          ]
+        }
+      }
+    },
+    "FDTenure": {
+      "type": "object",
+      "title": "FDTenure",
+      "description": "This indicates the duration for which the Fixed Deposit (FD) is held, expressed in days, months and years.",
+      "x-stoplight": {
+        "id": "b8a8yencrf6fn"
+      },
+      "required": [
+        "days",
+        "months",
+        "years"
+      ],
+      "properties": {
+        "days": {
+          "type": "integer",
+          "description": "Tenure expressed in days",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "months": {
+          "type": "integer",
+          "description": "Tenure expressed in months",
+          "format": "int32",
+          "minimum": 6,
+          "maximum": 11
+        },
+        "years": {
+          "type": "integer",
+          "description": "Tenure expressed in years",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 10
+        }
+      }
+    },
+    "InternalBankAccount": {
+      "type": "object",
+      "title": "InternalBankAccount",
+      "description": "Specifies the internal bank account details",
+      "x-stoplight": {
+        "id": "cqj717kedsbpl"
+      },
+      "required": [
+        "accountNo"
+      ],
+      "properties": {
+        "accountNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/swJoliwLU7s"
+        }
+      }
+    }
+  }
+}

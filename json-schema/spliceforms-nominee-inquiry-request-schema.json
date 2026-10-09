@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-nominee-inquiry-request-schema.json",
+  "title": "NomineeInquiryRequest",
+  "description": "Account number",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-inquiry-services-openapi.yml#/components/schemas/NomineeInquiryRequest",
+  "x-stoplight": {
+    "id": "e35gdhum4bjrj"
+  },
+  "type": "object",
+  "required": [
+    "accountNo"
+  ],
+  "properties": {
+    "accountNo": {
+      "x-stoplight": {
+        "id": "ep1mruta33ktd"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/swJoliwLU7s"
+    }
+  }
+}

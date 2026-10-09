@@ -1,0 +1,351 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Inquiry Services data validations API
+  summary: List of services to inquire customer data
+  description: This API provides endpoints to retrive the information about existing customer of the bank. This information could be used by channel application forms to display on the screen or to make certain decisions during application form data capture.
+  contact:
+    name: akhilesh
+    url: https://spliceforms.com/
+    email: api@apibanking.com
+  license:
+    url: https://spliceforms.com/
+    name: Commercial
+servers:
+- url: https://api.stitch.spliceforms.com/inquiry
+tags:
+- name: data validations
+  description: Endpoints to verify customer information
+paths:
+  /v1/customer/vpa/verification:
+    post:
+      summary: Verify VPA (UPI Id)
+      description: Validates a customer's Virtual Payment Address (VPA) to ensure accuracy and correctness before processing transactions.
+      operationId: verifyCustomerVpa
+      requestBody:
+        description: Shared Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VPAOwnershipCheckRequest'
+            examples:
+              Example 1:
+                value:
+                  vpa: ranbir.kapoor@paytm
+                  customerName: Ali Akbar
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VPAOwnershipCheckResponse'
+              examples:
+                Example 1:
+                  value:
+                    isValid: true
+                Example 2:
+                  value:
+                    isValid: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      servers:
+      - url: http://localhost:3000
+      x-stoplight:
+        id: 6hs7n9a2ceoze
+      tags:
+      - data validations
+  /v1/customer/bank-account/verification:
+    post:
+      summary: Verify Bank Account
+      description: Validates a customer's bank account details to ensure accuracy before initiating transactions.
+      operationId: verifyCustomerBankAccount
+      requestBody:
+        description: Shared Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankAccountOwnershipCheckRequest'
+            examples:
+              Example 1:
+                value:
+                  accountHolderName: Ali Akbar
+                  accountNo: '102001053892'
+                  accountType: SAVINGS
+                  ifsc: HDFC0000001
+                  bank: HDFC BANK PVT LTD
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountOwnershipCheckResponse'
+              examples:
+                Example 1:
+                  value:
+                    isValid: true
+                Example 2:
+                  value:
+                    isValid: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      servers:
+      - url: http://localhost:3000
+      x-stoplight:
+        id: z72ur0s87hchj
+      tags:
+      - data validations
+components:
+  schemas:
+    VPAOwnershipCheckRequest:
+      title: VPAOwnershipCheckRequest
+      x-stoplight:
+        id: hxu1n2hr57ezy
+      type: object
+      required:
+      - vpa
+      - customerName
+      properties:
+        vpa:
+          x-stoplight:
+            id: ogg3sdxmlm5hp
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/ruVStTpk5p0
+        customerName:
+          x-stoplight:
+            id: onxexpulw73dr
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+    BankAccountOwnershipCheckRequest:
+      title: BankAccountOwnershipCheckRequest
+      x-stoplight:
+        id: a8dq2g4umclnn
+      type: object
+      required:
+      - accountHolderName
+      - accountNo
+      - accountType
+      - ifsc
+      properties:
+        accountHolderName:
+          x-stoplight:
+            id: 1eo5al4wfwbip
+          description: Account holder name associated with Bank.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+        accountNo:
+          x-stoplight:
+            id: t758265ua6izh
+          description: A unique identifier number assigned to a bank account.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
+        accountType:
+          x-stoplight:
+            id: k4lfugpho08kd
+          description: Specifies the type of bank account associated with the transaction or request. The allowed values will have to comply with the values of codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/tCwO6x9ZNk0
+        ifsc:
+          x-stoplight:
+            id: fhn7mpxnhqjvd
+          description: A unique 11-character alphanumeric code used to identify specific bank branches.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5js4tqEmILQ
+        bankCode:
+          x-stoplight:
+            id: 307xbcazmb0cr
+          description: The name of the bank.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/EDRPdrQwsaA
+    VPAOwnershipCheckResponse:
+      title: VPAOwnershipCheckResponse
+      x-stoplight:
+        id: r4eoi7ry7f8o1
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          description: Response of the VPA check
+          x-stoplight:
+            id: an8kqg2rp2y1d
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    BankAccountOwnershipCheckResponse:
+      title: BankAccountOwnershipCheckResponse
+      x-stoplight:
+        id: j3l1o3ozmith2
+      type: object
+      required:
+      - isValid
+      properties:
+        isValid:
+          type: boolean
+          x-stoplight:
+            id: 8nuki30m5guzh
+          description: indicates if the bank account ownership check was successful
+    ProblemJson:
+      type: object
+      x-stoplight:
+        id: oooamay5pgk0b
+      title: ProblemJson
+      description: Problem Error Json
+      required:
+      - title
+      - status
+      properties:
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+          pattern: ^[A-Za-z0-9-_]+
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Unauthorized
+          x-stoplight:
+            id: qp048dxgamcyv
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+          minimum: 1
+          maximum: 1000
+          examples:
+          - 200
+          x-stoplight:
+            id: mppplj2ikgpo5
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 5
+          maxLength: 2043
+          examples:
+          - api_key missing
+          x-stoplight:
+            id: 05ie4179zj1s5
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          format: uri
+          pattern: ^(https?|http):\/\/[^\s/$.?#].[^\s]*$
+          minLength: 5
+          maxLength: 2083
+          examples:
+          - https://example.com/resource
+          x-stoplight:
+            id: f0d9smdiysl1b
+        validationErrors:
+          type: array
+          description: Validation Errors
+          items:
+            x-stoplight:
+              id: 7vcjnrvdy7wos
+            $ref: '#/components/schemas/ValidationError'
+          x-stoplight:
+            id: uxclbrhmspafm
+x-stoplight:
+  id: mrnq6rlv8lmce
+x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/inquiry-services-v1.0.yaml
+x-bundled-from: openapi/_original/stitch-capture-services/inquiry-services-v1.0.yaml (./models refs inlined into components/schemas; stoplight:// platform overrides are not resolvable outside Stoplight and are kept as x-unresolved-stoplight-ref)

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-staff-schema.json",
+  "title": "Staff",
+  "description": "It captures key details of a bank staff involved in processing an application",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-capture-services-openapi.yml#/components/schemas/Staff",
+  "type": "object",
+  "x-stoplight": {
+    "id": "36aobxkwelk2l"
+  },
+  "required": [
+    "branchCode",
+    "lgCode",
+    "lcCode"
+  ],
+  "properties": {
+    "branchCode": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/DkpDaBt77Zw"
+    },
+    "lgCode": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/gHuU3wTRjT0"
+    },
+    "lcCode": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/pZLZAOMcf2s"
+    }
+  }
+}

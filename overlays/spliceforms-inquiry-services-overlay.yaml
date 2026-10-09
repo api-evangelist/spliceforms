@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: Spliceforms Inquiry Services enhancements
+  version: 1.0.0
+extends: ../openapi/_original/spliceforms-inquiry-services-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-provider: Spliceforms
+    x-api-evangelist:
+      slug: spliceforms
+      product: Stitch (apibanking.com)
+      enriched: '2026-10-09'
+- target: $.paths['/v1/customer/vpa/verification'].post
+  update:
+    x-mcp-tool: verifyCustomerVpa
+    x-agent-safe: false
+- target: $.paths['/v1/customer/bank-account/verification'].post
+  update:
+    x-mcp-tool: verifyCustomerBankAccount
+    x-agent-safe: false
+- target: $.paths['/v1/customer/accounts/nominees/get'].post
+  update:
+    x-mcp-tool: getCustomerAccountNominees
+    x-agent-safe: false
+- target: $.paths['/v1/customer/fd-maturity'].post
+  update:
+    x-mcp-tool: calculateFDMaturity
+    x-agent-safe: false

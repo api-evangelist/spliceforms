@@ -1,0 +1,300 @@
+name: Spliceforms Stitch MCP (candidate)
+type: MCPServer
+generated: '2026-10-09'
+method: derived
+source:
+- openapi/spliceforms-auth-services-openapi.yml
+- openapi/spliceforms-capture-services-openapi.yml
+- openapi/spliceforms-data-services-openapi.yml
+- openapi/spliceforms-inquiry-services-openapi.yml
+- openapi/spliceforms-processing-service-openapi.yml
+status: candidate
+description: No official Spliceforms / apibanking.com MCP server was found. This is a candidate tool list derived one-to-one from the Stitch OpenAPI operations in this repo.
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+evidence:
+- url: https://api.apibanking.com/mcp
+  status: 403
+  note: 'pre-flight: control path also 403, edge rejects before routing; proves nothing either way'
+- url: https://apibanking.com/.well-known/mcp.json
+  status: 404
+- url: https://api.stitch.spliceforms.com/mcp
+  status: no response (DNS/connection failure)
+- search: apibanking.com Spliceforms MCP server
+  result: no provider MCP server found
+tools:
+- name: initiateAuthentication
+  description: Initiate OTP Authentication Flow
+  operationId: initiateAuthentication
+  method: POST
+  path: /v1/otp/initiate
+  openapi: openapi/spliceforms-auth-services-openapi.yml
+  readOnly: false
+- name: resendOTP
+  description: Resend OTP
+  operationId: resendOTP
+  method: POST
+  path: /v1/otp/resend
+  openapi: openapi/spliceforms-auth-services-openapi.yml
+  readOnly: false
+- name: verifyOTPAndIssueToken
+  description: Verify OTP and Issue Token
+  operationId: verifyOTPAndIssueToken
+  method: POST
+  path: /v1/otp/token
+  openapi: openapi/spliceforms-auth-services-openapi.yml
+  readOnly: false
+- name: initiateApplication
+  description: Initiate application form capture
+  operationId: initiateApplication
+  method: POST
+  path: /v1/application-forms
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: saveAccount
+  description: Save Account Preferences
+  operationId: saveAccount
+  method: POST
+  path: /v1/application-forms/{applicationId}/accounts
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: fetchAccount
+  description: Fetch Account Preferences
+  operationId: fetchAccount
+  method: GET
+  path: /v1/application-forms/{applicationId}/accounts/{accountSerialNo}
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: true
+- name: saveAccountNomination
+  description: Save Nomination
+  operationId: saveAccountNomination
+  method: POST
+  path: /v1/application-forms/{applicationId}/accounts/{accountSerialNo}/nomination
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: fetchAccountNomination
+  description: Fetch Nomination
+  operationId: fetchAccountNomination
+  method: GET
+  path: /v1/application-forms/{applicationId}/accounts/{accountSerialNo}/nomination
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: true
+- name: deleteAccountNomination
+  description: Delete Nomination
+  operationId: deleteAccountNomination
+  method: DELETE
+  path: /v1/application-forms/{applicationId}/accounts/{accountSerialNo}/nomination
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: savePayinPreferences
+  description: Save Payin Preferences
+  operationId: savePayinPreferences
+  method: POST
+  path: /v1/application-forms/{applicationId}/payin-preferences
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: fetchPayinPreferences
+  description: Fetch Payin Preferences
+  operationId: fetchPayinPreferences
+  method: GET
+  path: /v1/application-forms/{applicationId}/payin-preferences
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: true
+- name: deletePayinPreferences
+  description: Delete Payin Preferences
+  operationId: deletePayinPreferences
+  method: DELETE
+  path: /v1/application-forms/{applicationId}/payin-preferences
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: saveStaff
+  description: Save Staff
+  operationId: saveStaff
+  method: POST
+  path: /v1/application-forms/{applicationId}/staff
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: fetchStaff
+  description: Fetch Staff
+  operationId: fetchStaff
+  method: GET
+  path: /v1/application-forms/{applicationId}/staff
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: true
+- name: deleteStaff
+  description: Delete Staff
+  operationId: deleteStaff
+  method: DELETE
+  path: /v1/application-forms/{applicationId}/staff
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: saveConsents
+  description: Save Consents
+  operationId: saveConsents
+  method: POST
+  path: /v1/application-forms/{applicationId}/consents
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: fetchConsents
+  description: Fetch Consents
+  operationId: fetchConsents
+  method: GET
+  path: /v1/application-forms/{applicationId}/consents
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: true
+- name: initiatePayin
+  description: Initiate Payin Request
+  operationId: initiatePayin
+  method: POST
+  path: /v1/application-forms/{applicationId}/payin
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: fetchPayinStatus
+  description: Fetch Payin Status
+  operationId: fetchPayinStatus
+  method: POST
+  path: /v1/application-forms/{applicationId}/payin/status
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: validateApplicationForm
+  description: Validate Application Form
+  operationId: validateApplicationForm
+  method: POST
+  path: /v1/application-forms/{applicationId}/validation
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: submitApplicationForm
+  description: Submit Application Form
+  operationId: submitApplicationForm
+  method: POST
+  path: /v1/application-forms/{applicationId}/submission
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: false
+- name: fetchApplicationStatus
+  description: Fetch Application Status
+  operationId: fetchApplicationStatus
+  method: GET
+  path: /v1/applications/{applicationId}/status
+  openapi: openapi/spliceforms-capture-services-openapi.yml
+  readOnly: true
+- name: fetchBranches
+  description: Fetch Branches
+  operationId: fetchBranches
+  method: GET
+  path: /v1/branches
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: fetchBranchStates
+  description: Fetch Branch States
+  operationId: fetchBranchStates
+  method: GET
+  path: /v1/branches/states
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: fetchBranchCities
+  description: Fetch Branch Cities
+  operationId: fetchBranchCities
+  method: GET
+  path: /v1/branches/cities
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: fetchBranchDistricts
+  description: Fetch Branch Districts
+  operationId: fetchBranchDistricts
+  method: GET
+  path: /v1/branches/districts
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: fetchConsentDefinitions
+  description: Fetch Consent Definitions
+  operationId: fetchConsentDefinitions
+  method: GET
+  path: /v1/consent-definitions
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: fetchStates
+  description: Fetch States
+  operationId: fetchStates
+  method: GET
+  path: /v1/states
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: fetchCities
+  description: Fetch Cities
+  operationId: fetchCities
+  method: GET
+  path: /v1/cities
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: fetchCodesets
+  description: Fetch Codesets
+  operationId: fetchCodesets
+  method: GET
+  path: /v1/codesets
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: get_v1_data_codesets_codes
+  description: Fetch Codeset Values
+  operationId: get-v1-data-codesets-codes
+  method: GET
+  path: /v1/codesets/{codeset}
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: get_v1_banks
+  description: Fetch Banks
+  operationId: get-v1-banks
+  method: GET
+  path: /v1/banks
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: get_v1_banks_branches
+  description: Fetch Branches of Other Banks
+  operationId: get-v1-banks-branches
+  method: GET
+  path: /v1/banks/branches
+  openapi: openapi/spliceforms-data-services-openapi.yml
+  readOnly: true
+- name: verifyCustomerVpa
+  description: Verify VPA (UPI Id)
+  operationId: verifyCustomerVpa
+  method: POST
+  path: /v1/customer/vpa/verification
+  openapi: openapi/spliceforms-inquiry-services-openapi.yml
+  readOnly: false
+- name: verifyCustomerBankAccount
+  description: Verify Bank Account
+  operationId: verifyCustomerBankAccount
+  method: POST
+  path: /v1/customer/bank-account/verification
+  openapi: openapi/spliceforms-inquiry-services-openapi.yml
+  readOnly: false
+- name: getCustomerAccountNominees
+  description: Fetch Account Nominees
+  operationId: getCustomerAccountNominees
+  method: POST
+  path: /v1/customer/accounts/nominees/get
+  openapi: openapi/spliceforms-inquiry-services-openapi.yml
+  readOnly: false
+- name: calculateFDMaturity
+  description: Calculate FD Maturity
+  operationId: calculateFDMaturity
+  method: POST
+  path: /v1/customer/fd-maturity
+  openapi: openapi/spliceforms-inquiry-services-openapi.yml
+  readOnly: false
+- name: processing_submitApplication
+  description: Submit Application
+  operationId: submitApplicationForm
+  method: POST
+  path: /v1/applications/submit
+  openapi: openapi/spliceforms-processing-service-openapi.yml
+  readOnly: false
+- name: get_v1_applications_status
+  description: Get Processing Status
+  operationId: get-v1-applications-status
+  method: POST
+  path: /v1/applications/status
+  openapi: openapi/spliceforms-processing-service-openapi.yml
+  readOnly: false

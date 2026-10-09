@@ -1,0 +1,57 @@
+overlay: 1.0.0
+info:
+  title: Spliceforms Data Services enhancements
+  version: 1.0.0
+extends: ../openapi/_original/spliceforms-data-services-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-provider: Spliceforms
+    x-api-evangelist:
+      slug: spliceforms
+      product: Stitch (apibanking.com)
+      enriched: '2026-10-09'
+- target: $.paths['/v1/branches'].get
+  update:
+    x-mcp-tool: fetchBranches
+    x-agent-safe: true
+- target: $.paths['/v1/branches/states'].get
+  update:
+    x-mcp-tool: fetchBranchStates
+    x-agent-safe: true
+- target: $.paths['/v1/branches/cities'].get
+  update:
+    x-mcp-tool: fetchBranchCities
+    x-agent-safe: true
+- target: $.paths['/v1/branches/districts'].get
+  update:
+    x-mcp-tool: fetchBranchDistricts
+    x-agent-safe: true
+- target: $.paths['/v1/consent-definitions'].get
+  update:
+    x-mcp-tool: fetchConsentDefinitions
+    x-agent-safe: true
+- target: $.paths['/v1/states'].get
+  update:
+    x-mcp-tool: fetchStates
+    x-agent-safe: true
+- target: $.paths['/v1/cities'].get
+  update:
+    x-mcp-tool: fetchCities
+    x-agent-safe: true
+- target: $.paths['/v1/codesets'].get
+  update:
+    x-mcp-tool: fetchCodesets
+    x-agent-safe: true
+- target: $.paths['/v1/codesets/{codeset}'].get
+  update:
+    x-mcp-tool: get_v1_data_codesets_codes
+    x-agent-safe: true
+- target: $.paths['/v1/banks'].get
+  update:
+    x-mcp-tool: get_v1_banks
+    x-agent-safe: true
+- target: $.paths['/v1/banks/branches'].get
+  update:
+    x-mcp-tool: get_v1_banks_branches
+    x-agent-safe: true

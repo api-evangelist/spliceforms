@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-payin-request-schema.json",
+  "title": "PayinRequest",
+  "description": "Payin request",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-capture-services-openapi.yml#/components/schemas/PayinRequest",
+  "type": "object",
+  "x-stoplight": {
+    "id": "odvdz2ke622gr"
+  },
+  "required": [
+    "requestReferenceNo",
+    "amount",
+    "source",
+    "device"
+  ],
+  "properties": {
+    "requestReferenceNo": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/LxUYQPKCXxM"
+    },
+    "amount": {
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/wbgPBBXK2qY"
+    },
+    "source": {
+      "$ref": "#/$defs/ExternalFundingRequest"
+    },
+    "device": {
+      "$ref": "#/$defs/Device"
+    }
+  },
+  "$defs": {
+    "Device": {
+      "type": "object",
+      "title": "Device",
+      "description": "It captures details about the device initiating the request",
+      "properties": {
+        "channelId": {
+          "type": "string",
+          "description": "The unique code representing the specific channel.",
+          "pattern": "^\\d{1,5}$",
+          "minLength": 1,
+          "maxLength": 5
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address of the device.",
+          "format": "ipv6",
+          "pattern": "^([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])$",
+          "minLength": 2,
+          "maxLength": 39
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The user agent of the device.",
+          "pattern": "^[A-Za-z ]+",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "channelId",
+        "userAgent"
+      ],
+      "x-stoplight": {
+        "id": "01tld0hvzfmpg"
+      }
+    },
+    "ExternalBankAccount": {
+      "type": "object",
+      "title": "ExternalBankAccount",
+      "description": "Contains details of the NEFT instrument.",
+      "x-package": "payment.instrument",
+      "x-stoplight": {
+        "id": "jp29joi2rdyw4"
+      },
+      "required": [
+        "accountType",
+        "accountNo",
+        "ifsc"
+      ],
+      "properties": {
+        "accountType": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/tCwO6x9ZNk0"
+        },
+        "accountNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/swJoliwLU7s"
+        },
+        "ifsc": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5js4tqEmILQ"
+        }
+      }
+    },
+    "ExternalFundingMethodType": {
+      "description": "Options through which applicant can make a deposit using external bank accounts",
+      "title": "ExternalFundingMethodType",
+      "type": "string",
+      "x-stoplight": {
+        "id": "juqy97cplinyp"
+      },
+      "enum": [
+        "UPI",
+        "NETBANKING"
+      ],
+      "pattern": "^[A-Z_]+",
+      "minLength": 3,
+      "maxLength": 10
+    },
+    "ExternalFundingRequest": {
+      "type": "object",
+      "title": "ExternalFundingRequest",
+      "description": "Funds sourced from an external bank account.",
+      "x-stoplight": {
+        "id": "eyiccvugl6ed6"
+      },
+      "required": [
+        "method",
+        "instrument"
+      ],
+      "properties": {
+        "method": {
+          "description": "Possible methods for getting funds from external accounts",
+          "$ref": "#/$defs/ExternalFundingMethodType"
+        },
+        "instrument": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/UpiPaymentRequest"
+            },
+            {
+              "$ref": "#/$defs/NetbankingPaymentRequest"
+            }
+          ]
+        }
+      }
+    },
+    "NetbankingPaymentRequest": {
+      "type": "object",
+      "title": "NetbankingPaymentRequest",
+      "description": "Contains details of the netbanking payment request.",
+      "properties": {
+        "account": {
+          "$ref": "#/$defs/ExternalBankAccount"
+        }
+      },
+      "required": [
+        "account"
+      ],
+      "x-stoplight": {
+        "id": "opeyfm5n1c05u"
+      }
+    },
+    "UpiPaymentRequest": {
+      "type": "object",
+      "title": "UpiPaymentRequest",
+      "description": "Contains details of the UPI payment request",
+      "x-stoplight": {
+        "id": "ar2fr8aiikut5"
+      },
+      "required": [
+        "vpa",
+        "account"
+      ],
+      "properties": {
+        "vpa": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/ruVStTpk5p0"
+        },
+        "account": {
+          "$ref": "#/$defs/ExternalBankAccount"
+        }
+      }
+    }
+  }
+}

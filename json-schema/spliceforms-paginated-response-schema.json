@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-paginated-response-schema.json",
+  "title": "PaginatedResponse",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-data-services-openapi.yml#/components/schemas/PaginatedResponse",
+  "type": "object",
+  "x-stoplight": {
+    "id": "cd03j7c25sy2q"
+  },
+  "required": [
+    "totalRecords",
+    "totalPages",
+    "pageNo",
+    "pageSize"
+  ],
+  "properties": {
+    "totalRecords": {
+      "type": "integer",
+      "description": "Total number of records available.",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 10000,
+      "x-stoplight": {
+        "id": "ng7t6wdgbqolv"
+      }
+    },
+    "totalPages": {
+      "type": "integer",
+      "description": "Total number of pages.",
+      "minimum": 1,
+      "maximum": 1000,
+      "format": "int32",
+      "x-stoplight": {
+        "id": "tnb60gemsmgcg"
+      }
+    },
+    "pageNo": {
+      "type": "integer",
+      "description": "Current page number.",
+      "minimum": 1,
+      "maximum": 100,
+      "format": "int32",
+      "x-stoplight": {
+        "id": "2lvw64mf3ljcq"
+      }
+    },
+    "pageSize": {
+      "type": "integer",
+      "description": "Number of records per page.",
+      "minimum": 1,
+      "maximum": 100,
+      "format": "int32",
+      "x-stoplight": {
+        "id": "lswzbcgxb87ul"
+      }
+    }
+  }
+}

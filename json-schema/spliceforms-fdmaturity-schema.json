@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-fdmaturity-schema.json",
+  "title": "FDMaturity",
+  "description": "Information related to a Fixed Deposit (FD) at the time of maturity, including the maturity amount, interest earned, start date and maturity date.",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-inquiry-services-openapi.yml#/components/schemas/FDMaturity",
+  "type": "object",
+  "x-stoplight": {
+    "id": "0g86xjf2eivg1"
+  },
+  "required": [
+    "maturityAmount",
+    "interestRate",
+    "maturityDate"
+  ],
+  "properties": {
+    "maturityAmount": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 100000000000,
+      "description": "The total amount receivable at the end of an investment term, including the principal and accumulated interest, as per the agreed-upon rate and tenure.",
+      "x-stoplight": {
+        "id": "fexwcwsspjcg2"
+      }
+    },
+    "interestRate": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 10,
+      "x-stoplight": {
+        "id": "5a6za28ekdue2"
+      },
+      "description": "The percentage at which interest is to be earned on a deposit over the specified tenure."
+    },
+    "depositStartDate": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "minLength": 10,
+      "maxLength": 10,
+      "description": "The date on which the Fixed Deposit (FD) is opened and the investment tenure begins.",
+      "x-stoplight": {
+        "id": "tc2u1z55epwe5"
+      }
+    },
+    "maturityDate": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "minLength": 10,
+      "maxLength": 10,
+      "description": "The date on which the Fixed Deposit (FD) completes its tenure, and the principal along with the accrued interest becomes available for withdrawal or renewal.",
+      "x-stoplight": {
+        "id": "vfafu4yop30eh"
+      }
+    }
+  }
+}

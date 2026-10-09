@@ -1,0 +1,1120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-form92828-schema.json",
+  "title": "Form92828",
+  "description": "FIXED DEPOSIT / RECURRING DEPOSIT PAYIN SLIP (FD/RD) APPLICABLE FOR RESIDENT AND NON RESIDENT CUSTOMERS",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-processing-service-openapi.yml#/components/schemas/Form92828",
+  "type": "object",
+  "x-stoplight": {
+    "id": "rilisn4v2qqzp"
+  },
+  "required": [
+    "application",
+    "applicant",
+    "account"
+  ],
+  "properties": {
+    "application": {
+      "$ref": "#/$defs/Application92828",
+      "x-stoplight": {
+        "id": "n8ue67dzitnuh"
+      }
+    },
+    "applicant": {
+      "$ref": "#/$defs/ETBIndividualApplicant",
+      "x-stoplight": {
+        "id": "0800vpaosbjg1"
+      }
+    },
+    "account": {
+      "x-stoplight": {
+        "id": "b49sn4dhfw10g"
+      },
+      "oneOf": [
+        {
+          "x-stoplight": {
+            "id": "on7sl98uqmuh1"
+          },
+          "$ref": "#/$defs/FDAccount"
+        },
+        {
+          "x-stoplight": {
+            "id": "modtf6ds1qwoa"
+          },
+          "$ref": "#/$defs/RDAccount"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "Application92828": {
+      "type": "object",
+      "title": "Application92828",
+      "x-package": "application",
+      "description": "Represents the Application object for application form 92828",
+      "x-stoplight": {
+        "id": "taydkhnrmfgqm"
+      },
+      "required": [
+        "initiation",
+        "payin",
+        "declaration",
+        "bankUse"
+      ],
+      "properties": {
+        "initiation": {
+          "$ref": "#/$defs/Initiation"
+        },
+        "payin": {
+          "$ref": "#/$defs/Payin"
+        },
+        "declaration": {
+          "$ref": "#/$defs/Declaration"
+        },
+        "bankUse": {
+          "$ref": "#/$defs/BankUse"
+        }
+      }
+    },
+    "BankUse": {
+      "type": "object",
+      "x-stoplight": {
+        "id": "3ecnic72quaq4"
+      },
+      "title": "BankUse",
+      "x-package": "application",
+      "description": "Specifies internal processing details and configurations used by the bank to handle the application.",
+      "required": [
+        "valueDate",
+        "branchCode",
+        "accountNo"
+      ],
+      "properties": {
+        "lgCode": {
+          "x-stoplight": {
+            "id": "ccy9abfq1c3ey"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/h7aJH8CGqzs"
+        },
+        "lcCode": {
+          "x-stoplight": {
+            "id": "xid4enzj7s0hb"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/XW1N92Wte4U"
+        },
+        "bankOfficerName": {
+          "description": "Bank officer name who has assisted to open an account.",
+          "x-stoplight": {
+            "id": "0l0q596mm4aqf"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GBJp3DRz5Pc"
+        },
+        "valueDate": {
+          "x-stoplight": {
+            "id": "hbzqedkw72zji"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/wm3wXYPgwSw"
+        },
+        "branchCode": {
+          "x-stoplight": {
+            "id": "0g4xh03ysn5mz"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/LjM7P7Qb4YA"
+        },
+        "accountNo": {
+          "description": "Specifies the unique FD/RD account number assigned by the bank.",
+          "x-stoplight": {
+            "id": "j6rdaftzupvuy"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/CXUS5RjjXpQ"
+        }
+      }
+    },
+    "Cheque": {
+      "type": "object",
+      "title": "Cheque",
+      "x-package": "payment.instrument",
+      "description": "Contains details of the cheque instrument.",
+      "x-stoplight": {
+        "id": "j12nczs7clue4"
+      },
+      "required": [
+        "chequeNo"
+      ],
+      "properties": {
+        "chequeNo": {
+          "description": "Specifies the unique numeric identifier printed on a cheque used for tracking and processing cheque-based transactions.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/BW9k4iY6NTQ"
+        }
+      }
+    },
+    "CombinedFunding": {
+      "title": "CombinedFunding",
+      "description": "Funds are sourced from both internal and external accounts.",
+      "x-stoplight": {
+        "id": "nztq8dlqfxcxw"
+      },
+      "type": "object",
+      "required": [
+        "internal",
+        "external"
+      ],
+      "properties": {
+        "internal": {
+          "x-stoplight": {
+            "id": "e4woy7sko96a8"
+          },
+          "$ref": "#/$defs/InternalFunding"
+        },
+        "external": {
+          "x-stoplight": {
+            "id": "e2pzhjp9emz40"
+          },
+          "$ref": "#/$defs/ExternalFunding"
+        }
+      }
+    },
+    "ConvertToFD": {
+      "type": "object",
+      "title": "ConvertToFD",
+      "x-package": "account.rd",
+      "description": "Indicates the customer's choice for converting the amount to a Fixed Deposit for a tenure of 1 year and 1 day.",
+      "x-stoplight": {
+        "id": "og94oxa4e6u0b"
+      },
+      "required": [
+        "principalType"
+      ],
+      "properties": {
+        "principalType": {
+          "description": "If the customer's choice for converting the amount to a Fixed Deposit for a tenure of 1 year and 1 day is true then whether it should be only for Principal or Principal + Interest",
+          "$ref": "#/$defs/RDToFDConversionPrincipalType"
+        }
+      }
+    },
+    "DA1Nomination": {
+      "type": "object",
+      "title": "DA1Nomination",
+      "x-package": "nomination",
+      "description": "This form allows the account holder to specify a nominee.",
+      "x-stoplight": {
+        "id": "f7l0pty1nx2i2"
+      },
+      "required": [
+        "nominee"
+      ],
+      "properties": {
+        "nominee": {
+          "x-stoplight": {
+            "id": "u02shblgh8ej4"
+          },
+          "$ref": "#/$defs/Nominee"
+        }
+      }
+    },
+    "Declaration": {
+      "type": "object",
+      "title": "Declaration",
+      "x-package": "application",
+      "description": "A declaration may include consent for compliance, acknowledgment of policies, and confirmation of provided details.",
+      "x-stoplight": {
+        "id": "d2kmi0eogtgsx"
+      },
+      "required": [
+        "isNominationOpted",
+        "nomination",
+        "showNomineeNameOnFdAdvice"
+      ],
+      "properties": {
+        "isNominationOpted": {
+          "x-stoplight": {
+            "id": "7dbc8qm3fmpn9"
+          },
+          "description": "This indicates whether the account holder chooses to nominate a beneficiary who will receive the funds in the account in the event of the account holder’s demise. If boolean is true then details in \"nominationForDa1\" has to be filled",
+          "type": "boolean"
+        },
+        "nomination": {
+          "x-stoplight": {
+            "id": "gdq2khgfux9po"
+          },
+          "oneOf": [
+            {
+              "x-stoplight": {
+                "id": "ixe4g35q3vdvs"
+              },
+              "$ref": "#/$defs/DA1Nomination"
+            },
+            {
+              "x-stoplight": {
+                "id": "8ybtph53cz6fu"
+              },
+              "$ref": "#/$defs/ExistingNomination"
+            }
+          ]
+        },
+        "showNomineeNameOnFdAdvice": {
+          "type": "boolean",
+          "x-stoplight": {
+            "id": "2xg6amxsakpu2"
+          },
+          "description": "Indicates whether the nominee's name should be displayed on the Fixed Deposit advice."
+        },
+        "witnesses": {
+          "x-stoplight": {
+            "id": "tfd5ar1r0bhcl"
+          },
+          "$ref": "#/$defs/WitnessList"
+        }
+      }
+    },
+    "ETBIndividualApplicant": {
+      "type": "object",
+      "title": "ETBIndividualApplicant",
+      "x-package": "applicant",
+      "description": "Applicant includes essential information of an individual",
+      "x-stoplight": {
+        "id": "nditubbu7u5h5"
+      },
+      "required": [
+        "customerId"
+      ],
+      "properties": {
+        "customerId": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/ajUxCNykrmw"
+        },
+        "name": {
+          "$ref": "#/$defs/IndividualNameWithPrefix"
+        },
+        "dob": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/aG0y4UYcP4U"
+        },
+        "panNo": {
+          "x-stoplight": {
+            "id": "5mae4tbz01btr"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/MjXTu6jFfGs"
+        },
+        "isForm60Attached": {
+          "description": "Indicates whether Form 60 is attached in cases where a PAN is not provided.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ExistingNomination": {
+      "title": "ExistingNomination",
+      "x-package": "nomination",
+      "x-stoplight": {
+        "id": "wiz3cxtcuf9um"
+      },
+      "type": "object",
+      "description": "Indicates if existing nomination is to be copied  ",
+      "required": [
+        "accountNo"
+      ],
+      "properties": {
+        "accountNo": {
+          "x-stoplight": {
+            "id": "crb3omw63whoy"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/CXUS5RjjXpQ"
+        }
+      }
+    },
+    "ExternalBankAccount": {
+      "type": "object",
+      "title": "ExternalBankAccount",
+      "x-package": "payment.instrument",
+      "description": "Contains details of the NEFT instrument.",
+      "x-stoplight": {
+        "id": "7inww1mr2xuw0"
+      },
+      "required": [
+        "accountNo",
+        "ifsc"
+      ],
+      "properties": {
+        "accountType": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/R8MDJ7uw3Ao"
+        },
+        "accountNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/CXUS5RjjXpQ"
+        },
+        "ifsc": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/oIlUghMdKYs"
+        }
+      }
+    },
+    "ExternalFunding": {
+      "type": "object",
+      "title": "ExternalFunding",
+      "x-package": "payment",
+      "description": "Funds sourced from an external bank account.",
+      "x-stoplight": {
+        "id": "hx2fyfbcile37"
+      },
+      "required": [
+        "amount",
+        "externalFundingMethod",
+        "instrument"
+      ],
+      "properties": {
+        "amount": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/MZwicoWokxU"
+        },
+        "externalFundingMethod": {
+          "x-stoplight": {
+            "id": "etqhsz8ky9dwq"
+          },
+          "description": "Possible methods for getting funds from external accounts",
+          "$ref": "#/$defs/ExternalFundingMethodType"
+        },
+        "instrument": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/UPI"
+            },
+            {
+              "$ref": "#/$defs/Netbanking"
+            }
+          ],
+          "x-stoplight": {
+            "id": "jmwh4nu0rw4hy"
+          }
+        }
+      }
+    },
+    "ExternalFundingMethodType": {
+      "description": "Options through which applicant can make a deposit using external bank accounts",
+      "title": "ExternalFundingMethodType",
+      "type": "string",
+      "x-stoplight": {
+        "id": "juqy97cplinyp"
+      },
+      "enum": [
+        "UPI",
+        "NETBANKING"
+      ],
+      "pattern": "^[A-Z_]+",
+      "minLength": 3,
+      "maxLength": 10
+    },
+    "FDAccount": {
+      "type": "object",
+      "title": "FDAccount",
+      "x-package": "account.fd",
+      "description": "Represents the preferences for FD account",
+      "x-stoplight": {
+        "id": "e7ex796rckz0f"
+      },
+      "required": [
+        "operatingInstruction",
+        "tenure",
+        "interestRate",
+        "interestPayoutTreatment",
+        "maturityInstruction",
+        "tds",
+        "isSweepinOpted",
+        "payout"
+      ],
+      "properties": {
+        "productCode": {
+          "x-stoplight": {
+            "id": "oe4k7frccnlnd"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/vmNsQaC93oc"
+        },
+        "operatingInstruction": {
+          "description": "The rules or authority under which the account will be managed and operated.\nThe allowed values will have to comply with the values of codeset.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/rObdOUlIxpI"
+        },
+        "tenure": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/csQZLhwrNyY"
+        },
+        "interestRate": {
+          "x-stoplight": {
+            "id": "hpzhw9b9g993c"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/XFoE2fFIVew"
+        },
+        "interestPayoutTreatment": {
+          "x-stoplight": {
+            "id": "p8zx9hkaj4d9d"
+          },
+          "description": "The interval at which interest earned on a deposit is paid out to the account holder.\nThe allowed values will have to comply with the values of codeset.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/CzwbIK795PY"
+        },
+        "maturityInstruction": {
+          "description": "The directive given for what should happen to a deposit when it reaches the end of its term.\nThe allowed values will have to comply with the values of codeset.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/enqvw6TDHlY"
+        },
+        "tds": {
+          "$ref": "#/$defs/TDS"
+        },
+        "isSweepinOpted": {
+          "description": "Indicates whether the customer has opted for the Sweep In option.",
+          "type": "boolean",
+          "x-stoplight": {
+            "id": "af4fis8eryt6f"
+          }
+        },
+        "payout": {
+          "$ref": "#/$defs/FDPayout"
+        }
+      }
+    },
+    "FDInternalPayout": {
+      "type": "object",
+      "title": "FDInternalPayout",
+      "x-package": "account.fd",
+      "x-stoplight": {
+        "id": "0zj03c7cha5w0"
+      },
+      "required": [
+        "interestPayoutAccountNo",
+        "principalPayoutAccountNo"
+      ],
+      "properties": {
+        "interestPayoutAccountNo": {
+          "x-stoplight": {
+            "id": "s32q8l8ljtsnl"
+          },
+          "$ref": "#/$defs/InternalBankAccount"
+        },
+        "principalPayoutAccountNo": {
+          "x-stoplight": {
+            "id": "59ktjr8pzh64n"
+          },
+          "$ref": "#/$defs/InternalBankAccount"
+        }
+      }
+    },
+    "FDPayout": {
+      "title": "FDPayout",
+      "x-package": "account.fd",
+      "description": "Specifies the methods to payout FD interest and/or principal on maturity",
+      "x-stoplight": {
+        "id": "8cv6pv3c6nh2w"
+      },
+      "type": "object",
+      "required": [
+        "mode",
+        "instrument"
+      ],
+      "properties": {
+        "mode": {
+          "x-stoplight": {
+            "id": "7qgl706xptrk5"
+          },
+          "description": "Options provided to the applicant for maturity payout",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/xxTjGnx2gTk"
+        },
+        "instrument": {
+          "x-stoplight": {
+            "id": "yiae4q1tjkswt"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FDInternalPayout"
+            },
+            {
+              "x-stoplight": {
+                "id": "zj96y0vp5dne1"
+              },
+              "$ref": "#/$defs/ExternalBankAccount"
+            }
+          ]
+        }
+      }
+    },
+    "Guardian": {
+      "type": "object",
+      "title": "Guardian",
+      "x-package": "nomination",
+      "description": "It refers to the information related to the person who will act as a legal guardian for the nominee in case the nominee is a minor or unable to manage their own affairs.",
+      "x-stoplight": {
+        "id": "c0cac19i4oixc"
+      },
+      "required": [
+        "name",
+        "age",
+        "address"
+      ],
+      "properties": {
+        "name": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GBJp3DRz5Pc"
+        },
+        "age": {
+          "description": "Guardian cannot be a minor i.e age of guardian will be greater or equal to 18 years.\n",
+          "x-stoplight": {
+            "id": "6xs6wjst5lf6r"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/BwKc6HdGJu0"
+        },
+        "address": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/mcFgUXbPKRw"
+        }
+      }
+    },
+    "IndividualNameWithPrefix": {
+      "type": "object",
+      "title": "IndividualFullNameWithPrefix",
+      "x-package": "applicant.individual",
+      "description": "Individual full name with prefix",
+      "x-stoplight": {
+        "id": "fyj4qz65qcm1s"
+      },
+      "required": [
+        "prefix",
+        "fullName"
+      ],
+      "properties": {
+        "prefix": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/wbEq5OXsCHU"
+        },
+        "fullName": {
+          "x-stoplight": {
+            "id": "lwmz56uvhdum2"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GBJp3DRz5Pc"
+        }
+      }
+    },
+    "Initiation": {
+      "type": "object",
+      "title": "Initiation",
+      "x-package": "application",
+      "description": "Captures metadata and submission details such as the form id, form's version, application id, issuance date, and the channel id through which the application was initiated.",
+      "x-stoplight": {
+        "id": "e3u9cq6d6ezcg"
+      },
+      "required": [
+        "formId",
+        "formVersion",
+        "applicationId",
+        "channelId",
+        "issuedAt"
+      ],
+      "properties": {
+        "formId": {
+          "x-stoplight": {
+            "id": "k6lnt5mpgxzv9"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/iiGPrB32Ank"
+        },
+        "formVersion": {
+          "x-stoplight": {
+            "id": "wd47vaeyyvt78"
+          },
+          "description": "A form version is a specific iteration of a form, identified by a version number",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/VLQ0aAoMnm0"
+        },
+        "applicationId": {
+          "x-stoplight": {
+            "id": "m68hhd8de6gf8"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/iHQHzZ1iQtY"
+        },
+        "channelId": {
+          "x-stoplight": {
+            "id": "oit18uxk7dn7u"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/eOB5R23etBA"
+        },
+        "issuedAt": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/np1JeqRzOfA"
+        }
+      }
+    },
+    "InternalBankAccount": {
+      "type": "object",
+      "title": "InternalBankAccount",
+      "x-package": "payment.instrument",
+      "description": "Specifies the internal bank account details",
+      "x-stoplight": {
+        "id": "q5waebxxnruk6"
+      },
+      "required": [
+        "accountNo"
+      ],
+      "properties": {
+        "accountNo": {
+          "description": "A unique identifier number assigned to a bank account.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/CXUS5RjjXpQ"
+        }
+      }
+    },
+    "InternalFunding": {
+      "type": "object",
+      "title": "InternalFunding",
+      "x-package": "payment",
+      "description": "Funds drawn from an account within the bank.",
+      "x-stoplight": {
+        "id": "z37a0pyqwppgp"
+      },
+      "required": [
+        "amount",
+        "internalFundingMethod",
+        "instrument"
+      ],
+      "properties": {
+        "amount": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/MZwicoWokxU"
+        },
+        "internalFundingMethod": {
+          "x-stoplight": {
+            "id": "epnbdr7i6r4t6"
+          },
+          "description": "Options through which applicant can make a deposit with HDFC account",
+          "$ref": "#/$defs/InternalFundingMethodType"
+        },
+        "instrument": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Cheque"
+            },
+            {
+              "$ref": "#/$defs/InternalBankAccount"
+            }
+          ],
+          "x-stoplight": {
+            "id": "lhw06zs0u8esj"
+          }
+        }
+      }
+    },
+    "InternalFundingMethodType": {
+      "description": "Options through which applicant can make a deposit with HDFC account",
+      "title": "InternalFundingMethodType",
+      "type": "string",
+      "x-stoplight": {
+        "id": "h6xd7r9bk3vnm"
+      },
+      "enum": [
+        "BANK_ACCOUNT",
+        "CHEQUE"
+      ],
+      "pattern": "^[A-Z_]+",
+      "minLength": 6,
+      "maxLength": 12
+    },
+    "Netbanking": {
+      "type": "object",
+      "title": "Netbanking",
+      "x-package": "payment.instrument",
+      "description": "Contains details of the netbanking instrument.",
+      "x-stoplight": {
+        "id": "invjj1sx222ij"
+      },
+      "required": [
+        "account"
+      ],
+      "properties": {
+        "account": {
+          "x-stoplight": {
+            "id": "dslgw91ocw3xf"
+          },
+          "$ref": "#/$defs/ExternalBankAccount"
+        },
+        "paymentReferenceNo": {
+          "x-stoplight": {
+            "id": "5t3zyszady6nh"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/6IgGrkcnBSA"
+        }
+      }
+    },
+    "Nominee": {
+      "type": "object",
+      "title": "Nominee",
+      "x-package": "nomination",
+      "description": "Specifies the personal information of the nominee designated by the account holder.",
+      "x-stoplight": {
+        "id": "r69uqmh912x15"
+      },
+      "required": [
+        "name",
+        "dob",
+        "address",
+        "relationshipWithApplicant"
+      ],
+      "properties": {
+        "name": {
+          "description": "The full name of the individual nominated by the account holder to receive the benefits or proceeds of the account in the event of the account holder's demise.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GBJp3DRz5Pc"
+        },
+        "dob": {
+          "description": "If nominee dob is less than 18yrs then guardian details in \"guardian\" has to be filled. ",
+          "x-stoplight": {
+            "id": "e05ddffkcsbm6"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/aG0y4UYcP4U"
+        },
+        "address": {
+          "$ref": "#/$defs/NomineeAddress"
+        },
+        "residenceTelephone": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/fBBveAyoqsk"
+        },
+        "relationshipWithApplicant": {
+          "x-stoplight": {
+            "id": "24kl1oxueeazg"
+          },
+          "description": "Relationship of Nominee with Applicant/Depositor.\nThe allowed values will have to comply with the values of codeset",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/dsdUUFuCV9k"
+        },
+        "guardian": {
+          "x-stoplight": {
+            "id": "c3lxozz4q7mpz"
+          },
+          "$ref": "#/$defs/Guardian"
+        }
+      }
+    },
+    "NomineeAddress": {
+      "type": "object",
+      "title": "NomineeAddress",
+      "x-package": "nomination",
+      "description": "Specifies the complete address details of the nominee.",
+      "x-stoplight": {
+        "id": "1qk1rt4rsfmap"
+      },
+      "required": [
+        "line",
+        "cityCode",
+        "stateCode",
+        "countryCode",
+        "pinCode"
+      ],
+      "properties": {
+        "line": {
+          "x-stoplight": {
+            "id": "hlaqyghqmce16"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/mcFgUXbPKRw"
+        },
+        "cityCode": {
+          "x-stoplight": {
+            "id": "tz2wyx67123dx"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/bllicKRv1IY"
+        },
+        "stateCode": {
+          "x-stoplight": {
+            "id": "qrttuyfw447yd"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/o75BCEyPNls"
+        },
+        "countryCode": {
+          "x-stoplight": {
+            "id": "c6v183c9m7sgb"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/XZwWWNhbNiQ"
+        },
+        "pinCode": {
+          "x-stoplight": {
+            "id": "p6ebi59fjn101"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/oieLAlWljDg"
+        }
+      }
+    },
+    "Payin": {
+      "title": "Payin",
+      "x-package": "payment",
+      "description": "Contains the funding details, including the amount and payment method.",
+      "x-stoplight": {
+        "id": "y0zcoi6f08pap"
+      },
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceType",
+        "source"
+      ],
+      "properties": {
+        "sourceType": {
+          "x-stoplight": {
+            "id": "vosih9eb07mr0"
+          },
+          "description": "Indicates the type of source for the payin",
+          "$ref": "#/$defs/PayinSourceType"
+        },
+        "source": {
+          "x-stoplight": {
+            "id": "m3td8x1aggtc3"
+          },
+          "oneOf": [
+            {
+              "x-stoplight": {
+                "id": "77vfug44rwurk"
+              },
+              "$ref": "#/$defs/InternalFunding"
+            },
+            {
+              "x-stoplight": {
+                "id": "6b6waes1nu7dn"
+              },
+              "$ref": "#/$defs/ExternalFunding"
+            },
+            {
+              "x-stoplight": {
+                "id": "90uiznbqkde7v"
+              },
+              "$ref": "#/$defs/CombinedFunding"
+            }
+          ]
+        }
+      }
+    },
+    "PayinSourceType": {
+      "title": "PayinSourceType",
+      "description": "Indicates the type of source for the payin",
+      "type": "string",
+      "x-stoplight": {
+        "id": "7za683yp010l3"
+      },
+      "enum": [
+        "INTERNAL",
+        "EXTERNAL",
+        "COMBINED"
+      ],
+      "pattern": "^[A-Z_]+",
+      "minLength": 8,
+      "maxLength": 8
+    },
+    "RDAccount": {
+      "type": "object",
+      "title": "RDAccount",
+      "x-package": "account.rd",
+      "description": "Represents the preferences for RD account",
+      "x-stoplight": {
+        "id": "o6xp762tyy471"
+      },
+      "required": [
+        "operatingInstruction",
+        "tenure",
+        "interestRate",
+        "tds",
+        "payout"
+      ],
+      "properties": {
+        "productCode": {
+          "x-stoplight": {
+            "id": "oe4k7msccnlnd"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/vmNsQaC93oc"
+        },
+        "operatingInstruction": {
+          "description": "The rules or authority under which the account will be managed and operated.\nThe allowed values will have to comply with the values of codeset.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/rObdOUlIxpI"
+        },
+        "tenure": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/csQZLhwrNyY"
+        },
+        "interestRate": {
+          "x-stoplight": {
+            "id": "hpzhw9b7g993c"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/XFoE2fFIVew"
+        },
+        "tds": {
+          "$ref": "#/$defs/TDS"
+        },
+        "payout": {
+          "$ref": "#/$defs/RDPayout"
+        }
+      }
+    },
+    "RDPayout": {
+      "type": "object",
+      "title": "RDPayout",
+      "x-package": "account.rd",
+      "description": "Specifies the method for disbursing the RD maturity proceeds, including both the principal and accrued interest.",
+      "x-stoplight": {
+        "id": "yzab1vrzzie8f"
+      },
+      "required": [
+        "mode",
+        "instrument"
+      ],
+      "properties": {
+        "mode": {
+          "description": "Specifies the method for disbursing the RD maturity proceeds, including both the principal and accrued interest.",
+          "x-stoplight": {
+            "id": "nm3gow16l09zr"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/WlSjRrHFStQ"
+        },
+        "instrument": {
+          "x-stoplight": {
+            "id": "0qtyb3ybwgu3v"
+          },
+          "oneOf": [
+            {
+              "x-stoplight": {
+                "id": "9yx4v9a554wo3"
+              },
+              "$ref": "#/$defs/InternalBankAccount"
+            },
+            {
+              "x-stoplight": {
+                "id": "i0nh8lp6aknmv"
+              },
+              "$ref": "#/$defs/ExternalBankAccount"
+            },
+            {
+              "x-stoplight": {
+                "id": "4sybmjtrdi045"
+              },
+              "$ref": "#/$defs/ConvertToFD"
+            }
+          ]
+        }
+      }
+    },
+    "RDToFDConversionPrincipalType": {
+      "title": "RDToFDConversionPrincipalType",
+      "type": "string",
+      "enum": [
+        "ONLY_PRINCIPAL",
+        "PRINCIPAL_AND_INTEREST"
+      ],
+      "pattern": "^[A-Za-z0-9_]+$",
+      "minLength": 2,
+      "maxLength": 25,
+      "description": "Specifies the method for disbursing the RD maturity proceeds, including both the principal and accrued interest.",
+      "x-stoplight": {
+        "id": "uts4z3ym7ldmh"
+      }
+    },
+    "TDS": {
+      "type": "object",
+      "title": "TDS",
+      "x-package": "account",
+      "description": "Captures tds information such as to deduct tds yes/no and if no then attach relevant document.",
+      "x-stoplight": {
+        "id": "26t5urz0hi245"
+      },
+      "required": [
+        "isTdsDeductionOpted"
+      ],
+      "properties": {
+        "isTdsDeductionOpted": {
+          "type": "boolean",
+          "description": "Indicates whether TDS should be deducted on the interest earned from the Fixed Deposit (FD) or Recurring Deposit (RD).\nIf False, TdsWaiver are expected in \"attach\"",
+          "x-stoplight": {
+            "id": "58fh8ae77gjnp"
+          }
+        },
+        "tdsWaiverProofType": {
+          "x-stoplight": {
+            "id": "6n2cexp5qwhf2"
+          },
+          "description": "The tds waiver document to be selected in case when customer doesn't want to get tds deducted.\nThe allowed values will have to comply with the values of codeset.",
+          "$ref": "#/$defs/TDSWaiverProofType"
+        }
+      }
+    },
+    "TDSWaiverProofType": {
+      "title": "TDSWaiverProofType",
+      "type": "string",
+      "description": "Indicates the type of document proof that is attached with the application form for getting waiver on TDS.",
+      "x-stoplight": {
+        "id": "gw33xz3ftldrn"
+      },
+      "enum": [
+        "FORM_15GH",
+        "TAX_EXEMPT_LETTER",
+        "CUST_ID_WAIVER"
+      ],
+      "minLength": 9,
+      "maxLength": 17,
+      "pattern": "^[A-Z0-9_]+$"
+    },
+    "UPI": {
+      "type": "object",
+      "title": "UPI",
+      "x-package": "payment.instrument",
+      "description": "Contains details of the UPI instrument.",
+      "x-stoplight": {
+        "id": "5hkobctoawsjs"
+      },
+      "required": [
+        "vpa",
+        "account"
+      ],
+      "properties": {
+        "vpa": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/3RlN1EaYMPw"
+        },
+        "account": {
+          "x-stoplight": {
+            "id": "t9embtv36wxpz"
+          },
+          "$ref": "#/$defs/ExternalBankAccount"
+        },
+        "paymentReferenceNo": {
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/6IgGrkcnBSA"
+        }
+      }
+    },
+    "Witness": {
+      "type": "object",
+      "title": "Witness",
+      "x-package": "application",
+      "description": "Specifies the information of the witness required to validate and authenticate the application.",
+      "x-stoplight": {
+        "id": "e5miu1hmugc2f"
+      },
+      "required": [
+        "name",
+        "address",
+        "place"
+      ],
+      "properties": {
+        "name": {
+          "description": "Witness full name",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GBJp3DRz5Pc"
+        },
+        "address": {
+          "description": "Witness complete address",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/mcFgUXbPKRw"
+        },
+        "place": {
+          "description": "Specifies the physical location or venue relevant to the context.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_]+$",
+          "maxLength": 20
+        },
+        "date": {
+          "type": "string",
+          "x-stoplight": {
+            "id": "lsugzgf7h9oy0"
+          },
+          "format": "date",
+          "pattern": "^(19|20)\\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",
+          "minLength": 10,
+          "maxLength": 10,
+          "description": "The date at which witness information is captured in the application"
+        }
+      }
+    },
+    "WitnessList": {
+      "type": "array",
+      "title": "WitnessList",
+      "description": "Witness details are captured when applicant assigns a nominee and doesn't know how to signature",
+      "minItems": 1,
+      "maxItems": 2,
+      "x-stoplight": {
+        "id": "juodh53fpdzb9"
+      },
+      "items": {
+        "$ref": "#/$defs/Witness"
+      }
+    }
+  }
+}

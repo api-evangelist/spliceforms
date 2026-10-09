@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-branch-schema.json",
+  "title": "Branch",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-data-services-openapi.yml#/components/schemas/Branch",
+  "x-stoplight": {
+    "id": "3pxsvpgp85b7e"
+  },
+  "type": "object",
+  "required": [
+    "code",
+    "name",
+    "ifsc",
+    "geoLocation",
+    "address"
+  ],
+  "properties": {
+    "code": {
+      "x-stoplight": {
+        "id": "77rb4w7laxusj"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/DkpDaBt77Zw"
+    },
+    "name": {
+      "x-stoplight": {
+        "id": "wpgz0elj2w2mt"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/tKUjcMXT9qo"
+    },
+    "ifsc": {
+      "x-stoplight": {
+        "id": "lifh9rlc26xri"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5js4tqEmILQ"
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1,
+      "x-stoplight": {
+        "id": "cuavkgltht8o7"
+      },
+      "maxLength": 50,
+      "pattern": "^[A-Za-z0-9]+$",
+      "description": "It classifies a bank branch based on its location, size, and the range of services it offers."
+    },
+    "geoLocation": {
+      "x-stoplight": {
+        "id": "jibjuqpy4f1kd"
+      },
+      "$ref": "#/$defs/GeoLocation"
+    },
+    "address": {
+      "x-stoplight": {
+        "id": "p3vz76qi8mmhn"
+      },
+      "$ref": "#/$defs/BranchAddress"
+    }
+  },
+  "$defs": {
+    "BranchAddress": {
+      "type": "object",
+      "x-stoplight": {
+        "id": "bua7t4hbaep0e"
+      },
+      "title": "BranchAddress",
+      "description": "Specifies the complete address details of branch",
+      "id": "97ps4jh19l4j7",
+      "required": [
+        "line1",
+        "line2",
+        "line3",
+        "cityCode",
+        "cityName",
+        "districtCode",
+        "districtName",
+        "stateCode",
+        "stateName",
+        "countryCode",
+        "countryName",
+        "pinCode"
+      ],
+      "properties": {
+        "line1": {
+          "description": "It includes details such as the building number, street name, and apartment or suite number.",
+          "x-stoplight": {
+            "id": "yknvs70fagczq"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5HU7oy6KrWo"
+        },
+        "line2": {
+          "description": "It may include secondary information like landmarks, floor numbers, or specific sub-locations within a larger property.",
+          "x-stoplight": {
+            "id": "h336d31hn9dxq"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5HU7oy6KrWo"
+        },
+        "line3": {
+          "description": "It includes details such as neighborhood or other location identifiers.",
+          "x-stoplight": {
+            "id": "uhmifbux1potr"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5HU7oy6KrWo"
+        },
+        "cityCode": {
+          "x-stoplight": {
+            "id": "40estq0jjmahv"
+          },
+          "description": "The code of the city where the address is located. The allowed values will have to comply with the values of \"City\" codeset.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/e716yeYODOc"
+        },
+        "cityName": {
+          "x-stoplight": {
+            "id": "h2w71v3wssmrx"
+          },
+          "description": "The name of the city where the address is located.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/uacPPo0KgqI"
+        },
+        "districtCode": {
+          "x-stoplight": {
+            "id": "m7h2qhrh9t8eh"
+          },
+          "description": "The code of the district where the address is located. The allowed values will have to comply with the values of \"District\" codeset.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/1hOLdlr48PY"
+        },
+        "districtName": {
+          "x-stoplight": {
+            "id": "4x95to04p87wo"
+          },
+          "description": "The name of the district where the address is located.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/FKvyeY13Gko"
+        },
+        "stateCode": {
+          "x-stoplight": {
+            "id": "vu7xx1eidcpc6"
+          },
+          "description": "The code of the state where the address is located. The allowed values will have to comply with the values of \"State\" codeset.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/Cvh9dy4b2Bc"
+        },
+        "stateName": {
+          "x-stoplight": {
+            "id": "q8qudo0x22z3f"
+          },
+          "description": "The name of the state where the address is located.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GmiZxW2vxw4"
+        },
+        "countryCode": {
+          "x-stoplight": {
+            "id": "14o5xxgnc24ef"
+          },
+          "description": "The code of the country where the address is located. The allowed values will have to comply with the values of \"Country\" codeset.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/TefCsIHCKhs"
+        },
+        "countryName": {
+          "x-stoplight": {
+            "id": "x600wkw9qmip3"
+          },
+          "description": "The name of the country where the address is located.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/Zt82KlnOynE"
+        },
+        "pinCode": {
+          "x-stoplight": {
+            "id": "s3085fpulpj33"
+          },
+          "description": "The postal or ZIP code associated with the address to facilitate accurate delivery and identification.",
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/Ov8lL8w72Jo"
+        }
+      }
+    },
+    "GeoLocation": {
+      "title": "GeoLocation",
+      "x-stoplight": {
+        "id": "tmhztlxh6befr"
+      },
+      "description": "Represents the geographical location",
+      "type": "object",
+      "required": [
+        "latitude",
+        "longitude"
+      ],
+      "properties": {
+        "latitude": {
+          "x-stoplight": {
+            "id": "dm2528c5mewjm"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/Qf0eSUPDxn8"
+        },
+        "longitude": {
+          "x-stoplight": {
+            "id": "64k0ifanddevb"
+          },
+          "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GaeVyfJDlr4"
+        }
+      }
+    }
+  }
+}

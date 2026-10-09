@@ -1,0 +1,102 @@
+generated: '2026-10-09'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 8
+  own: 3
+  other_domain: 2
+  platform: 3
+  roles:
+  - api
+  - marketing
+  - other
+  - source
+  - support
+  - website
+hosts:
+- host: api.apibanking.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: apibanking.com
+  role: api
+  relation: other-domain
+- host: api.spliceforms.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: spliceforms.com
+  role: api
+  relation: own
+- host: api.stitch.spliceforms.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: spliceforms.com
+  role: api
+  relation: own
+- host: apibanking.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - ProductWebsite
+  - Support
+  - About
+  serves: []
+  registrable_domain: apibanking.com
+  role: support
+  relation: other-domain
+- host: apibanking.substack.com
+  found_by:
+  - pointer
+  types:
+  - Blog
+  serves: []
+  registrable_domain: substack.com
+  role: marketing
+  relation: platform
+- host: github.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - SpectralRules
+  - GitHubOrganization
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: spliceforms.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  serves:
+  - cdn
+  - hosting
+  vendor: fastly
+  registrable_domain: spliceforms.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

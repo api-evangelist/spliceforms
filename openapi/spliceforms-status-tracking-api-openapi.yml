@@ -1,0 +1,324 @@
+openapi: 3.2.0
+info:
+  title: Spliceforms Status Tracking API
+  version: '1.0'
+  contact:
+    name: akhilesh
+    url: https://spliceforms.com/
+    email: api@apibanking.com
+  license:
+    url: https://spliceforms.com/
+    name: Commercial
+  description: 'Operations tagged status-tracking across 2 of this provider''s published API definitions: spliceforms-capture-services-openapi.yml, spliceforms-processing-service-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.stitch.spliceforms.com/capture
+- url: https://api.stitch.com/processing
+tags:
+- name: status-tracking
+  description: API endpoints for tracking the status of application processing
+paths:
+  /v1/applications/{applicationId}/status:
+    get:
+      tags:
+      - status-tracking
+      summary: Fetch Application Status
+      description: It retrieves the current processing status of an application using its unique applicationId
+      operationId: fetchApplicationStatus
+      parameters:
+      - name: applicationId
+        in: path
+        description: The application form Identifier.
+        required: true
+        schema:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/NPaBdSGrXxc
+      responses:
+        '200':
+          description: This status code indicates that the request was received, understood, and processed successfully by the server. The response body will contain the data requested by the client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ETBFDApplicationStatus'
+        '400':
+          description: This status code indicates that the server could not understand or process the request due to invalid syntax or parameters. The client should modify the request and retry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: This status code means the server ran into an unexpected problem while processing your request. It indicates an issue on the server side, not with your input. Try refreshing or resubmitting your request after a short wait.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      servers:
+      - url: https://api.stitch.spliceforms.com/capture
+      x-stoplight:
+        id: ltmky171j23xx
+    servers:
+    - url: https://api.stitch.spliceforms.com/capture
+  /v1/applications/status:
+    post:
+      summary: Get Processing Status
+      description: Fetch application processing status for the given application id
+      tags:
+      - status-tracking
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatus92828'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+      operationId: get-v1-applications-status
+      x-stoplight:
+        id: ctl6btupqyab4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                applicationId:
+                  x-stoplight:
+                    id: xr6887as5tqlj
+                  x-unresolved-stoplight-ref: stoplight://resources/overrides/iHQHzZ1iQtY
+    servers:
+    - url: https://api.stitch.com/processing
+components:
+  schemas:
+    AccountOpeningResult:
+      type: object
+      title: AccountOpeningResult
+      description: Account opening result
+      properties:
+        accounts:
+          type: array
+          description: List of accounts opened as part of application processing
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/FDAccountOpeningResult'
+      required:
+      - accounts
+      x-stoplight:
+        id: 5c1hf4pjkjkjw
+    FDAccountOpeningResult:
+      type: object
+      title: FDAccountOpeningResult
+      x-stoplight:
+        id: p30gaesnmzwua
+      required:
+      - accountSerialNo
+      - accountNo
+      properties:
+        accountSerialNo:
+          $ref: '#/components/schemas/AccountSerialNo'
+        accountNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/NTK9s0hcXsQ
+        accountType:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/tCwO6x9ZNk0
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    ProblemJson:
+      type: object
+      x-stoplight:
+        id: oooamay5pgk0b
+      title: ProblemJson
+      description: Problem Error Json
+      required:
+      - title
+      - status
+      properties:
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+          pattern: ^[A-Za-z0-9-_]+
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Unauthorized
+          x-stoplight:
+            id: qp048dxgamcyv
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+          minimum: 1
+          maximum: 1000
+          examples:
+          - 200
+          x-stoplight:
+            id: mppplj2ikgpo5
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 5
+          maxLength: 2043
+          examples:
+          - api_key missing
+          x-stoplight:
+            id: 05ie4179zj1s5
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          format: uri
+          pattern: ^(https?|http):\/\/[^\s/$.?#].[^\s]*$
+          minLength: 5
+          maxLength: 2083
+          examples:
+          - https://example.com/resource
+          x-stoplight:
+            id: f0d9smdiysl1b
+        validationErrors:
+          type: array
+          description: Validation Errors
+          items:
+            x-stoplight:
+              id: 7vcjnrvdy7wos
+            $ref: '#/components/schemas/ValidationError'
+          x-stoplight:
+            id: uxclbrhmspafm
+    AccountSerialNo:
+      type: integer
+      title: AccountSerialNo
+      description: Indicates the serial number of the account which is added to the application
+      format: int32
+      minimum: 1
+      maximum: 1
+      examples:
+      - 1
+      x-stoplight:
+        id: myofrfpy3wo2a
+    ETBFDApplicationStatus:
+      type: object
+      title: ETBFDApplicationStatus
+      description: Processing status for ETB FD application
+      x-stoplight:
+        id: tmhi5v9yp9q61
+      required:
+      - status
+      properties:
+        status:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/9mKfsqolpW4
+        accountOpeningResult:
+          $ref: '#/components/schemas/AccountOpeningResult'
+    AccountSerialNumber:
+      type: integer
+      title: AccountSerialNumber
+      description: Indicates the serial number of the account which is added to the application
+      format: int32
+      minimum: 1
+      maximum: 1
+      examples:
+      - 1
+      x-stoplight:
+        id: myofrfpy3wo2a
+    ApplicationStatus92828:
+      type: object
+      title: ApplicationStatus92828
+      description: Processing status for application
+      x-stoplight:
+        id: tmhi5v9yp9q61
+      required:
+      - status
+      properties:
+        status:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/RL5rpdrZO8o
+        accountOpeningResult:
+          oneOf:
+          - x-stoplight:
+              id: ussk8kva66n8w
+            $ref: '#/components/schemas/FDAccountOpeningResult_2'
+    FDAccountOpeningResult_2:
+      type: object
+      title: FDAccountOpeningResult
+      x-stoplight:
+        id: p30gaesnmzwua
+      required:
+      - accountSerialNo
+      - accountNo
+      properties:
+        accountSerialNo:
+          $ref: '#/components/schemas/AccountSerialNumber'
+        accountNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/CXUS5RjjXpQ
+        accountType:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/R8MDJ7uw3Ao
+x-refined-from:
+- spliceforms-capture-services-openapi.yml
+- spliceforms-processing-service-openapi.yml
+x-stoplight:
+  id: znydl40fblitz
+x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+x-bundled-from: openapi/_original/stitch-capture-services/auth-services-v1.0.yaml (./models refs inlined into components/schemas; stoplight:// platform overrides are not resolvable outside Stoplight and are kept as x-unresolved-stoplight-ref)

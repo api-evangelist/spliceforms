@@ -1,0 +1,482 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Data Services Location API
+  summary: ''
+  description: List of endpoints to serve the public data that may be needed for application form data capture.
+  contact:
+    name: akhilesh
+    url: https://spliceforms.com/
+    email: api@apibanking.com
+  license:
+    url: https://spliceforms.com/
+    name: Commercial
+servers:
+- url: https://api.stitch.spliceforms.com/data
+tags:
+- name: Location
+  description: Endpoints related to geographical locations, including states and cities.
+paths:
+  /v1/states:
+    parameters: []
+    get:
+      summary: Fetch States
+      x-stoplight:
+        id: ii1qxr8m51gz1
+      description: Retrieve list of states
+      operationId: fetchStates
+      parameters:
+      - name: pageNo
+        in: query
+        description: It specifies the page number of the results to be returned
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10000
+          default: 1
+          example: 1
+      - name: pageSize
+        in: query
+        description: It determines the number of records to be returned per page
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 10
+          maximum: 100
+          default: 10
+          example: 10
+      - name: stateName
+        in: query
+        description: It includes records that match the state name. The matching strategy (exact/partial) can be specified using stateMatch parameter
+        schema:
+          type: string
+          pattern: ^[A-Za-z]+(?:[ '-][A-Za-z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Maharastra
+      - name: stateMatch
+        in: query
+        description: It specifies whether the state name match is exact or partial (default exact)
+        schema:
+          type: string
+          pattern: ^(EXACT|PARTIAL)$
+          minLength: 5
+          maxLength: 7
+          examples:
+          - EXACT
+          default: EXACT
+          enum:
+          - EXACT
+          - PARTIAL
+      - schema:
+          type: string
+          example: MH
+          pattern: ^[A-Za-z .:]+$
+          minLength: 2
+          maxLength: 5
+        in: query
+        name: stateCode
+        description: It includes records that match the exact state code. The allowed values will have to comply with the values of "State" codeset.
+      responses:
+        '200':
+          description: This status code indicates that the request was received, understood, and processed successfully by the server. The response body will contain the data requested by the client.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - x-stoplight:
+                    id: tpla1ia38hyfw
+                  $ref: '#/components/schemas/PaginatedResponse'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      description: List of states
+                      items:
+                        x-stoplight:
+                          id: uiwsyk1gss77p
+                        $ref: '#/components/schemas/State'
+              examples: {}
+        '400':
+          description: This status code indicates that the server could not understand or process the request due to invalid syntax or parameters. The client should modify the request and retry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: This status code means the server ran into an unexpected problem while processing your request. It indicates an issue on the server side, not with your input. Try refreshing or resubmitting your request after a short wait.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      tags:
+      - Location
+  /v1/cities:
+    parameters: []
+    get:
+      summary: Fetch Cities
+      description: Retrieve list of cities
+      operationId: fetchCities
+      parameters:
+      - name: pageNo
+        in: query
+        description: It specifies the page number of the results to be returned
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 1
+          examples:
+          - 1
+      - name: pageSize
+        in: query
+        description: It determines the number of records to be returned per page
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 10
+          maximum: 100
+          examples:
+          - 10
+      - name: cityName
+        in: query
+        description: It includes records that match the city name. The matching strategy (exact/partial) can be specified using cityMatch parameter
+        schema:
+          type: string
+          pattern: ^[A-Za-z]+(?:[ '-][A-Za-z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Mumbai
+      - name: cityMatch
+        in: query
+        description: It specifies whether the city name match is exact or partial (default exact)
+        schema:
+          type: string
+          pattern: ^(EXACT|PARTIAL)$
+          minLength: 5
+          maxLength: 7
+          examples:
+          - EXACT
+      - schema:
+          type: string
+          pattern: ^[A-Za-z .:]+$
+          minLength: 2
+          maxLength: 5
+          example: MUM
+        in: query
+        name: cityCode
+        description: It includes records that match the exact city code. The allowed values will have to comply with the values of "City" codeset.
+      responses:
+        '200':
+          description: This status code indicates that the request was received, understood, and processed successfully by the server. The response body will contain the data requested by the client.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - x-stoplight:
+                    id: rl0zdfggrsaii
+                  $ref: '#/components/schemas/PaginatedResponse'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      description: List of cities
+                      items:
+                        x-stoplight:
+                          id: k5ruf5m1nztpv
+                        $ref: '#/components/schemas/City'
+              examples: {}
+        '400':
+          description: This status code indicates that the server could not understand or process the request due to invalid syntax or parameters. The client should modify the request and retry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: This status code means the server ran into an unexpected problem while processing your request. It indicates an issue on the server side, not with your input. Try refreshing or resubmitting your request after a short wait.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      x-stoplight:
+        id: xepshq6b3z6fn
+      tags:
+      - Location
+components:
+  schemas:
+    PaginatedResponse:
+      type: object
+      x-stoplight:
+        id: cd03j7c25sy2q
+      title: PaginatedResponse
+      required:
+      - totalRecords
+      - totalPages
+      - pageNo
+      - pageSize
+      properties:
+        totalRecords:
+          type: integer
+          description: Total number of records available.
+          format: int32
+          example: 45
+          minimum: 1
+          maximum: 10000
+          x-stoplight:
+            id: ng7t6wdgbqolv
+        totalPages:
+          type: integer
+          description: Total number of pages.
+          example: 4
+          minimum: 1
+          maximum: 1000
+          format: int32
+          x-stoplight:
+            id: tnb60gemsmgcg
+        pageNo:
+          type: integer
+          description: Current page number.
+          example: 2
+          minimum: 1
+          maximum: 100
+          format: int32
+          x-stoplight:
+            id: 2lvw64mf3ljcq
+        pageSize:
+          type: integer
+          description: Number of records per page.
+          example: 10
+          minimum: 1
+          maximum: 100
+          format: int32
+          x-stoplight:
+            id: lswzbcgxb87ul
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    ProblemJson:
+      type: object
+      x-stoplight:
+        id: oooamay5pgk0b
+      title: ProblemJson
+      description: Problem Error Json
+      required:
+      - title
+      - status
+      properties:
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+          pattern: ^[A-Za-z0-9-_]+
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Unauthorized
+          x-stoplight:
+            id: qp048dxgamcyv
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+          minimum: 1
+          maximum: 1000
+          examples:
+          - 200
+          x-stoplight:
+            id: mppplj2ikgpo5
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 5
+          maxLength: 2043
+          examples:
+          - api_key missing
+          x-stoplight:
+            id: 05ie4179zj1s5
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          format: uri
+          pattern: ^(https?|http):\/\/[^\s/$.?#].[^\s]*$
+          minLength: 5
+          maxLength: 2083
+          examples:
+          - https://example.com/resource
+          x-stoplight:
+            id: f0d9smdiysl1b
+        validationErrors:
+          type: array
+          description: Validation Errors
+          items:
+            x-stoplight:
+              id: 7vcjnrvdy7wos
+            $ref: '#/components/schemas/ValidationError'
+          x-stoplight:
+            id: uxclbrhmspafm
+    City:
+      type: object
+      x-stoplight:
+        id: 3x1h6y4vmul6z
+      title: City
+      description: Specifies the details of city, state and country.
+      required:
+      - code
+      - name
+      - stateCode
+      - stateName
+      - countryCode
+      - countryName
+      properties:
+        code:
+          x-stoplight:
+            id: lzdoashdvfodg
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        name:
+          x-stoplight:
+            id: 1s2hq2grcra0i
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/uacPPo0KgqI
+        stateCode:
+          x-stoplight:
+            id: 4i09y4fwq9qrk
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        stateName:
+          x-stoplight:
+            id: k3ybr6vz1eiq1
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GmiZxW2vxw4
+        countryCode:
+          x-stoplight:
+            id: 2ip2qp0a2o3et
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        countryName:
+          x-stoplight:
+            id: ibneu8qkxsnu6
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Zt82KlnOynE
+    State:
+      type: object
+      x-stoplight:
+        id: bb23oh0qpyztr
+      title: State
+      description: Specifies the details of state and country
+      required:
+      - code
+      - name
+      - countryCode
+      - countryName
+      properties:
+        code:
+          x-stoplight:
+            id: be80x1rzwkxa1
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        name:
+          x-stoplight:
+            id: 8un2kp2txvzi8
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GmiZxW2vxw4
+        countryCode:
+          x-stoplight:
+            id: d6mzxot9d2a4i
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        countryName:
+          x-stoplight:
+            id: 71h742i9bpd0o
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Zt82KlnOynE
+x-stoplight:
+  id: p2yovmp4rufcv
+x-internal: true
+x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/data-services-v1.0.yaml
+x-bundled-from: openapi/_original/stitch-capture-services/data-services-v1.0.yaml (./models refs inlined into components/schemas; stoplight:// platform overrides are not resolvable outside Stoplight and are kept as x-unresolved-stoplight-ref)

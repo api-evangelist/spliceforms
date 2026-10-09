@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-state-schema.json",
+  "title": "State",
+  "description": "Specifies the details of state and country",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-data-services-openapi.yml#/components/schemas/State",
+  "type": "object",
+  "x-stoplight": {
+    "id": "bb23oh0qpyztr"
+  },
+  "required": [
+    "code",
+    "name",
+    "countryCode",
+    "countryName"
+  ],
+  "properties": {
+    "code": {
+      "x-stoplight": {
+        "id": "be80x1rzwkxa1"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/Cvh9dy4b2Bc"
+    },
+    "name": {
+      "x-stoplight": {
+        "id": "8un2kp2txvzi8"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/GmiZxW2vxw4"
+    },
+    "countryCode": {
+      "x-stoplight": {
+        "id": "d6mzxot9d2a4i"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/TefCsIHCKhs"
+    },
+    "countryName": {
+      "x-stoplight": {
+        "id": "71h742i9bpd0o"
+      },
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/Zt82KlnOynE"
+    }
+  }
+}

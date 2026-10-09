@@ -1,23 +1,757 @@
 aid: spliceforms
+
 name: Spliceforms
-description: 'Spliceforms is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github)
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: Spliceforms Enterprise Solutions (CIN U72200MH2022PTC395237) is a private limited company incorporated in India on 13 December 2022
+  that operates apibanking.com, an API and embedded-banking platform for financial institutions. It provides an API factory, a docs content platform
+  and developer portal, and a partner management portal with SDKs, sandboxes and sample apps, to help banks, fintechs and corporates build partner
+  integrations. It also publishes a Spectral API style guide on GitHub.
+
 url: https://raw.githubusercontent.com/api-evangelist/spliceforms/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:spectral-ruleset-github
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-09 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-09'
+
 modified: '2026-10-09'
+
 tags:
 - Company
-apis: []
+- API Banking
+- Open Banking
+- Embedded Banking
+- Fintech
+- Developer Portal
+- Banking
+- India
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
+image: https://apibanking.com/wp-content/uploads/2023/02/logo.svg
+
 common:
+- type: AgenticAccess
+  url: agentic-access/spliceforms-agentic-access.yml
+- type: Spectral
+  url: rules/spliceforms-stoplight-projects-spectral-rules.yml
+- type: Spectral
+  url: rules/spliceforms-rules.yml
+- type: JSONLD
+  url: json-ld/spliceforms-context.jsonld
+- type: Vocabulary
+  url: vocabulary/spliceforms-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/spliceforms-data-model.yml
+- type: Conventions
+  url: conventions/spliceforms-conventions.yml
+- type: ErrorCatalog
+  url: errors/spliceforms-problem-types.yml
+- type: Conformance
+  url: conformance/spliceforms-conformance.yml
+- type: Overlay
+  url: overlays/spliceforms-auth-services-overlay.yaml
+- type: Hosts
+  url: hosts/spliceforms-hosts.yml
+- type: Vendors
+  url: vendors/spliceforms-vendors.yml
+- type: DomainSecurity
+  url: security/spliceforms-domain-security.yml
 - type: Website
   url: https://spliceforms.com/
+- type: SpectralRules
+  url: https://github.com/spliceforms/stoplight-projects/blob/efa3a9d27fea181247794c461dccb33010a2e51d/sf-style-guide/.spectral.json
+- type: ProductWebsite
+  url: https://apibanking.com/
+- type: Blog
+  url: https://apibanking.substack.com/
+- type: GitHubOrganization
+  url: https://github.com/spliceforms
+- type: Support
+  url: https://apibanking.com/contact-us/
+- type: About
+  url: https://apibanking.com/about-us/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/apibanking/
+
+apis:
+- aid: spliceforms:spliceforms-account-data-inquiry-api
+  name: Spliceforms account data inquiry API
+  description: Endpoints to inquire customer accounts information
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - account data inquiry
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-account-data-inquiry-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-branches-api
+  name: Spliceforms Branches API
+  description: Endpoints for retrieving and managing bank branch information.
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - branches
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-branches-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-calculators-api
+  name: Spliceforms Calculators API
+  description: Endpoints to fetch calculator results
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - calculators
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-calculators-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-codesets-api
+  name: Spliceforms Codesets API
+  description: Endpoints to retrieve codesets information
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - codesets
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-codesets-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-consents-api
+  name: Spliceforms Consents API
+  description: Endpoints dealing with consent management and definitions.
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - consents
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-consents-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-data-validations-api
+  name: Spliceforms data validations API
+  description: Endpoints to verify customer information
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - data validations
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-data-validations-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-form-capture-api
+  name: Spliceforms Form Capture API
+  description: API endpoints for filling the application form information and submit for processing
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - form-capture
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-form-capture-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-location-api
+  name: Spliceforms Location API
+  description: Endpoints related to geographical locations, including states and cities.
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - location
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-location-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-otp-auth-api
+  name: Spliceforms OTP Auth API
+  description: API endpoints for token issuance on successful OTP authentication
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - OTP Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-otp-auth-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-status-tracking-api
+  name: Spliceforms Status Tracking API
+  description: API endpoints for tracking the status of application processing
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - status-tracking
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-status-tracking-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+- aid: spliceforms:spliceforms-submission-api
+  name: Spliceforms Submission API
+  description: API endpoints to initiate the application processing
+  humanURL: >-
+    https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
+  baseURL: https://api.stitch.spliceforms.com/auth
+  tags:
+  - submission
+  properties:
+  - type: OpenAPI
+    url: openapi/spliceforms-submission-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpchallenge-answer-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpresend-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-otpauth-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdaccount-with-optional-payout-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-etbfdapplication-form-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-staff-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-payin-source-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-consent-definition-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-city-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-paginated-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-other-bank-branch-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-fdmaturity-calculation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-bank-account-ownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-vpaownership-check-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-nominee-inquiry-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-form92828-schema.json
+  - type: JSONSchema
+    url: json-schema/spliceforms-application-status92828-schema.json
+x-enrichment:
+  date: '2026-10-09'
+  status: enriched
+  artifacts_added: 135
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: 'Enriched 2026-10-09: website and identity verified (minimal) from the provider''s own pages; probed URLs below.'
+  evidence:
+  - url: https://spliceforms.com/
+    status: 200
+  - url: https://apibanking.com/
+    status: 200
+  - url: https://github.com/spliceforms
+    status: 200
+  - url: https://apibanking.springrecruit.com/careers
+    status: 0

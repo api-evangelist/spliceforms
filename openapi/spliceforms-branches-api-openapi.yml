@@ -1,0 +1,961 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Data Services Branches API
+  summary: ''
+  description: List of endpoints to serve the public data that may be needed for application form data capture.
+  contact:
+    name: akhilesh
+    url: https://spliceforms.com/
+    email: api@apibanking.com
+  license:
+    url: https://spliceforms.com/
+    name: Commercial
+servers:
+- url: https://api.stitch.spliceforms.com/data
+tags:
+- name: Branches
+  description: Endpoints for retrieving and managing bank branch information.
+paths:
+  /v1/branches:
+    get:
+      summary: Fetch Branches
+      x-stoplight:
+        id: ohkafxvi6bzdt
+      description: Retrieves a complete list of all bank branches with their details.
+      operationId: fetchBranches
+      parameters:
+      - name: pageNo
+        in: query
+        description: It specifies the page number of the results to be returned
+        required: true
+        schema:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 10000
+          default: 1
+          example: 1
+      - name: pageSize
+        in: query
+        description: It determines the number of records to be returned per page
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 10
+          maximum: 100
+          example: 10
+      - name: cityCode
+        in: query
+        description: It includes records that match the exact city code. The allowed values will have to comply with the values of "City" codeset.
+        schema:
+          type: string
+          pattern: ^[A-Za-z0-9]+$
+          minLength: 1
+          maxLength: 50
+          example: MUM
+      - name: districtCode
+        in: query
+        description: It includes records that match the exact district code. The allowed values will have to comply with the values of "District" codeset.
+        schema:
+          type: string
+          maxLength: 50
+          example: MUM
+          minLength: 1
+          pattern: ^[A-Za-z0-9]+$
+      - name: stateCode
+        in: query
+        description: It includes records that match the exact state code. The allowed values will have to comply with the values of "State" codeset.
+        schema:
+          type: string
+          maxLength: 50
+          example: MH
+          minLength: 1
+          pattern: ^[A-Za-z0-9]+$
+      - name: countryCode
+        in: query
+        description: It includes records that match the exact country code. The allowed values will have to comply with the values of "Country" codeset.
+        schema:
+          type: string
+          maxLength: 50
+          default: IN
+          example: IN
+          minLength: 1
+          pattern: ^[A-Za-z0-9]+$
+      - name: pin
+        in: query
+        description: It includes records that match the exact pincode
+        schema:
+          type: string
+          pattern: ^\d{6}$
+          minLength: 1
+          maxLength: 6
+          example: '400102'
+      - name: ifsc
+        in: query
+        description: It includes records that match the exact ifsc code
+        schema:
+          type: string
+          minLength: 11
+          maxLength: 11
+          pattern: ^[A-Z]{4}0[0-9A-Z]{6}$
+          example: HDFC0991001
+      responses:
+        '200':
+          description: This status code indicates that the request was received, understood, and processed successfully by the server. The response body will contain the data requested by the client.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - x-stoplight:
+                    id: slckwbt0ysvr7
+                  $ref: '#/components/schemas/PaginatedResponse'
+                - type: object
+                  x-stoplight:
+                    id: p5lorl15epbrx
+                  properties:
+                    data:
+                      type: array
+                      x-stoplight:
+                        id: ipfhxxq2t8brk
+                      description: List of branches matching the search criteria
+                      items:
+                        x-stoplight:
+                          id: gphkrrtqil2bw
+                        $ref: '#/components/schemas/Branch'
+              examples: {}
+        '400':
+          description: This status code indicates that the server could not understand or process the request due to invalid syntax or parameters. The client should modify the request and retry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: This status code means the server ran into an unexpected problem while processing your request. It indicates an issue on the server side, not with your input. Try refreshing or resubmitting your request after a short wait.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      x-internal: false
+      tags:
+      - Branches
+  /v1/branches/states:
+    get:
+      summary: Fetch Branch States
+      description: Retrieves a distinct list of states where bank branches are located.
+      operationId: fetchBranchStates
+      parameters:
+      - name: pageNo
+        in: query
+        description: It specifies the page number of the results to be returned
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10000
+          example: 1
+          default: 1
+      - name: pageSize
+        in: query
+        description: It determines the number of records to be returned per page
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 10
+          maximum: 100
+          example: 10
+          default: 10
+      - name: countryCode
+        in: query
+        description: It includes records that match the exact country code. The allowed values will have to comply with the values of "Country" codeset.
+        schema:
+          type: string
+          maxLength: 50
+          default: IN
+          example: IN
+          minLength: 1
+          pattern: ^[A-Za-z0-9]+$
+      responses:
+        '200':
+          description: This status code indicates that the request was received, understood, and processed successfully by the server. The response body will contain the data requested by the client.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - type: object
+                  x-stoplight:
+                    id: 2ghemqj2yu6or
+                  properties:
+                    data:
+                      type: array
+                      x-stoplight:
+                        id: 71tx7p7uncdaw
+                      description: List of states where bank branch exists
+                      items:
+                        x-stoplight:
+                          id: g9p92ve6jtgb7
+                        $ref: '#/components/schemas/BranchState'
+              examples: {}
+        '400':
+          description: This status code indicates that the server could not understand or process the request due to invalid syntax or parameters. The client should modify the request and retry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: This status code means the server ran into an unexpected problem while processing your request. It indicates an issue on the server side, not with your input. Try refreshing or resubmitting your request after a short wait.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      x-stoplight:
+        id: cw4rqjuccfmsu
+      tags:
+      - Branches
+  /v1/branches/cities:
+    get:
+      summary: Fetch Branch Cities
+      description: Retrieves a distinct list of cities that have branch locations.
+      operationId: fetchBranchCities
+      parameters:
+      - name: pageNo
+        in: query
+        description: It specifies the page number of the results to be returned
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10000
+          default: 1
+          example: 1
+      - name: pageSize
+        in: query
+        description: It determines the number of records to be returned per page
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          example: 10
+          default: 10
+      - name: districtCode
+        in: query
+        description: It includes records that match the exact district code. The allowed values will have to comply with the values of "District" codeset.
+        required: true
+        schema:
+          type: string
+          maxLength: 50
+          example: MUM
+          minLength: 1
+          pattern: ^[A-Za-z0-9]+$
+      - name: stateCode
+        in: query
+        description: It includes records that match the exact state code. The allowed values will have to comply with the values of "State" codeset.
+        required: true
+        schema:
+          type: string
+          maxLength: 50
+          example: MH
+          pattern: ^[A-Za-z0-9]+$
+          minLength: 1
+      - name: countryCode
+        in: query
+        description: It includes records that match the exact country code. The allowed values will have to comply with the values of "Country" codeset.
+        schema:
+          type: string
+          maxLength: 50
+          default: IN
+          example: IN
+          pattern: ^[A-Za-z0-9]+$
+          minLength: 1
+      responses:
+        '200':
+          description: This status code indicates that the request was received, understood, and processed successfully by the server. The response body will contain the data requested by the client.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - type: object
+                  x-stoplight:
+                    id: 5jj70r5npe5kh
+                  properties:
+                    data:
+                      type: array
+                      x-stoplight:
+                        id: 8cb39o13ku718
+                      description: List of cities where bank branch exists
+                      items:
+                        x-stoplight:
+                          id: uzzs94xry7y5f
+                        $ref: '#/components/schemas/BranchCity'
+              examples: {}
+        '400':
+          description: This status code indicates that the server could not understand or process the request due to invalid syntax or parameters. The client should modify the request and retry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: This status code means the server ran into an unexpected problem while processing your request. It indicates an issue on the server side, not with your input. Try refreshing or resubmitting your request after a short wait.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      x-stoplight:
+        id: t0b4mkn2go7fv
+      tags:
+      - Branches
+  /v1/branches/districts:
+    get:
+      summary: Fetch Branch Districts
+      description: Retrieves a distinct list of districts where branches are operating.
+      operationId: fetchBranchDistricts
+      parameters:
+      - name: pageNo
+        in: query
+        description: It specifies the page number of the results to be returned
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10000
+          default: 1
+          example: 1
+      - name: pageSize
+        in: query
+        description: It determines the number of records to be returned per page
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 10
+          maximum: 100
+          default: 10
+          example: 10
+      - name: stateCode
+        in: query
+        description: It includes records that match the exact state code. The allowed values will have to comply with the values of "State" codeset.
+        required: true
+        schema:
+          type: string
+          maxLength: 50
+          example: MH
+          pattern: ^[A-Za-z0-9]+$
+          minLength: 1
+      - name: countryCode
+        in: query
+        description: It includes records that match the exact country code. The allowed values will have to comply with the values of "Country" codeset.
+        schema:
+          type: string
+          maxLength: 50
+          default: IN
+          example: IN
+          minLength: 1
+          pattern: ^[A-Za-z0-9]+$
+      responses:
+        '200':
+          description: This status code indicates that the request was received, understood, and processed successfully by the server. The response body will contain the data requested by the client.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PaginatedResponse'
+                - type: object
+                  x-stoplight:
+                    id: t4jgme5ul1q5a
+                  properties:
+                    data:
+                      x-stoplight:
+                        id: b2xny6l352a65
+                      description: List of districts where bank branch exists
+                      $ref: '#/components/schemas/BranchDistrict'
+              examples: {}
+        '400':
+          description: This status code indicates that the server could not understand or process the request due to invalid syntax or parameters. The client should modify the request and retry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: This status code means the server ran into an unexpected problem while processing your request. It indicates an issue on the server side, not with your input. Try refreshing or resubmitting your request after a short wait.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      x-stoplight:
+        id: td2zvwlo3xmuq
+      tags:
+      - Branches
+  /v1/banks:
+    get:
+      summary: Fetch Banks
+      description: Fetch the list of banks
+      tags:
+      - Branches
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - x-stoplight:
+                    id: sr99bpxfx14j2
+                  $ref: '#/components/schemas/PaginatedResponse'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      description: List of states
+                      items:
+                        x-stoplight:
+                          id: jqvmzjw9pl0sw
+                        $ref: '#/components/schemas/Bank'
+              examples: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+      operationId: get-v1-banks
+      x-stoplight:
+        id: tho7ptqixdu7g
+  /v1/banks/branches:
+    get:
+      summary: Fetch Branches of Other Banks
+      description: Fetch list of branches of other banks for the given search criteria
+      tags:
+      - Branches
+      parameters:
+      - name: bankCode
+        in: query
+        description: The bank code
+        schema:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/EDRPdrQwsaA
+      - name: ifsc
+        in: query
+        description: It includes records that match the exact ifsc code
+        schema:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5js4tqEmILQ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - x-stoplight:
+                    id: slck12bt0ysvr7
+                  $ref: '#/components/schemas/PaginatedResponse'
+                - type: object
+                  x-stoplight:
+                    id: p5lorl112pbrx
+                  properties:
+                    data:
+                      type: array
+                      x-stoplight:
+                        id: tk2u34onkp0qs
+                      description: List of branches of other banks matching the search criteria
+                      items:
+                        x-stoplight:
+                          id: gphkrrtqi12bw
+                        $ref: '#/components/schemas/OtherBankBranch'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+      operationId: get-v1-banks-branches
+      x-stoplight:
+        id: zy9z8d2rxkjn4
+components:
+  schemas:
+    BranchCity:
+      type: object
+      x-stoplight:
+        id: 4uar581vkoj0x
+      title: BranchCity
+      description: It specifies the details of City where bank branch is available
+      required:
+      - code
+      - name
+      properties:
+        code:
+          x-stoplight:
+            id: 04hstu3r9unk5
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        name:
+          x-stoplight:
+            id: yeul0i38ycatd
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/uacPPo0KgqI
+    GeoLocation:
+      title: GeoLocation
+      x-stoplight:
+        id: tmhztlxh6befr
+      description: Represents the geographical location
+      type: object
+      required:
+      - latitude
+      - longitude
+      properties:
+        latitude:
+          x-stoplight:
+            id: dm2528c5mewjm
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Qf0eSUPDxn8
+        longitude:
+          x-stoplight:
+            id: 64k0ifanddevb
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GaeVyfJDlr4
+    OtherBankBranch:
+      title: OtherBankBranch
+      x-stoplight:
+        id: mi8fksfz1wmuc
+      type: object
+      description: Branch of other bank
+      required:
+      - code
+      - name
+      - ifsc
+      properties:
+        code:
+          x-stoplight:
+            id: kbqnyus40o01y
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/DkpDaBt77Zw
+        name:
+          x-stoplight:
+            id: 73aw12qfq4omq
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/tKUjcMXT9qo
+        ifsc:
+          x-stoplight:
+            id: fz3xxlo9lzqzn
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5js4tqEmILQ
+        address:
+          x-stoplight:
+            id: ctubov5zrvzh4
+          $ref: '#/components/schemas/BranchAddress'
+    BranchDistrict:
+      type: object
+      x-stoplight:
+        id: 4v5t11513sj15
+      title: BranchDistrict
+      description: It specifies the details of District where bank branch is available
+      required:
+      - code
+      - name
+      properties:
+        code:
+          x-stoplight:
+            id: onf7trujncsrl
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/1hOLdlr48PY
+        name:
+          x-stoplight:
+            id: wd4fx2fjbi8ri
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/FKvyeY13Gko
+    Bank:
+      title: Bank
+      x-stoplight:
+        id: 6ljeoukpsckyf
+      type: object
+      description: The bank
+      properties:
+        code:
+          x-stoplight:
+            id: zbx8xy16xe2tp
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/EDRPdrQwsaA
+        name:
+          x-stoplight:
+            id: jwwpypzanbxfx
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/6NqxowBxwf4
+    Branch:
+      title: Branch
+      x-stoplight:
+        id: 3pxsvpgp85b7e
+      type: object
+      required:
+      - code
+      - name
+      - ifsc
+      - geoLocation
+      - address
+      properties:
+        code:
+          x-stoplight:
+            id: 77rb4w7laxusj
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/DkpDaBt77Zw
+        name:
+          x-stoplight:
+            id: wpgz0elj2w2mt
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/tKUjcMXT9qo
+        ifsc:
+          x-stoplight:
+            id: lifh9rlc26xri
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5js4tqEmILQ
+        category:
+          type: string
+          examples:
+          - Metropolitan
+          minLength: 1
+          x-stoplight:
+            id: cuavkgltht8o7
+          maxLength: 50
+          pattern: ^[A-Za-z0-9]+$
+          description: It classifies a bank branch based on its location, size, and the range of services it offers.
+        geoLocation:
+          x-stoplight:
+            id: jibjuqpy4f1kd
+          $ref: '#/components/schemas/GeoLocation'
+        address:
+          x-stoplight:
+            id: p3vz76qi8mmhn
+          $ref: '#/components/schemas/BranchAddress'
+    PaginatedResponse:
+      type: object
+      x-stoplight:
+        id: cd03j7c25sy2q
+      title: PaginatedResponse
+      required:
+      - totalRecords
+      - totalPages
+      - pageNo
+      - pageSize
+      properties:
+        totalRecords:
+          type: integer
+          description: Total number of records available.
+          format: int32
+          example: 45
+          minimum: 1
+          maximum: 10000
+          x-stoplight:
+            id: ng7t6wdgbqolv
+        totalPages:
+          type: integer
+          description: Total number of pages.
+          example: 4
+          minimum: 1
+          maximum: 1000
+          format: int32
+          x-stoplight:
+            id: tnb60gemsmgcg
+        pageNo:
+          type: integer
+          description: Current page number.
+          example: 2
+          minimum: 1
+          maximum: 100
+          format: int32
+          x-stoplight:
+            id: 2lvw64mf3ljcq
+        pageSize:
+          type: integer
+          description: Number of records per page.
+          example: 10
+          minimum: 1
+          maximum: 100
+          format: int32
+          x-stoplight:
+            id: lswzbcgxb87ul
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    BranchState:
+      type: object
+      x-stoplight:
+        id: 6v33x30o3czcu
+      title: BranchState
+      description: 'Specifies the details of state where bank branch is available '
+      required:
+      - code
+      - name
+      properties:
+        code:
+          x-stoplight:
+            id: 756h783k5zwyu
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        name:
+          x-stoplight:
+            id: aiiy86vttn874
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GmiZxW2vxw4
+    ProblemJson:
+      type: object
+      x-stoplight:
+        id: oooamay5pgk0b
+      title: ProblemJson
+      description: Problem Error Json
+      required:
+      - title
+      - status
+      properties:
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+          pattern: ^[A-Za-z0-9-_]+
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Unauthorized
+          x-stoplight:
+            id: qp048dxgamcyv
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+          minimum: 1
+          maximum: 1000
+          examples:
+          - 200
+          x-stoplight:
+            id: mppplj2ikgpo5
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 5
+          maxLength: 2043
+          examples:
+          - api_key missing
+          x-stoplight:
+            id: 05ie4179zj1s5
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          format: uri
+          pattern: ^(https?|http):\/\/[^\s/$.?#].[^\s]*$
+          minLength: 5
+          maxLength: 2083
+          examples:
+          - https://example.com/resource
+          x-stoplight:
+            id: f0d9smdiysl1b
+        validationErrors:
+          type: array
+          description: Validation Errors
+          items:
+            x-stoplight:
+              id: 7vcjnrvdy7wos
+            $ref: '#/components/schemas/ValidationError'
+          x-stoplight:
+            id: uxclbrhmspafm
+    BranchAddress:
+      type: object
+      x-stoplight:
+        id: bua7t4hbaep0e
+      title: BranchAddress
+      description: Specifies the complete address details of branch
+      id: 97ps4jh19l4j7
+      required:
+      - line1
+      - line2
+      - line3
+      - cityCode
+      - cityName
+      - districtCode
+      - districtName
+      - stateCode
+      - stateName
+      - countryCode
+      - countryName
+      - pinCode
+      properties:
+        line1:
+          description: It includes details such as the building number, street name, and apartment or suite number.
+          x-stoplight:
+            id: yknvs70fagczq
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5HU7oy6KrWo
+        line2:
+          description: It may include secondary information like landmarks, floor numbers, or specific sub-locations within a larger property.
+          x-stoplight:
+            id: h336d31hn9dxq
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5HU7oy6KrWo
+        line3:
+          description: It includes details such as neighborhood or other location identifiers.
+          x-stoplight:
+            id: uhmifbux1potr
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5HU7oy6KrWo
+        cityCode:
+          x-stoplight:
+            id: 40estq0jjmahv
+          description: The code of the city where the address is located. The allowed values will have to comply with the values of "City" codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        cityName:
+          x-stoplight:
+            id: h2w71v3wssmrx
+          description: The name of the city where the address is located.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/uacPPo0KgqI
+        districtCode:
+          x-stoplight:
+            id: m7h2qhrh9t8eh
+          description: The code of the district where the address is located. The allowed values will have to comply with the values of "District" codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/1hOLdlr48PY
+        districtName:
+          x-stoplight:
+            id: 4x95to04p87wo
+          description: The name of the district where the address is located.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/FKvyeY13Gko
+        stateCode:
+          x-stoplight:
+            id: vu7xx1eidcpc6
+          description: The code of the state where the address is located. The allowed values will have to comply with the values of "State" codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        stateName:
+          x-stoplight:
+            id: q8qudo0x22z3f
+          description: The name of the state where the address is located.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GmiZxW2vxw4
+        countryCode:
+          x-stoplight:
+            id: 14o5xxgnc24ef
+          description: The code of the country where the address is located. The allowed values will have to comply with the values of "Country" codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        countryName:
+          x-stoplight:
+            id: x600wkw9qmip3
+          description: The name of the country where the address is located.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Zt82KlnOynE
+        pinCode:
+          x-stoplight:
+            id: s3085fpulpj33
+          description: The postal or ZIP code associated with the address to facilitate accurate delivery and identification.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
+x-stoplight:
+  id: p2yovmp4rufcv
+x-internal: true
+x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/data-services-v1.0.yaml
+x-bundled-from: openapi/_original/stitch-capture-services/data-services-v1.0.yaml (./models refs inlined into components/schemas; stoplight:// platform overrides are not resolvable outside Stoplight and are kept as x-unresolved-stoplight-ref)

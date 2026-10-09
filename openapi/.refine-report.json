@@ -1,0 +1,43 @@
+{
+  "provider": "spliceforms",
+  "sources": [
+    "spliceforms-auth-services-openapi.yml",
+    "spliceforms-capture-services-openapi.yml",
+    "spliceforms-data-services-openapi.yml",
+    "spliceforms-inquiry-services-openapi.yml",
+    "spliceforms-processing-service-openapi.yml"
+  ],
+  "outputs": [
+    "spliceforms-otp-auth-api-openapi.yml",
+    "spliceforms-form-capture-api-openapi.yml",
+    "spliceforms-status-tracking-api-openapi.yml",
+    "spliceforms-branches-api-openapi.yml",
+    "spliceforms-codesets-api-openapi.yml",
+    "spliceforms-consents-api-openapi.yml",
+    "spliceforms-location-api-openapi.yml",
+    "spliceforms-account-data-inquiry-api-openapi.yml",
+    "spliceforms-calculators-api-openapi.yml",
+    "spliceforms-data-validations-api-openapi.yml",
+    "spliceforms-submission-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/spliceforms-auth-services-openapi.yml",
+    "archived openapi/spliceforms-capture-services-openapi.yml",
+    "archived openapi/spliceforms-data-services-openapi.yml",
+    "archived openapi/spliceforms-inquiry-services-openapi.yml",
+    "archived openapi/spliceforms-processing-service-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "spliceforms-auth-services-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "spliceforms-capture-services-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "spliceforms-data-services-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "spliceforms-inquiry-services-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "spliceforms-processing-service-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'status-tracking' spans 2 source specs (spliceforms-capture-services-openapi.yml, spliceforms-processing-service-openapi.yml): per-path servers applied",
+    "apis.yml register: written (+11 apis, 11 total)"
+  ],
+  "skipped": []
+}

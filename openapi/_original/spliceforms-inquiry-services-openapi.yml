@@ -1,0 +1,792 @@
+# x-archived-from: spliceforms-inquiry-services-openapi.yml
+# x-archived-on: 2026-10-09
+openapi: 3.1.0
+x-stoplight:
+  id: mrnq6rlv8lmce
+info:
+  version: '1.0'
+  title: Inquiry Services
+  summary: List of services to inquire customer data
+  description: This API provides endpoints to retrive the information about existing customer of the bank. This information could be used by channel application forms to display on the screen or to make
+    certain decisions during application form data capture.
+  contact:
+    name: akhilesh
+    url: https://spliceforms.com/
+    email: api@apibanking.com
+  license:
+    url: https://spliceforms.com/
+    name: Commercial
+servers:
+- url: https://api.stitch.spliceforms.com/inquiry
+paths:
+  /v1/customer/vpa/verification:
+    post:
+      summary: Verify VPA (UPI Id)
+      description: Validates a customer's Virtual Payment Address (VPA) to ensure accuracy and correctness before processing transactions.
+      operationId: verifyCustomerVpa
+      requestBody:
+        description: Shared Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VPAOwnershipCheckRequest'
+            examples:
+              Example 1:
+                value:
+                  vpa: ranbir.kapoor@paytm
+                  customerName: Ali Akbar
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VPAOwnershipCheckResponse'
+              examples:
+                Example 1:
+                  value:
+                    isValid: true
+                Example 2:
+                  value:
+                    isValid: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      servers:
+      - url: http://localhost:3000
+      x-stoplight:
+        id: 6hs7n9a2ceoze
+      tags:
+      - data validations
+  /v1/customer/bank-account/verification:
+    post:
+      summary: Verify Bank Account
+      description: Validates a customer's bank account details to ensure accuracy before initiating transactions.
+      operationId: verifyCustomerBankAccount
+      requestBody:
+        description: Shared Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankAccountOwnershipCheckRequest'
+            examples:
+              Example 1:
+                value:
+                  accountHolderName: Ali Akbar
+                  accountNo: '102001053892'
+                  accountType: SAVINGS
+                  ifsc: HDFC0000001
+                  bank: HDFC BANK PVT LTD
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountOwnershipCheckResponse'
+              examples:
+                Example 1:
+                  value:
+                    isValid: true
+                Example 2:
+                  value:
+                    isValid: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      servers:
+      - url: http://localhost:3000
+      x-stoplight:
+        id: z72ur0s87hchj
+      tags:
+      - data validations
+  /v1/customer/accounts/nominees/get:
+    post:
+      summary: Fetch Account Nominees
+      description: Retrieves the list of nominees associated with a customer's accounts.
+      operationId: getCustomerAccountNominees
+      requestBody:
+        description: Shared Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NomineeInquiryRequest'
+            examples:
+              Example 1:
+                value:
+                  accountNo: '102001053892'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nominees:
+                    type: array
+                    description: Specifies the personal information of the nominee designated by the account holder.
+                    items:
+                      x-stoplight:
+                        id: zl8izkvheutvg
+                      $ref: '#/components/schemas/Nominee'
+              examples:
+                Example 1:
+                  value:
+                    nominees:
+                    - name: Virat Kohli
+                      gender: male
+                      dob: '1990-01-30'
+                      address:
+                        line1: Near Kailash Complex
+                        line2: Opposite Kailash Business Park
+                        line3: Near BMC Garden
+                        city: Mumbai
+                        district: Mumbai
+                        state: Maharashtra
+                        country: India
+                        pin: '410206'
+                      mobileNo: '+918082186583'
+                      emailId: rahim.sterling@gmail.com
+                      guardianDetails:
+                        name: Shekhar S Maity
+                        dob: '1990-01-30'
+                        relationshipWithNominee: Husband
+                        address:
+                          line1: Near Kailash Complex
+                          line2: Opposite Kailash Business Park
+                          line3: Near BMC Garden
+                          city: Mumbai
+                          district: Mumbai
+                          state: Maharashtra
+                          country: India
+                          pin: '410206'
+                      relationshipWithApplicant: Father
+                      sharePercentage: 50
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      servers:
+      - url: http://localhost:3000
+      x-stoplight:
+        id: rndm0zusepvl2
+      tags:
+      - account data inquiry
+  /v1/customer/fd-maturity:
+    post:
+      summary: Calculate FD Maturity
+      description: Calculates the maturity amount and interest for a fixed deposit based on the provided principal amount and tenure.
+      operationId: calculateFDMaturity
+      requestBody:
+        description: Shared Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FDMaturityCalculationRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FDMaturity'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      servers:
+      - url: http://localhost:3000
+      x-stoplight:
+        id: ys0z42ijhi5mu
+      tags:
+      - calculators
+components:
+  schemas:
+    VPAOwnershipCheckRequest:
+      title: VPAOwnershipCheckRequest
+      x-stoplight:
+        id: hxu1n2hr57ezy
+      type: object
+      required:
+      - vpa
+      - customerName
+      properties:
+        vpa:
+          x-stoplight:
+            id: ogg3sdxmlm5hp
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/ruVStTpk5p0
+        customerName:
+          x-stoplight:
+            id: onxexpulw73dr
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+    VPAOwnershipCheckResponse:
+      title: VPAOwnershipCheckResponse
+      x-stoplight:
+        id: r4eoi7ry7f8o1
+      type: object
+      properties:
+        isValid:
+          type: boolean
+          description: Response of the VPA check
+          x-stoplight:
+            id: an8kqg2rp2y1d
+    ProblemJson:
+      type: object
+      x-stoplight:
+        id: oooamay5pgk0b
+      title: ProblemJson
+      description: Problem Error Json
+      required:
+      - title
+      - status
+      properties:
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive
+            content negotiation; see [RFC7231], Section 3.4).
+          pattern: ^[A-Za-z0-9-_]+
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Unauthorized
+          x-stoplight:
+            id: qp048dxgamcyv
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+          minimum: 1
+          maximum: 1000
+          examples:
+          - 200
+          x-stoplight:
+            id: mppplj2ikgpo5
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 5
+          maxLength: 2043
+          examples:
+          - api_key missing
+          x-stoplight:
+            id: 05ie4179zj1s5
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          format: uri
+          pattern: ^(https?|http):\/\/[^\s/$.?#].[^\s]*$
+          minLength: 5
+          maxLength: 2083
+          examples:
+          - https://example.com/resource
+          x-stoplight:
+            id: f0d9smdiysl1b
+        validationErrors:
+          type: array
+          description: Validation Errors
+          items:
+            x-stoplight:
+              id: 7vcjnrvdy7wos
+            $ref: '#/components/schemas/ValidationError'
+          x-stoplight:
+            id: uxclbrhmspafm
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    BankAccountOwnershipCheckRequest:
+      title: BankAccountOwnershipCheckRequest
+      x-stoplight:
+        id: a8dq2g4umclnn
+      type: object
+      required:
+      - accountHolderName
+      - accountNo
+      - accountType
+      - ifsc
+      properties:
+        accountHolderName:
+          x-stoplight:
+            id: 1eo5al4wfwbip
+          description: Account holder name associated with Bank.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+        accountNo:
+          x-stoplight:
+            id: t758265ua6izh
+          description: A unique identifier number assigned to a bank account.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
+        accountType:
+          x-stoplight:
+            id: k4lfugpho08kd
+          description: Specifies the type of bank account associated with the transaction or request. The allowed values will have to comply with the values of codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/tCwO6x9ZNk0
+        ifsc:
+          x-stoplight:
+            id: fhn7mpxnhqjvd
+          description: A unique 11-character alphanumeric code used to identify specific bank branches.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5js4tqEmILQ
+        bankCode:
+          x-stoplight:
+            id: 307xbcazmb0cr
+          description: The name of the bank.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/EDRPdrQwsaA
+    BankAccountOwnershipCheckResponse:
+      title: BankAccountOwnershipCheckResponse
+      x-stoplight:
+        id: j3l1o3ozmith2
+      type: object
+      required:
+      - isValid
+      properties:
+        isValid:
+          type: boolean
+          x-stoplight:
+            id: 8nuki30m5guzh
+          description: indicates if the bank account ownership check was successful
+    NomineeInquiryRequest:
+      title: NomineeInquiryRequest
+      x-stoplight:
+        id: e35gdhum4bjrj
+      type: object
+      description: Account number
+      required:
+      - accountNo
+      properties:
+        accountNo:
+          x-stoplight:
+            id: ep1mruta33ktd
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
+    Nominee:
+      type: object
+      title: Nominee
+      description: Specifies the personal information of the nominee designated by the account holder.
+      x-package: nomination
+      x-stoplight:
+        id: 70bneppghra7k
+      required:
+      - name
+      - dob
+      - address
+      - relationshipWithApplicant
+      properties:
+        name:
+          description: The full name of the individual nominated by the account holder to receive the benefits or proceeds of the account in the event of the account holder's demise.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+        dob:
+          description: 'If nominee dob is less than 18yrs then guardian details in "guardian" has to be filled. '
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
+        address:
+          $ref: '#/components/schemas/NomineeAddress'
+        relationshipWithApplicant:
+          description: 'Relationship of Nominee with Applicant/Depositor.
+
+            The allowed values will have to comply with the values of codeset'
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/02QZBj0cg1s
+        guardian:
+          $ref: '#/components/schemas/Guardian'
+        sharePercentage:
+          x-stoplight:
+            id: z2a474uhtz3pr
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/IVykiNdyptI
+    NomineeAddress:
+      type: object
+      title: NomineeAddress
+      description: Specifies the complete address details of the nominee.
+      x-package: nomination
+      x-stoplight:
+        id: u5dcf6yibq6yq
+      required:
+      - line
+      - cityCode
+      - stateCode
+      - countryCode
+      - pinCode
+      properties:
+        line:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
+        cityCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        stateCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        countryCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        pinCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
+    Guardian:
+      type: object
+      title: Guardian
+      description: It refers to the information related to the person who will act as a legal guardian for the nominee in case the nominee is a minor or unable to manage their own affairs.
+      x-stoplight:
+        id: lghrra139m815
+      required:
+      - name
+      - dob
+      - address
+      properties:
+        name:
+          description: Full name of the guardian
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+        dob:
+          description: The exact date on which the guardian was born, including the day, month, and year.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
+        relationshipWithNominee:
+          description: Specifies the nature of the connection between two parties. The allowed values will have to comply with the values of "nomineeRelationCode" codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/rCj13ihpGbg
+        address:
+          $ref: '#/components/schemas/GuardianAddress'
+    GuardianAddress:
+      type: object
+      title: GuardianAddress
+      description: Specifies the complete address details of the guardian.
+      x-package: nomination
+      x-stoplight:
+        id: v86vldk7j4odh
+      required:
+      - line
+      - cityCode
+      - stateCode
+      - countryCode
+      - pinCode
+      properties:
+        line:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
+        cityCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        stateCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        countryCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        pinCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
+    FDMaturityCalculationRequest:
+      title: FDMaturityCalculationRequest
+      type: object
+      x-examples:
+        Example 1:
+          mobileNo: '+919876543210'
+          accountNo: '102001053892'
+          amount:
+            value: 5000
+            currency: INR
+          dob: '1998-01-12'
+          productType: regular
+          interestPaymentFrequency: reinvestment
+          tenure:
+            days: 1
+            months: 6
+            years: 1
+          maturityInstruction: renewPrinciple
+      required:
+      - mobileNo
+      - accountNo
+      - amount
+      - dob
+      - productType
+      - interestPayoutTreatment
+      - tenure
+      - maturityInstruction
+      properties:
+        mobileNo:
+          description: Specifies the contact mobile number for an individual.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/LT9qrA1aRC4
+        accountNo:
+          description: Specifies the bank account from which funds are debited.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
+        amount:
+          description: The original deposit amount upon maturity or withdrawal.
+          $ref: '#/components/schemas/AmountWithCurrency'
+        dob:
+          description: The exact date on which the individual was born, including the day, month, and year.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
+        productType:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/eZOUNbW4Dy0
+        interestPayoutTreatment:
+          x-stoplight:
+            id: 27bwffgdncfw6
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GIH20YnXrJk
+        tenure:
+          $ref: '#/components/schemas/FDTenure'
+        maturityInstruction:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/hNcvI153XgU
+    AmountWithCurrency:
+      title: AmountWithCurrency
+      x-stoplight:
+        id: sbp1q7zyp9lec
+      type: object
+      description: Amount with currency code
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          x-stoplight:
+            id: zfs2glt3vns73
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
+        currency:
+          x-stoplight:
+            id: trn7cym9swchs
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/euAvzUucCGw
+    FDTenure:
+      type: object
+      title: FDTenure
+      description: This indicates the duration for which the Fixed Deposit (FD) is held, expressed in days, months and years.
+      x-stoplight:
+        id: b8a8yencrf6fn
+      required:
+      - days
+      - months
+      - years
+      properties:
+        days:
+          type: integer
+          description: Tenure expressed in days
+          format: int32
+          minimum: 1
+          maximum: 31
+          example: 1
+        months:
+          type: integer
+          description: Tenure expressed in months
+          format: int32
+          minimum: 6
+          maximum: 11
+          examples:
+          - 6
+        years:
+          type: integer
+          description: Tenure expressed in years
+          format: int32
+          minimum: 0
+          maximum: 10
+          examples:
+          - 1
+    FDMaturity:
+      type: object
+      x-stoplight:
+        id: 0g86xjf2eivg1
+      title: FDMaturity
+      description: Information related to a Fixed Deposit (FD) at the time of maturity, including the maturity amount, interest earned, start date and maturity date.
+      examples:
+      - maturityAmount: 100000
+        roi: 5.5
+        startDate: '2025-01-30'
+        maturityDate: '2025-01-30'
+      required:
+      - maturityAmount
+      - interestRate
+      - maturityDate
+      properties:
+        maturityAmount:
+          type: number
+          minimum: 1
+          maximum: 100000000000
+          examples:
+          - 100000
+          description: The total amount receivable at the end of an investment term, including the principal and accumulated interest, as per the agreed-upon rate and tenure.
+          x-stoplight:
+            id: fexwcwsspjcg2
+        interestRate:
+          type: number
+          minimum: 0.1
+          maximum: 10
+          examples:
+          - 5.5
+          x-stoplight:
+            id: 5a6za28ekdue2
+          description: The percentage at which interest is to be earned on a deposit over the specified tenure.
+        depositStartDate:
+          type: string
+          format: date
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          minLength: 10
+          maxLength: 10
+          examples:
+          - '2025-01-30'
+          description: The date on which the Fixed Deposit (FD) is opened and the investment tenure begins.
+          x-stoplight:
+            id: tc2u1z55epwe5
+        maturityDate:
+          type: string
+          format: date
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          minLength: 10
+          maxLength: 10
+          examples:
+          - '2025-01-30'
+          description: The date on which the Fixed Deposit (FD) completes its tenure, and the principal along with the accrued interest becomes available for withdrawal or renewal.
+          x-stoplight:
+            id: vfafu4yop30eh
+tags:
+- name: account data inquiry
+  description: Endpoints to inquire customer accounts information
+- name: calculators
+  description: Endpoints to fetch calculator results
+- name: data validations
+  description: Endpoints to verify customer information
+x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/inquiry-services-v1.0.yaml
+x-bundled-from: openapi/_original/stitch-capture-services/inquiry-services-v1.0.yaml (./models refs inlined into components/schemas; stoplight:// platform overrides are not resolvable outside Stoplight
+  and are kept as x-unresolved-stoplight-ref)

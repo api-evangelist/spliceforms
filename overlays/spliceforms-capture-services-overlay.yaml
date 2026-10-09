@@ -1,0 +1,89 @@
+overlay: 1.0.0
+info:
+  title: Spliceforms Application Form Capture Services enhancements
+  version: 1.0.0
+extends: ../openapi/_original/spliceforms-capture-services-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-provider: Spliceforms
+    x-api-evangelist:
+      slug: spliceforms
+      product: Stitch (apibanking.com)
+      enriched: '2026-10-09'
+- target: $.paths['/v1/application-forms'].post
+  update:
+    x-mcp-tool: initiateApplication
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/accounts'].post
+  update:
+    x-mcp-tool: saveAccount
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/accounts/{accountSerialNo}'].get
+  update:
+    x-mcp-tool: fetchAccount
+    x-agent-safe: true
+- target: $.paths['/v1/application-forms/{applicationId}/accounts/{accountSerialNo}/nomination'].post
+  update:
+    x-mcp-tool: saveAccountNomination
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/accounts/{accountSerialNo}/nomination'].get
+  update:
+    x-mcp-tool: fetchAccountNomination
+    x-agent-safe: true
+- target: $.paths['/v1/application-forms/{applicationId}/accounts/{accountSerialNo}/nomination'].delete
+  update:
+    x-mcp-tool: deleteAccountNomination
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/payin-preferences'].post
+  update:
+    x-mcp-tool: savePayinPreferences
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/payin-preferences'].get
+  update:
+    x-mcp-tool: fetchPayinPreferences
+    x-agent-safe: true
+- target: $.paths['/v1/application-forms/{applicationId}/payin-preferences'].delete
+  update:
+    x-mcp-tool: deletePayinPreferences
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/staff'].post
+  update:
+    x-mcp-tool: saveStaff
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/staff'].get
+  update:
+    x-mcp-tool: fetchStaff
+    x-agent-safe: true
+- target: $.paths['/v1/application-forms/{applicationId}/staff'].delete
+  update:
+    x-mcp-tool: deleteStaff
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/consents'].post
+  update:
+    x-mcp-tool: saveConsents
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/consents'].get
+  update:
+    x-mcp-tool: fetchConsents
+    x-agent-safe: true
+- target: $.paths['/v1/application-forms/{applicationId}/payin'].post
+  update:
+    x-mcp-tool: initiatePayin
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/payin/status'].post
+  update:
+    x-mcp-tool: fetchPayinStatus
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/validation'].post
+  update:
+    x-mcp-tool: validateApplicationForm
+    x-agent-safe: false
+- target: $.paths['/v1/application-forms/{applicationId}/submission'].post
+  update:
+    x-mcp-tool: submitApplicationForm
+    x-agent-safe: false
+- target: $.paths['/v1/applications/{applicationId}/status'].get
+  update:
+    x-mcp-tool: fetchApplicationStatus
+    x-agent-safe: true

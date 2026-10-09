@@ -1,0 +1,7 @@
+name: Spliceforms Rate Limits
+generated: '2026-10-09'
+method: none
+source: openapi/spliceforms-capture-services-openapi.yml
+limit_count: 0
+limits: []
+note: No rate limits are documented; there is no public docs site, and no contract declares 429 responses or X-RateLimit/RateLimit/Retry-After headers.

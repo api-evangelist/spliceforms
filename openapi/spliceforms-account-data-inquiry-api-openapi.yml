@@ -1,0 +1,350 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Inquiry Services account data inquiry API
+  summary: List of services to inquire customer data
+  description: This API provides endpoints to retrive the information about existing customer of the bank. This information could be used by channel application forms to display on the screen or to make certain decisions during application form data capture.
+  contact:
+    name: akhilesh
+    url: https://spliceforms.com/
+    email: api@apibanking.com
+  license:
+    url: https://spliceforms.com/
+    name: Commercial
+servers:
+- url: https://api.stitch.spliceforms.com/inquiry
+tags:
+- name: account data inquiry
+  description: Endpoints to inquire customer accounts information
+paths:
+  /v1/customer/accounts/nominees/get:
+    post:
+      summary: Fetch Account Nominees
+      description: Retrieves the list of nominees associated with a customer's accounts.
+      operationId: getCustomerAccountNominees
+      requestBody:
+        description: Shared Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NomineeInquiryRequest'
+            examples:
+              Example 1:
+                value:
+                  accountNo: '102001053892'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nominees:
+                    type: array
+                    description: Specifies the personal information of the nominee designated by the account holder.
+                    items:
+                      x-stoplight:
+                        id: zl8izkvheutvg
+                      $ref: '#/components/schemas/Nominee'
+              examples:
+                Example 1:
+                  value:
+                    nominees:
+                    - name: Virat Kohli
+                      gender: male
+                      dob: '1990-01-30'
+                      address:
+                        line1: Near Kailash Complex
+                        line2: Opposite Kailash Business Park
+                        line3: Near BMC Garden
+                        city: Mumbai
+                        district: Mumbai
+                        state: Maharashtra
+                        country: India
+                        pin: '410206'
+                      mobileNo: '+918082186583'
+                      emailId: rahim.sterling@gmail.com
+                      guardianDetails:
+                        name: Shekhar S Maity
+                        dob: '1990-01-30'
+                        relationshipWithNominee: Husband
+                        address:
+                          line1: Near Kailash Complex
+                          line2: Opposite Kailash Business Park
+                          line3: Near BMC Garden
+                          city: Mumbai
+                          district: Mumbai
+                          state: Maharashtra
+                          country: India
+                          pin: '410206'
+                      relationshipWithApplicant: Father
+                      sharePercentage: 50
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 400
+                    detail: string
+                    instance: http://example.com
+                    validationErrors:
+                    - message: string
+                      properties:
+                      - string
+                      severity: ERROR
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJson'
+              examples:
+                Example 1:
+                  value:
+                    type: http://example.com
+                    title: string
+                    status: 500
+                    detail: string
+                    instance: http://example.com
+      servers:
+      - url: http://localhost:3000
+      x-stoplight:
+        id: rndm0zusepvl2
+      tags:
+      - account data inquiry
+components:
+  schemas:
+    ProblemJson:
+      type: object
+      x-stoplight:
+        id: oooamay5pgk0b
+      title: ProblemJson
+      description: Problem Error Json
+      required:
+      - title
+      - status
+      properties:
+        title:
+          type: string
+          description: A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization (e.g., using proactive content negotiation; see [RFC7231], Section 3.4).
+          pattern: ^[A-Za-z0-9-_]+
+          minLength: 2
+          maxLength: 50
+          examples:
+          - Unauthorized
+          x-stoplight:
+            id: qp048dxgamcyv
+        status:
+          type: integer
+          description: The HTTP status code ([RFC7231], Section 6) generated by the origin server for this occurrence of the problem.
+          format: int32
+          minimum: 1
+          maximum: 1000
+          examples:
+          - 200
+          x-stoplight:
+            id: mppplj2ikgpo5
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 5
+          maxLength: 2043
+          examples:
+          - api_key missing
+          x-stoplight:
+            id: 05ie4179zj1s5
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          format: uri
+          pattern: ^(https?|http):\/\/[^\s/$.?#].[^\s]*$
+          minLength: 5
+          maxLength: 2083
+          examples:
+          - https://example.com/resource
+          x-stoplight:
+            id: f0d9smdiysl1b
+        validationErrors:
+          type: array
+          description: Validation Errors
+          items:
+            x-stoplight:
+              id: 7vcjnrvdy7wos
+            $ref: '#/components/schemas/ValidationError'
+          x-stoplight:
+            id: uxclbrhmspafm
+    NomineeAddress:
+      type: object
+      title: NomineeAddress
+      description: Specifies the complete address details of the nominee.
+      x-package: nomination
+      x-stoplight:
+        id: u5dcf6yibq6yq
+      required:
+      - line
+      - cityCode
+      - stateCode
+      - countryCode
+      - pinCode
+      properties:
+        line:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
+        cityCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        stateCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        countryCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        pinCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
+    Guardian:
+      type: object
+      title: Guardian
+      description: It refers to the information related to the person who will act as a legal guardian for the nominee in case the nominee is a minor or unable to manage their own affairs.
+      x-stoplight:
+        id: lghrra139m815
+      required:
+      - name
+      - dob
+      - address
+      properties:
+        name:
+          description: Full name of the guardian
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+        dob:
+          description: The exact date on which the guardian was born, including the day, month, and year.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
+        relationshipWithNominee:
+          description: Specifies the nature of the connection between two parties. The allowed values will have to comply with the values of "nomineeRelationCode" codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/rCj13ihpGbg
+        address:
+          $ref: '#/components/schemas/GuardianAddress'
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    NomineeInquiryRequest:
+      title: NomineeInquiryRequest
+      x-stoplight:
+        id: e35gdhum4bjrj
+      type: object
+      description: Account number
+      required:
+      - accountNo
+      properties:
+        accountNo:
+          x-stoplight:
+            id: ep1mruta33ktd
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
+    GuardianAddress:
+      type: object
+      title: GuardianAddress
+      description: Specifies the complete address details of the guardian.
+      x-package: nomination
+      x-stoplight:
+        id: v86vldk7j4odh
+      required:
+      - line
+      - cityCode
+      - stateCode
+      - countryCode
+      - pinCode
+      properties:
+        line:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
+        cityCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        stateCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        countryCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        pinCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
+    Nominee:
+      type: object
+      title: Nominee
+      description: Specifies the personal information of the nominee designated by the account holder.
+      x-package: nomination
+      x-stoplight:
+        id: 70bneppghra7k
+      required:
+      - name
+      - dob
+      - address
+      - relationshipWithApplicant
+      properties:
+        name:
+          description: The full name of the individual nominated by the account holder to receive the benefits or proceeds of the account in the event of the account holder's demise.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+        dob:
+          description: 'If nominee dob is less than 18yrs then guardian details in "guardian" has to be filled. '
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
+        address:
+          $ref: '#/components/schemas/NomineeAddress'
+        relationshipWithApplicant:
+          description: 'Relationship of Nominee with Applicant/Depositor.
+
+            The allowed values will have to comply with the values of codeset'
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/02QZBj0cg1s
+        guardian:
+          $ref: '#/components/schemas/Guardian'
+        sharePercentage:
+          x-stoplight:
+            id: z2a474uhtz3pr
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/IVykiNdyptI
+x-stoplight:
+  id: mrnq6rlv8lmce
+x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/inquiry-services-v1.0.yaml
+x-bundled-from: openapi/_original/stitch-capture-services/inquiry-services-v1.0.yaml (./models refs inlined into components/schemas; stoplight:// platform overrides are not resolvable outside Stoplight and are kept as x-unresolved-stoplight-ref)

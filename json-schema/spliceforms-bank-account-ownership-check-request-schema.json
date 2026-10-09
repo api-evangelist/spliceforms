@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spliceforms/main/json-schema/spliceforms-bank-account-ownership-check-request-schema.json",
+  "title": "BankAccountOwnershipCheckRequest",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spliceforms-inquiry-services-openapi.yml#/components/schemas/BankAccountOwnershipCheckRequest",
+  "x-stoplight": {
+    "id": "a8dq2g4umclnn"
+  },
+  "type": "object",
+  "required": [
+    "accountHolderName",
+    "accountNo",
+    "accountType",
+    "ifsc"
+  ],
+  "properties": {
+    "accountHolderName": {
+      "x-stoplight": {
+        "id": "1eo5al4wfwbip"
+      },
+      "description": "Account holder name associated with Bank.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5yNhk1Hgfig"
+    },
+    "accountNo": {
+      "x-stoplight": {
+        "id": "t758265ua6izh"
+      },
+      "description": "A unique identifier number assigned to a bank account.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/swJoliwLU7s"
+    },
+    "accountType": {
+      "x-stoplight": {
+        "id": "k4lfugpho08kd"
+      },
+      "description": "Specifies the type of bank account associated with the transaction or request. The allowed values will have to comply with the values of codeset.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/tCwO6x9ZNk0"
+    },
+    "ifsc": {
+      "x-stoplight": {
+        "id": "fhn7mpxnhqjvd"
+      },
+      "description": "A unique 11-character alphanumeric code used to identify specific bank branches.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/5js4tqEmILQ"
+    },
+    "bankCode": {
+      "x-stoplight": {
+        "id": "307xbcazmb0cr"
+      },
+      "description": "The name of the bank.",
+      "x-unresolved-stoplight-ref": "stoplight://resources/overrides/EDRPdrQwsaA"
+    }
+  }
+}

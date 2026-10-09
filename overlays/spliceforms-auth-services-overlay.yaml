@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: Spliceforms Auth Services enhancements
+  version: 1.0.0
+extends: ../openapi/_original/spliceforms-auth-services-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-provider: Spliceforms
+    x-api-evangelist:
+      slug: spliceforms
+      product: Stitch (apibanking.com)
+      enriched: '2026-10-09'
+- target: $.paths['/v1/otp/initiate'].post
+  update:
+    x-mcp-tool: initiateAuthentication
+    x-agent-safe: false
+- target: $.paths['/v1/otp/resend'].post
+  update:
+    x-mcp-tool: resendOTP
+    x-agent-safe: false
+- target: $.paths['/v1/otp/token'].post
+  update:
+    x-mcp-tool: verifyOTPAndIssueToken
+    x-agent-safe: false
