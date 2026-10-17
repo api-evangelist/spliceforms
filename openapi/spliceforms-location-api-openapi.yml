@@ -254,53 +254,6 @@ paths:
       - Location
 components:
   schemas:
-    PaginatedResponse:
-      type: object
-      x-stoplight:
-        id: cd03j7c25sy2q
-      title: PaginatedResponse
-      required:
-      - totalRecords
-      - totalPages
-      - pageNo
-      - pageSize
-      properties:
-        totalRecords:
-          type: integer
-          description: Total number of records available.
-          format: int32
-          example: 45
-          minimum: 1
-          maximum: 10000
-          x-stoplight:
-            id: ng7t6wdgbqolv
-        totalPages:
-          type: integer
-          description: Total number of pages.
-          example: 4
-          minimum: 1
-          maximum: 1000
-          format: int32
-          x-stoplight:
-            id: tnb60gemsmgcg
-        pageNo:
-          type: integer
-          description: Current page number.
-          example: 2
-          minimum: 1
-          maximum: 100
-          format: int32
-          x-stoplight:
-            id: 2lvw64mf3ljcq
-        pageSize:
-          type: integer
-          description: Number of records per page.
-          example: 10
-          minimum: 1
-          maximum: 100
-          format: int32
-          x-stoplight:
-            id: lswzbcgxb87ul
     ValidationError:
       type: object
       x-stoplight:
@@ -349,6 +302,44 @@ components:
           - ERROR
           x-stoplight:
             id: kcvbyilxmlci5
+    City:
+      type: object
+      x-stoplight:
+        id: 3x1h6y4vmul6z
+      title: City
+      description: Specifies the details of city, state and country.
+      required:
+      - code
+      - name
+      - stateCode
+      - stateName
+      - countryCode
+      - countryName
+      properties:
+        code:
+          x-stoplight:
+            id: lzdoashdvfodg
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        name:
+          x-stoplight:
+            id: 1s2hq2grcra0i
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/uacPPo0KgqI
+        stateCode:
+          x-stoplight:
+            id: 4i09y4fwq9qrk
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        stateName:
+          x-stoplight:
+            id: k3ybr6vz1eiq1
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GmiZxW2vxw4
+        countryCode:
+          x-stoplight:
+            id: 2ip2qp0a2o3et
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        countryName:
+          x-stoplight:
+            id: ibneu8qkxsnu6
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Zt82KlnOynE
     ProblemJson:
       type: object
       x-stoplight:
@@ -409,44 +400,6 @@ components:
             $ref: '#/components/schemas/ValidationError'
           x-stoplight:
             id: uxclbrhmspafm
-    City:
-      type: object
-      x-stoplight:
-        id: 3x1h6y4vmul6z
-      title: City
-      description: Specifies the details of city, state and country.
-      required:
-      - code
-      - name
-      - stateCode
-      - stateName
-      - countryCode
-      - countryName
-      properties:
-        code:
-          x-stoplight:
-            id: lzdoashdvfodg
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
-        name:
-          x-stoplight:
-            id: 1s2hq2grcra0i
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/uacPPo0KgqI
-        stateCode:
-          x-stoplight:
-            id: 4i09y4fwq9qrk
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
-        stateName:
-          x-stoplight:
-            id: k3ybr6vz1eiq1
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/GmiZxW2vxw4
-        countryCode:
-          x-stoplight:
-            id: 2ip2qp0a2o3et
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
-        countryName:
-          x-stoplight:
-            id: ibneu8qkxsnu6
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Zt82KlnOynE
     State:
       type: object
       x-stoplight:
@@ -475,6 +428,53 @@ components:
           x-stoplight:
             id: 71h742i9bpd0o
           x-unresolved-stoplight-ref: stoplight://resources/overrides/Zt82KlnOynE
+    PaginatedResponse:
+      type: object
+      x-stoplight:
+        id: cd03j7c25sy2q
+      title: PaginatedResponse
+      required:
+      - totalRecords
+      - totalPages
+      - pageNo
+      - pageSize
+      properties:
+        totalRecords:
+          type: integer
+          description: Total number of records available.
+          format: int32
+          example: 45
+          minimum: 1
+          maximum: 10000
+          x-stoplight:
+            id: ng7t6wdgbqolv
+        totalPages:
+          type: integer
+          description: Total number of pages.
+          example: 4
+          minimum: 1
+          maximum: 1000
+          format: int32
+          x-stoplight:
+            id: tnb60gemsmgcg
+        pageNo:
+          type: integer
+          description: Current page number.
+          example: 2
+          minimum: 1
+          maximum: 100
+          format: int32
+          x-stoplight:
+            id: 2lvw64mf3ljcq
+        pageSize:
+          type: integer
+          description: Number of records per page.
+          example: 10
+          minimum: 1
+          maximum: 100
+          format: int32
+          x-stoplight:
+            id: lswzbcgxb87ul
 x-stoplight:
   id: p2yovmp4rufcv
 x-internal: true

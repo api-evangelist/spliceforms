@@ -1098,85 +1098,6 @@ paths:
         id: qlosjv7cxj04b
 components:
   schemas:
-    FDAccount:
-      type: object
-      title: FDAccount
-      description: Represents the preferences for FD account
-      x-stoplight:
-        id: 8x0xxhz2zj4g7
-      required:
-      - branchCode
-      - amount
-      - interestPayoutTreatment
-      - maturityInstruction
-      - tenure
-      - payout
-      properties:
-        branchCode:
-          description: The unique code representing the specific branch of the bank. The allowed values will have to comply with the values of "branchCode" codeset.
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/DkpDaBt77Zw
-        amount:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
-        interestPayoutTreatment:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/GIH20YnXrJk
-        maturityInstruction:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/hNcvI153XgU
-        tenure:
-          $ref: '#/components/schemas/FDTenure'
-        payout:
-          $ref: '#/components/schemas/FDPayout'
-        accountSerialNo:
-          $ref: '#/components/schemas/AccountSerialNo'
-    ETBIndividualApplicant:
-      type: object
-      title: ETBIndividualApplicant
-      description: It includes essential information of an individual
-      x-stoplight:
-        id: nub97d2z8vpme
-      required:
-      - mobileNo
-      - dob
-      properties:
-        mobileNo:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/LT9qrA1aRC4
-        dob:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
-    PayinInitiationResponse:
-      type: object
-      title: PayinInitiationResponse
-      description: Response for the payin request
-      x-stoplight:
-        id: wfu74s8hlrtni
-      required:
-      - orderId
-      - transactionId
-      properties:
-        link:
-          $ref: '#/components/schemas/PaymentLink'
-        orderId:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/DKNg0X01iqs
-        transactionId:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/ixcWjoDYuA0
-    FDApplication:
-      title: FDApplication
-      description: Contains the common fields for FD applications
-      x-stoplight:
-        id: 03tu6sm7n4z9f
-      allOf:
-      - x-stoplight:
-          id: wnurm5fra1b03
-        $ref: '#/components/schemas/Application'
-      - type: object
-        required:
-        - declaration
-        - payin
-        properties:
-          declaration:
-            $ref: '#/components/schemas/Declaration'
-          payin:
-            $ref: '#/components/schemas/Payin'
-      examples:
-      - {}
     ExternalFundingPreference:
       type: object
       title: ExternalFundingPreference
@@ -1191,6 +1112,23 @@ components:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
         account:
           $ref: '#/components/schemas/ExternalBankAccount'
+    ExternalFundingRequest:
+      type: object
+      title: ExternalFundingRequest
+      description: Funds sourced from an external bank account.
+      x-stoplight:
+        id: eyiccvugl6ed6
+      required:
+      - method
+      - instrument
+      properties:
+        method:
+          description: Possible methods for getting funds from external accounts
+          $ref: '#/components/schemas/ExternalFundingMethodType'
+        instrument:
+          oneOf:
+          - $ref: '#/components/schemas/UpiPaymentRequest'
+          - $ref: '#/components/schemas/NetbankingPaymentRequest'
     ExternalFunding:
       type: object
       title: ExternalFunding
@@ -1211,16 +1149,73 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Upi'
           - $ref: '#/components/schemas/Netbanking'
-    PayinStatusResponse:
+    FDPayout:
       type: object
-      title: PayinStatusResponse
+      title: FDPayout
+      description: Specifies the methods to payout FD interest and/or principal on maturity
+      x-package: account.fd
       x-stoplight:
-        id: p5cr7qcqolbas
+        id: zi0w6z8evo404
       required:
-      - status
+      - mode
+      - instrument
       properties:
-        status:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/4jnPFrrRuI0
+        mode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/1Ll91UtXZ2s
+        instrument:
+          oneOf:
+          - $ref: '#/components/schemas/InternalBankAccount'
+          - $ref: '#/components/schemas/ExternalBankAccount'
+    PayinInitiationResponse:
+      type: object
+      title: PayinInitiationResponse
+      description: Response for the payin request
+      x-stoplight:
+        id: wfu74s8hlrtni
+      required:
+      - orderId
+      - transactionId
+      properties:
+        link:
+          $ref: '#/components/schemas/PaymentLink'
+        orderId:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/DKNg0X01iqs
+        transactionId:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/ixcWjoDYuA0
+    ApplicationInitiationRequest:
+      title: ApplicationInitiationRequest
+      x-stoplight:
+        id: lomcyj5xgtc2l
+      type: object
+      required:
+      - applicant
+      properties:
+        applicant:
+          $ref: '#/components/schemas/ETBIndividualApplicant'
+          x-stoplight:
+            id: vdrn4pc3oibcx
+        staff:
+          x-stoplight:
+            id: sgof4h8njxbtf
+          $ref: '#/components/schemas/Staff'
+    Declaration:
+      type: object
+      title: Declaration
+      description: A declaration may include consent for compliance, acknowledgment of policies, and confirmation of provided details.
+      x-stoplight:
+        id: r34kag2o5sm70
+      required:
+      - isNominationOpted
+      - da1Nomination
+      - consentReferenceId
+      properties:
+        isNominationOpted:
+          type: boolean
+          description: This indicates whether the account holder chooses to nominate a beneficiary who will receive the funds in the account in the event of the account holder’s demise. If boolean is true then details in "nominationForDa1" has to be filled
+        da1Nomination:
+          $ref: '#/components/schemas/Nominee'
+        consentReferenceId:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/JVJLO1LAh5U
     ETBFDApplicationForm:
       type: object
       title: ETBFDApplicationForm
@@ -1269,48 +1264,60 @@ components:
       - {}
       - {}
       - {}
-    PayinSourcePreference:
+    PaymentStatusRequest:
       type: object
-      title: PayinSourcePreference
-      description: 'Payment source preference for the application  '
-      properties:
-        sourceType:
-          $ref: '#/components/schemas/PayinSourceType'
-        source:
-          oneOf:
-          - $ref: '#/components/schemas/InternalFundingPreference'
-          - $ref: '#/components/schemas/ExternalFundingPreference'
-          - $ref: '#/components/schemas/CombinedFundingPreference'
+      title: PaymentStatusRequest
+      x-stoplight:
+        id: 6ighht0beprif
       required:
-      - sourceType
-      - source
-      x-stoplight:
-        id: okkw9jkejlgpl
-    ETBFDApplicationStatus:
+      - requestReferenceNo
+      properties:
+        requestReferenceNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/LxUYQPKCXxM
+    PayinStatusResponse:
       type: object
-      title: ETBFDApplicationStatus
-      description: Processing status for ETB FD application
+      title: PayinStatusResponse
       x-stoplight:
-        id: tmhi5v9yp9q61
+        id: p5cr7qcqolbas
       required:
       - status
       properties:
         status:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/9mKfsqolpW4
-        accountOpeningResult:
-          $ref: '#/components/schemas/AccountOpeningResult'
-    ApplicationInitiationResponse:
-      title: ApplicationInitiationResponse
-      x-stoplight:
-        id: 37v0sgxkmy0da
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/4jnPFrrRuI0
+    PaymentLink:
       type: object
+      title: PaymentLink
+      description: Payment Link information
+      x-stoplight:
+        id: wapt3fttiu0dd
       required:
-      - applicationId
+      - httpMethod
+      - url
       properties:
-        applicationId:
-          x-stoplight:
-            id: 7gk5382vwbmwd
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/NPaBdSGrXxc
+        httpMethod:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/LxfGWMR4qzg
+        url:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/YjqooP8HUgE
+        params:
+          type: object
+          description: Indicates the list of parameters to be posted along with the payment URL
+          additionalProperties:
+            type: object
+            description: Indicates the value of the parameter
+    Netbanking:
+      type: object
+      title: Netbanking
+      description: Contains details of the netbanking instrument.
+      x-stoplight:
+        id: l5n40oebtpux4
+      required:
+      - account
+      - paymentReferenceNo
+      properties:
+        account:
+          $ref: '#/components/schemas/ExternalBankAccount'
+        paymentReferenceNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/dzVlqIouteM
     Guardian:
       type: object
       title: Guardian
@@ -1333,6 +1340,171 @@ components:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/rCj13ihpGbg
         address:
           $ref: '#/components/schemas/GuardianAddress'
+    CombinedFundingPreference:
+      title: CombinedFundingPreference
+      description: Funds are sourced from both internal and external accounts.
+      allOf:
+      - $ref: '#/components/schemas/InternalFundingPreference'
+      - $ref: '#/components/schemas/ExternalFundingPreference'
+      x-stoplight:
+        id: v0x3zc4toa407
+    NetbankingPaymentRequest:
+      type: object
+      title: NetbankingPaymentRequest
+      description: Contains details of the netbanking payment request.
+      properties:
+        account:
+          $ref: '#/components/schemas/ExternalBankAccount'
+      required:
+      - account
+      x-stoplight:
+        id: opeyfm5n1c05u
+    PayinSourcePreference:
+      type: object
+      title: PayinSourcePreference
+      description: 'Payment source preference for the application  '
+      properties:
+        sourceType:
+          $ref: '#/components/schemas/PayinSourceType'
+        source:
+          oneOf:
+          - $ref: '#/components/schemas/InternalFundingPreference'
+          - $ref: '#/components/schemas/ExternalFundingPreference'
+          - $ref: '#/components/schemas/CombinedFundingPreference'
+      required:
+      - sourceType
+      - source
+      x-stoplight:
+        id: okkw9jkejlgpl
+    Device:
+      type: object
+      title: Device
+      description: It captures details about the device initiating the request
+      properties:
+        channelId:
+          type: string
+          description: The unique code representing the specific channel.
+          pattern: ^\d{1,5}$
+          minLength: 1
+          maxLength: 5
+          examples:
+          - '10907'
+        ipAddress:
+          type: string
+          description: The IP address of the device.
+          format: ipv6
+          pattern: ^([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])$
+          minLength: 2
+          maxLength: 39
+          examples:
+          - 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+        userAgent:
+          type: string
+          description: The user agent of the device.
+          pattern: ^[A-Za-z ]+
+          minLength: 1
+          maxLength: 100
+          examples:
+          - Chrome
+      required:
+      - channelId
+      - userAgent
+      x-stoplight:
+        id: 01tld0hvzfmpg
+    ETBFDApplicationStatus:
+      type: object
+      title: ETBFDApplicationStatus
+      description: Processing status for ETB FD application
+      x-stoplight:
+        id: tmhi5v9yp9q61
+      required:
+      - status
+      properties:
+        status:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/9mKfsqolpW4
+        accountOpeningResult:
+          $ref: '#/components/schemas/AccountOpeningResult'
+    ExternalFundingMethodType:
+      description: Options through which applicant can make a deposit using external bank accounts
+      title: ExternalFundingMethodType
+      type: string
+      x-stoplight:
+        id: juqy97cplinyp
+      enum:
+      - UPI
+      - NETBANKING
+      pattern: ^[A-Z_]+
+      minLength: 3
+      maxLength: 10
+      examples:
+      - UPI
+    InternalBankAccount:
+      type: object
+      title: InternalBankAccount
+      description: Specifies the internal bank account details
+      examples:
+      - accountNo: '002001053410'
+      x-stoplight:
+        id: cqj717kedsbpl
+      required:
+      - accountNo
+      properties:
+        accountNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
+    FDTenure:
+      type: object
+      title: FDTenure
+      description: This indicates the duration for which the Fixed Deposit (FD) is held, expressed in days, months and years.
+      x-stoplight:
+        id: b8a8yencrf6fn
+      required:
+      - days
+      - months
+      - years
+      properties:
+        days:
+          type: integer
+          description: Tenure expressed in days
+          format: int32
+          minimum: 1
+          maximum: 31
+          example: 1
+        months:
+          type: integer
+          description: Tenure expressed in months
+          format: int32
+          minimum: 6
+          maximum: 11
+          examples:
+          - 6
+        years:
+          type: integer
+          description: Tenure expressed in years
+          format: int32
+          minimum: 0
+          maximum: 10
+          examples:
+          - 1
+    FDApplication:
+      title: FDApplication
+      description: Contains the common fields for FD applications
+      x-stoplight:
+        id: 03tu6sm7n4z9f
+      allOf:
+      - x-stoplight:
+          id: wnurm5fra1b03
+        $ref: '#/components/schemas/Application'
+      - type: object
+        required:
+        - declaration
+        - payin
+        properties:
+          declaration:
+            $ref: '#/components/schemas/Declaration'
+          payin:
+            $ref: '#/components/schemas/Payin'
+      examples:
+      - {}
     Payin:
       type: object
       title: Payin
@@ -1350,6 +1522,148 @@ components:
       - source
       x-stoplight:
         id: t1x11o2a16hbi
+    AccountOpeningResult:
+      type: object
+      title: AccountOpeningResult
+      description: Account opening result
+      properties:
+        accounts:
+          type: array
+          description: List of accounts opened as part of application processing
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/FDAccountOpeningResult'
+      required:
+      - accounts
+      x-stoplight:
+        id: 5c1hf4pjkjkjw
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    Application:
+      title: Application
+      x-stoplight:
+        id: zzae6t0s9xwav
+      type: object
+      description: Common/base model for application with common attributes. Concrete models for specific channel application forms should extend this (using allOff construct)
+      properties:
+        staff:
+          x-stoplight:
+            id: 9ntisl8skcjuj
+          $ref: '#/components/schemas/Staff'
+    PayinRequest:
+      type: object
+      title: PayinRequest
+      description: Payin request
+      x-stoplight:
+        id: odvdz2ke622gr
+      required:
+      - requestReferenceNo
+      - amount
+      - source
+      - device
+      properties:
+        requestReferenceNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/LxUYQPKCXxM
+        amount:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
+        source:
+          $ref: '#/components/schemas/ExternalFundingRequest'
+        device:
+          $ref: '#/components/schemas/Device'
+    ExternalBankAccount:
+      type: object
+      title: ExternalBankAccount
+      description: Contains details of the NEFT instrument.
+      x-package: payment.instrument
+      x-stoplight:
+        id: jp29joi2rdyw4
+      required:
+      - accountType
+      - accountNo
+      - ifsc
+      properties:
+        accountType:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/tCwO6x9ZNk0
+        accountNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
+        ifsc:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5js4tqEmILQ
+    CombinedFunding:
+      title: CombinedFunding
+      description: Funds are sourced from both internal and external accounts.
+      x-stoplight:
+        id: nztq8dlqfxcxw
+      type: object
+      required:
+      - internal
+      - external
+      properties:
+        internal:
+          $ref: '#/components/schemas/InternalFunding'
+          x-stoplight:
+            id: e4woy7sko96a8
+        external:
+          $ref: '#/components/schemas/ExternalFunding'
+          x-stoplight:
+            id: e2pzhjp9emz40
+    ApplicationInitiationResponse:
+      title: ApplicationInitiationResponse
+      x-stoplight:
+        id: 37v0sgxkmy0da
+      type: object
+      required:
+      - applicationId
+      properties:
+        applicationId:
+          x-stoplight:
+            id: 7gk5382vwbmwd
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/NPaBdSGrXxc
     FDAccountOpeningResult:
       type: object
       title: FDAccountOpeningResult
@@ -1389,18 +1703,111 @@ components:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
         pinCode:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
-    FDAccountWithOptionalPayout:
+    GuardianAddress:
       type: object
-      title: FDAccountWithOptionalPayout
-      description: 'Represents the preferences for FD account. Optionally payout preferences also can be provided  '
+      title: GuardianAddress
+      description: Specifies the complete address details of the guardian.
+      x-package: nomination
       x-stoplight:
-        id: kmnqbs2c1nykz
+        id: v86vldk7j4odh
+      required:
+      - line
+      - cityCode
+      - stateCode
+      - countryCode
+      - pinCode
+      properties:
+        line:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
+        cityCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        stateCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        countryCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        pinCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
+    ETBIndividualApplicant:
+      type: object
+      title: ETBIndividualApplicant
+      description: It includes essential information of an individual
+      x-stoplight:
+        id: nub97d2z8vpme
+      required:
+      - mobileNo
+      - dob
+      properties:
+        mobileNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/LT9qrA1aRC4
+        dob:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
+    AccountSerialNo:
+      type: integer
+      title: AccountSerialNo
+      description: Indicates the serial number of the account which is added to the application
+      format: int32
+      minimum: 1
+      maximum: 1
+      examples:
+      - 1
+      x-stoplight:
+        id: myofrfpy3wo2a
+    InternalFunding:
+      type: object
+      title: InternalFunding
+      description: Funds drawn from an account within the bank.
+      x-stoplight:
+        id: ryga2hh0o90se
+      required:
+      - amount
+      - instrument
+      properties:
+        amount:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
+        instrument:
+          $ref: '#/components/schemas/InternalBankAccount'
+    PayinSourceType:
+      type: string
+      enum:
+      - INTERNAL
+      - EXTERNAL
+      - COMBINED
+      title: PayinSourceType
+      description: Indicates the type of source for the payin
+      pattern: ^[A-Z_]+
+      minLength: 8
+      maxLength: 8
+      examples:
+      - INTERNAL
+      x-stoplight:
+        id: 5nyt7q7ez37fc
+    UpiPaymentRequest:
+      type: object
+      title: UpiPaymentRequest
+      description: Contains details of the UPI payment request
+      x-stoplight:
+        id: ar2fr8aiikut5
+      required:
+      - vpa
+      - account
+      properties:
+        vpa:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/ruVStTpk5p0
+        account:
+          $ref: '#/components/schemas/ExternalBankAccount'
+    FDAccount:
+      type: object
+      title: FDAccount
+      description: Represents the preferences for FD account
+      x-stoplight:
+        id: 8x0xxhz2zj4g7
       required:
       - branchCode
       - amount
       - interestPayoutTreatment
       - maturityInstruction
       - tenure
+      - payout
       properties:
         branchCode:
           description: The unique code representing the specific branch of the bank. The allowed values will have to comply with the values of "branchCode" codeset.
@@ -1417,37 +1824,6 @@ components:
           $ref: '#/components/schemas/FDPayout'
         accountSerialNo:
           $ref: '#/components/schemas/AccountSerialNo'
-    ExternalFundingMethodType:
-      description: Options through which applicant can make a deposit using external bank accounts
-      title: ExternalFundingMethodType
-      type: string
-      x-stoplight:
-        id: juqy97cplinyp
-      enum:
-      - UPI
-      - NETBANKING
-      pattern: ^[A-Z_]+
-      minLength: 3
-      maxLength: 10
-      examples:
-      - UPI
-    ExternalFundingRequest:
-      type: object
-      title: ExternalFundingRequest
-      description: Funds sourced from an external bank account.
-      x-stoplight:
-        id: eyiccvugl6ed6
-      required:
-      - method
-      - instrument
-      properties:
-        method:
-          description: Possible methods for getting funds from external accounts
-          $ref: '#/components/schemas/ExternalFundingMethodType'
-        instrument:
-          oneOf:
-          - $ref: '#/components/schemas/UpiPaymentRequest'
-          - $ref: '#/components/schemas/NetbankingPaymentRequest'
     ProblemJson:
       type: object
       x-stoplight:
@@ -1508,229 +1884,6 @@ components:
             $ref: '#/components/schemas/ValidationError'
           x-stoplight:
             id: uxclbrhmspafm
-    CombinedFundingPreference:
-      title: CombinedFundingPreference
-      description: Funds are sourced from both internal and external accounts.
-      allOf:
-      - $ref: '#/components/schemas/InternalFundingPreference'
-      - $ref: '#/components/schemas/ExternalFundingPreference'
-      x-stoplight:
-        id: v0x3zc4toa407
-    InternalFundingPreference:
-      type: object
-      title: InternalFundingPreference
-      description: Funds drawn from an account within the bank.
-      x-stoplight:
-        id: gx4gqeyebnbjy
-      required:
-      - amount
-      - account
-      properties:
-        amount:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
-        account:
-          $ref: '#/components/schemas/InternalBankAccount'
-    Declaration:
-      type: object
-      title: Declaration
-      description: A declaration may include consent for compliance, acknowledgment of policies, and confirmation of provided details.
-      x-stoplight:
-        id: r34kag2o5sm70
-      required:
-      - isNominationOpted
-      - da1Nomination
-      - consentReferenceId
-      properties:
-        isNominationOpted:
-          type: boolean
-          description: This indicates whether the account holder chooses to nominate a beneficiary who will receive the funds in the account in the event of the account holder’s demise. If boolean is true then details in "nominationForDa1" has to be filled
-        da1Nomination:
-          $ref: '#/components/schemas/Nominee'
-        consentReferenceId:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/JVJLO1LAh5U
-    PayinSourceType:
-      type: string
-      enum:
-      - INTERNAL
-      - EXTERNAL
-      - COMBINED
-      title: PayinSourceType
-      description: Indicates the type of source for the payin
-      pattern: ^[A-Z_]+
-      minLength: 8
-      maxLength: 8
-      examples:
-      - INTERNAL
-      x-stoplight:
-        id: 5nyt7q7ez37fc
-    CombinedFunding:
-      title: CombinedFunding
-      description: Funds are sourced from both internal and external accounts.
-      x-stoplight:
-        id: nztq8dlqfxcxw
-      type: object
-      required:
-      - internal
-      - external
-      properties:
-        internal:
-          $ref: '#/components/schemas/InternalFunding'
-          x-stoplight:
-            id: e4woy7sko96a8
-        external:
-          $ref: '#/components/schemas/ExternalFunding'
-          x-stoplight:
-            id: e2pzhjp9emz40
-    UpiPaymentRequest:
-      type: object
-      title: UpiPaymentRequest
-      description: Contains details of the UPI payment request
-      x-stoplight:
-        id: ar2fr8aiikut5
-      required:
-      - vpa
-      - account
-      properties:
-        vpa:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/ruVStTpk5p0
-        account:
-          $ref: '#/components/schemas/ExternalBankAccount'
-    FDTenure:
-      type: object
-      title: FDTenure
-      description: This indicates the duration for which the Fixed Deposit (FD) is held, expressed in days, months and years.
-      x-stoplight:
-        id: b8a8yencrf6fn
-      required:
-      - days
-      - months
-      - years
-      properties:
-        days:
-          type: integer
-          description: Tenure expressed in days
-          format: int32
-          minimum: 1
-          maximum: 31
-          example: 1
-        months:
-          type: integer
-          description: Tenure expressed in months
-          format: int32
-          minimum: 6
-          maximum: 11
-          examples:
-          - 6
-        years:
-          type: integer
-          description: Tenure expressed in years
-          format: int32
-          minimum: 0
-          maximum: 10
-          examples:
-          - 1
-    PaymentLink:
-      type: object
-      title: PaymentLink
-      description: Payment Link information
-      x-stoplight:
-        id: wapt3fttiu0dd
-      required:
-      - httpMethod
-      - url
-      properties:
-        httpMethod:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/LxfGWMR4qzg
-        url:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/YjqooP8HUgE
-        params:
-          type: object
-          description: Indicates the list of parameters to be posted along with the payment URL
-          additionalProperties:
-            type: object
-            description: Indicates the value of the parameter
-    PaymentStatusRequest:
-      type: object
-      title: PaymentStatusRequest
-      x-stoplight:
-        id: 6ighht0beprif
-      required:
-      - requestReferenceNo
-      properties:
-        requestReferenceNo:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/LxUYQPKCXxM
-    ApplicationInitiationRequest:
-      title: ApplicationInitiationRequest
-      x-stoplight:
-        id: lomcyj5xgtc2l
-      type: object
-      required:
-      - applicant
-      properties:
-        applicant:
-          $ref: '#/components/schemas/ETBIndividualApplicant'
-          x-stoplight:
-            id: vdrn4pc3oibcx
-        staff:
-          x-stoplight:
-            id: sgof4h8njxbtf
-          $ref: '#/components/schemas/Staff'
-    Netbanking:
-      type: object
-      title: Netbanking
-      description: Contains details of the netbanking instrument.
-      x-stoplight:
-        id: l5n40oebtpux4
-      required:
-      - account
-      - paymentReferenceNo
-      properties:
-        account:
-          $ref: '#/components/schemas/ExternalBankAccount'
-        paymentReferenceNo:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/dzVlqIouteM
-    GuardianAddress:
-      type: object
-      title: GuardianAddress
-      description: Specifies the complete address details of the guardian.
-      x-package: nomination
-      x-stoplight:
-        id: v86vldk7j4odh
-      required:
-      - line
-      - cityCode
-      - stateCode
-      - countryCode
-      - pinCode
-      properties:
-        line:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
-        cityCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
-        stateCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
-        countryCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
-        pinCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
-    Upi:
-      type: object
-      title: Upi
-      description: Contains details of the UPI instrument.
-      x-stoplight:
-        id: fwcfjb6bphkmw
-      required:
-      - vpa
-      - account
-      - paymentReferenceNo
-      properties:
-        vpa:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/ruVStTpk5p0
-        account:
-          $ref: '#/components/schemas/ExternalBankAccount'
-        paymentReferenceNo:
-          x-stoplight: {}
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/dzVlqIouteM
     Nominee:
       type: object
       title: Nominee
@@ -1763,184 +1916,20 @@ components:
           x-stoplight:
             id: z2a474uhtz3pr
           x-unresolved-stoplight-ref: stoplight://resources/overrides/IVykiNdyptI
-    AccountSerialNo:
-      type: integer
-      title: AccountSerialNo
-      description: Indicates the serial number of the account which is added to the application
-      format: int32
-      minimum: 1
-      maximum: 1
-      examples:
-      - 1
-      x-stoplight:
-        id: myofrfpy3wo2a
-    InternalBankAccount:
+    InternalFundingPreference:
       type: object
-      title: InternalBankAccount
-      description: Specifies the internal bank account details
-      examples:
-      - accountNo: '002001053410'
-      x-stoplight:
-        id: cqj717kedsbpl
-      required:
-      - accountNo
-      properties:
-        accountNo:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
-    PayinRequest:
-      type: object
-      title: PayinRequest
-      description: Payin request
-      x-stoplight:
-        id: odvdz2ke622gr
-      required:
-      - requestReferenceNo
-      - amount
-      - source
-      - device
-      properties:
-        requestReferenceNo:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/LxUYQPKCXxM
-        amount:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
-        source:
-          $ref: '#/components/schemas/ExternalFundingRequest'
-        device:
-          $ref: '#/components/schemas/Device'
-    AccountOpeningResult:
-      type: object
-      title: AccountOpeningResult
-      description: Account opening result
-      properties:
-        accounts:
-          type: array
-          description: List of accounts opened as part of application processing
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/FDAccountOpeningResult'
-      required:
-      - accounts
-      x-stoplight:
-        id: 5c1hf4pjkjkjw
-    ExternalBankAccount:
-      type: object
-      title: ExternalBankAccount
-      description: Contains details of the NEFT instrument.
-      x-package: payment.instrument
-      x-stoplight:
-        id: jp29joi2rdyw4
-      required:
-      - accountType
-      - accountNo
-      - ifsc
-      properties:
-        accountType:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/tCwO6x9ZNk0
-        accountNo:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
-        ifsc:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/5js4tqEmILQ
-    InternalFunding:
-      type: object
-      title: InternalFunding
+      title: InternalFundingPreference
       description: Funds drawn from an account within the bank.
       x-stoplight:
-        id: ryga2hh0o90se
+        id: gx4gqeyebnbjy
       required:
       - amount
-      - instrument
+      - account
       properties:
         amount:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
-        instrument:
-          $ref: '#/components/schemas/InternalBankAccount'
-    Application:
-      title: Application
-      x-stoplight:
-        id: zzae6t0s9xwav
-      type: object
-      description: Common/base model for application with common attributes. Concrete models for specific channel application forms should extend this (using allOff construct)
-      properties:
-        staff:
-          x-stoplight:
-            id: 9ntisl8skcjuj
-          $ref: '#/components/schemas/Staff'
-    NetbankingPaymentRequest:
-      type: object
-      title: NetbankingPaymentRequest
-      description: Contains details of the netbanking payment request.
-      properties:
         account:
-          $ref: '#/components/schemas/ExternalBankAccount'
-      required:
-      - account
-      x-stoplight:
-        id: opeyfm5n1c05u
-    FDPayout:
-      type: object
-      title: FDPayout
-      description: Specifies the methods to payout FD interest and/or principal on maturity
-      x-package: account.fd
-      x-stoplight:
-        id: zi0w6z8evo404
-      required:
-      - mode
-      - instrument
-      properties:
-        mode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/1Ll91UtXZ2s
-        instrument:
-          oneOf:
-          - $ref: '#/components/schemas/InternalBankAccount'
-          - $ref: '#/components/schemas/ExternalBankAccount'
-    ValidationError:
-      type: object
-      x-stoplight:
-        id: i03w36ken44hv
-      title: ValidationError
-      description: Validation Error
-      required:
-      - message
-      - severity
-      properties:
-        message:
-          type: string
-          description: Message for the validation error
-          pattern: ^[A-Za-z0-9-_ ]+
-          minLength: 2
-          maxLength: 2048
-          examples:
-          - fields can not be empty
-          x-stoplight:
-            id: vfc11e0vv4ka0
-        fields:
-          type: array
-          description: One or more properties on which the validation was performed.
-          items:
-            type: string
-            description: Propertie on which the validation was performed.
-            pattern: ^[A-Za-z0-9-_]+
-            minLength: 2
-            maxLength: 50
-            examples:
-            - '23212322'
-            x-stoplight:
-              id: 7ezn2bw6cptug
-          x-stoplight:
-            id: ngstgikrr1jga
-        severity:
-          type: string
-          enum:
-          - ERROR
-          - WARNING
-          description: Severity of the validation error.
-          pattern: ^[A-Z]+(_[A-Z]+)*$
-          minLength: 2
-          maxLength: 50
-          examples:
-          - ERROR
-          x-stoplight:
-            id: kcvbyilxmlci5
+          $ref: '#/components/schemas/InternalBankAccount'
     Staff:
       type: object
       title: Staff
@@ -1958,41 +1947,52 @@ components:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/gHuU3wTRjT0
         lcCode:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/pZLZAOMcf2s
-    Device:
+    Upi:
       type: object
-      title: Device
-      description: It captures details about the device initiating the request
-      properties:
-        channelId:
-          type: string
-          description: The unique code representing the specific channel.
-          pattern: ^\d{1,5}$
-          minLength: 1
-          maxLength: 5
-          examples:
-          - '10907'
-        ipAddress:
-          type: string
-          description: The IP address of the device.
-          format: ipv6
-          pattern: ^([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9])?[0-9])$
-          minLength: 2
-          maxLength: 39
-          examples:
-          - 2001:0db8:85a3:0000:0000:8a2e:0370:7334
-        userAgent:
-          type: string
-          description: The user agent of the device.
-          pattern: ^[A-Za-z ]+
-          minLength: 1
-          maxLength: 100
-          examples:
-          - Chrome
-      required:
-      - channelId
-      - userAgent
+      title: Upi
+      description: Contains details of the UPI instrument.
       x-stoplight:
-        id: 01tld0hvzfmpg
+        id: fwcfjb6bphkmw
+      required:
+      - vpa
+      - account
+      - paymentReferenceNo
+      properties:
+        vpa:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/ruVStTpk5p0
+        account:
+          $ref: '#/components/schemas/ExternalBankAccount'
+        paymentReferenceNo:
+          x-stoplight: {}
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/dzVlqIouteM
+    FDAccountWithOptionalPayout:
+      type: object
+      title: FDAccountWithOptionalPayout
+      description: 'Represents the preferences for FD account. Optionally payout preferences also can be provided  '
+      x-stoplight:
+        id: kmnqbs2c1nykz
+      required:
+      - branchCode
+      - amount
+      - interestPayoutTreatment
+      - maturityInstruction
+      - tenure
+      properties:
+        branchCode:
+          description: The unique code representing the specific branch of the bank. The allowed values will have to comply with the values of "branchCode" codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/DkpDaBt77Zw
+        amount:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/wbgPBBXK2qY
+        interestPayoutTreatment:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GIH20YnXrJk
+        maturityInstruction:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/hNcvI153XgU
+        tenure:
+          $ref: '#/components/schemas/FDTenure'
+        payout:
+          $ref: '#/components/schemas/FDPayout'
+        accountSerialNo:
+          $ref: '#/components/schemas/AccountSerialNo'
 x-stoplight:
   id: yewzi8y7jhaeg
 x-internal: true

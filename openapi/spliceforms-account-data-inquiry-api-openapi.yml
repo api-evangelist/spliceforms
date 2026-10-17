@@ -121,6 +121,76 @@ paths:
       - account data inquiry
 components:
   schemas:
+    ValidationError:
+      type: object
+      x-stoplight:
+        id: i03w36ken44hv
+      title: ValidationError
+      description: Validation Error
+      required:
+      - message
+      - severity
+      properties:
+        message:
+          type: string
+          description: Message for the validation error
+          pattern: ^[A-Za-z0-9-_ ]+
+          minLength: 2
+          maxLength: 2048
+          examples:
+          - fields can not be empty
+          x-stoplight:
+            id: vfc11e0vv4ka0
+        fields:
+          type: array
+          description: One or more properties on which the validation was performed.
+          items:
+            type: string
+            description: Propertie on which the validation was performed.
+            pattern: ^[A-Za-z0-9-_]+
+            minLength: 2
+            maxLength: 50
+            examples:
+            - '23212322'
+            x-stoplight:
+              id: 7ezn2bw6cptug
+          x-stoplight:
+            id: ngstgikrr1jga
+        severity:
+          type: string
+          enum:
+          - ERROR
+          - WARNING
+          description: Severity of the validation error.
+          pattern: ^[A-Z]+(_[A-Z]+)*$
+          minLength: 2
+          maxLength: 50
+          examples:
+          - ERROR
+          x-stoplight:
+            id: kcvbyilxmlci5
+    Guardian:
+      type: object
+      title: Guardian
+      description: It refers to the information related to the person who will act as a legal guardian for the nominee in case the nominee is a minor or unable to manage their own affairs.
+      x-stoplight:
+        id: lghrra139m815
+      required:
+      - name
+      - dob
+      - address
+      properties:
+        name:
+          description: Full name of the guardian
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
+        dob:
+          description: The exact date on which the guardian was born, including the day, month, and year.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
+        relationshipWithNominee:
+          description: Specifies the nature of the connection between two parties. The allowed values will have to comply with the values of "nomineeRelationCode" codeset.
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/rCj13ihpGbg
+        address:
+          $ref: '#/components/schemas/GuardianAddress'
     ProblemJson:
       type: object
       x-stoplight:
@@ -181,137 +251,6 @@ components:
             $ref: '#/components/schemas/ValidationError'
           x-stoplight:
             id: uxclbrhmspafm
-    NomineeAddress:
-      type: object
-      title: NomineeAddress
-      description: Specifies the complete address details of the nominee.
-      x-package: nomination
-      x-stoplight:
-        id: u5dcf6yibq6yq
-      required:
-      - line
-      - cityCode
-      - stateCode
-      - countryCode
-      - pinCode
-      properties:
-        line:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
-        cityCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
-        stateCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
-        countryCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
-        pinCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
-    Guardian:
-      type: object
-      title: Guardian
-      description: It refers to the information related to the person who will act as a legal guardian for the nominee in case the nominee is a minor or unable to manage their own affairs.
-      x-stoplight:
-        id: lghrra139m815
-      required:
-      - name
-      - dob
-      - address
-      properties:
-        name:
-          description: Full name of the guardian
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/5yNhk1Hgfig
-        dob:
-          description: The exact date on which the guardian was born, including the day, month, and year.
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
-        relationshipWithNominee:
-          description: Specifies the nature of the connection between two parties. The allowed values will have to comply with the values of "nomineeRelationCode" codeset.
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/rCj13ihpGbg
-        address:
-          $ref: '#/components/schemas/GuardianAddress'
-    ValidationError:
-      type: object
-      x-stoplight:
-        id: i03w36ken44hv
-      title: ValidationError
-      description: Validation Error
-      required:
-      - message
-      - severity
-      properties:
-        message:
-          type: string
-          description: Message for the validation error
-          pattern: ^[A-Za-z0-9-_ ]+
-          minLength: 2
-          maxLength: 2048
-          examples:
-          - fields can not be empty
-          x-stoplight:
-            id: vfc11e0vv4ka0
-        fields:
-          type: array
-          description: One or more properties on which the validation was performed.
-          items:
-            type: string
-            description: Propertie on which the validation was performed.
-            pattern: ^[A-Za-z0-9-_]+
-            minLength: 2
-            maxLength: 50
-            examples:
-            - '23212322'
-            x-stoplight:
-              id: 7ezn2bw6cptug
-          x-stoplight:
-            id: ngstgikrr1jga
-        severity:
-          type: string
-          enum:
-          - ERROR
-          - WARNING
-          description: Severity of the validation error.
-          pattern: ^[A-Z]+(_[A-Z]+)*$
-          minLength: 2
-          maxLength: 50
-          examples:
-          - ERROR
-          x-stoplight:
-            id: kcvbyilxmlci5
-    NomineeInquiryRequest:
-      title: NomineeInquiryRequest
-      x-stoplight:
-        id: e35gdhum4bjrj
-      type: object
-      description: Account number
-      required:
-      - accountNo
-      properties:
-        accountNo:
-          x-stoplight:
-            id: ep1mruta33ktd
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
-    GuardianAddress:
-      type: object
-      title: GuardianAddress
-      description: Specifies the complete address details of the guardian.
-      x-package: nomination
-      x-stoplight:
-        id: v86vldk7j4odh
-      required:
-      - line
-      - cityCode
-      - stateCode
-      - countryCode
-      - pinCode
-      properties:
-        line:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
-        cityCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
-        stateCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
-        countryCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
-        pinCode:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
     Nominee:
       type: object
       title: Nominee
@@ -344,6 +283,67 @@ components:
           x-stoplight:
             id: z2a474uhtz3pr
           x-unresolved-stoplight-ref: stoplight://resources/overrides/IVykiNdyptI
+    NomineeInquiryRequest:
+      title: NomineeInquiryRequest
+      x-stoplight:
+        id: e35gdhum4bjrj
+      type: object
+      description: Account number
+      required:
+      - accountNo
+      properties:
+        accountNo:
+          x-stoplight:
+            id: ep1mruta33ktd
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/swJoliwLU7s
+    NomineeAddress:
+      type: object
+      title: NomineeAddress
+      description: Specifies the complete address details of the nominee.
+      x-package: nomination
+      x-stoplight:
+        id: u5dcf6yibq6yq
+      required:
+      - line
+      - cityCode
+      - stateCode
+      - countryCode
+      - pinCode
+      properties:
+        line:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
+        cityCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        stateCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        countryCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        pinCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
+    GuardianAddress:
+      type: object
+      title: GuardianAddress
+      description: Specifies the complete address details of the guardian.
+      x-package: nomination
+      x-stoplight:
+        id: v86vldk7j4odh
+      required:
+      - line
+      - cityCode
+      - stateCode
+      - countryCode
+      - pinCode
+      properties:
+        line:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/cJk4qn60FYo
+        cityCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/e716yeYODOc
+        stateCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Cvh9dy4b2Bc
+        countryCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/TefCsIHCKhs
+        pinCode:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Ov8lL8w72Jo
 x-stoplight:
   id: mrnq6rlv8lmce
 x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/inquiry-services-v1.0.yaml

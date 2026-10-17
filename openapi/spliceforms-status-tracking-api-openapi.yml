@@ -111,36 +111,6 @@ paths:
     - url: https://api.stitch.com/processing
 components:
   schemas:
-    AccountOpeningResult:
-      type: object
-      title: AccountOpeningResult
-      description: Account opening result
-      properties:
-        accounts:
-          type: array
-          description: List of accounts opened as part of application processing
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/FDAccountOpeningResult'
-      required:
-      - accounts
-      x-stoplight:
-        id: 5c1hf4pjkjkjw
-    FDAccountOpeningResult:
-      type: object
-      title: FDAccountOpeningResult
-      x-stoplight:
-        id: p30gaesnmzwua
-      required:
-      - accountSerialNo
-      - accountNo
-      properties:
-        accountSerialNo:
-          $ref: '#/components/schemas/AccountSerialNo'
-        accountNo:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/NTK9s0hcXsQ
-        accountType:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/tCwO6x9ZNk0
     ValidationError:
       type: object
       x-stoplight:
@@ -189,6 +159,21 @@ components:
           - ERROR
           x-stoplight:
             id: kcvbyilxmlci5
+    AccountOpeningResult:
+      type: object
+      title: AccountOpeningResult
+      description: Account opening result
+      properties:
+        accounts:
+          type: array
+          description: List of accounts opened as part of application processing
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/FDAccountOpeningResult'
+      required:
+      - accounts
+      x-stoplight:
+        id: 5c1hf4pjkjkjw
     ProblemJson:
       type: object
       x-stoplight:
@@ -249,17 +234,21 @@ components:
             $ref: '#/components/schemas/ValidationError'
           x-stoplight:
             id: uxclbrhmspafm
-    AccountSerialNo:
-      type: integer
-      title: AccountSerialNo
-      description: Indicates the serial number of the account which is added to the application
-      format: int32
-      minimum: 1
-      maximum: 1
-      examples:
-      - 1
+    FDAccountOpeningResult:
+      type: object
+      title: FDAccountOpeningResult
       x-stoplight:
-        id: myofrfpy3wo2a
+        id: p30gaesnmzwua
+      required:
+      - accountSerialNo
+      - accountNo
+      properties:
+        accountSerialNo:
+          $ref: '#/components/schemas/AccountSerialNo'
+        accountNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/NTK9s0hcXsQ
+        accountType:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/tCwO6x9ZNk0
     ETBFDApplicationStatus:
       type: object
       title: ETBFDApplicationStatus
@@ -273,9 +262,9 @@ components:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/9mKfsqolpW4
         accountOpeningResult:
           $ref: '#/components/schemas/AccountOpeningResult'
-    AccountSerialNumber:
+    AccountSerialNo:
       type: integer
-      title: AccountSerialNumber
+      title: AccountSerialNo
       description: Indicates the serial number of the account which is added to the application
       format: int32
       minimum: 1
@@ -315,6 +304,17 @@ components:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/CXUS5RjjXpQ
         accountType:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/R8MDJ7uw3Ao
+    AccountSerialNumber:
+      type: integer
+      title: AccountSerialNumber
+      description: Indicates the serial number of the account which is added to the application
+      format: int32
+      minimum: 1
+      maximum: 1
+      examples:
+      - 1
+      x-stoplight:
+        id: myofrfpy3wo2a
 x-refined-from:
 - spliceforms-capture-services-openapi.yml
 - spliceforms-processing-service-openapi.yml

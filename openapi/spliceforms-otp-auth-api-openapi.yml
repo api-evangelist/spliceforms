@@ -171,106 +171,6 @@ paths:
       - OTP Auth
 components:
   schemas:
-    OTPChallengeRequest:
-      type: object
-      title: OTPChallengeRequest
-      x-stoplight:
-        id: r7ybne8md89ak
-      required:
-      - channelId
-      - identity
-      properties:
-        channelId:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/GirFFZFRFvU
-        identity:
-          oneOf:
-          - $ref: '#/components/schemas/MobileAndDob'
-          - $ref: '#/components/schemas/MobileAndPan'
-    OTPAuthSession:
-      type: string
-      title: OTPAuthSession
-      description: Encrypted string that contains OTP Auth session information
-      pattern: ^.*$
-      minLength: 1
-      maxLength: 1000
-      examples:
-      - dsf23rfvdf
-      x-stoplight:
-        id: hlir38dud4lqd
-    OTPAuthResponse:
-      type: object
-      title: OTPAuthResponse
-      x-stoplight:
-        id: 8gfzq9ydu7h4h
-      required:
-      - accessToken
-      properties:
-        accessToken:
-          $ref: '#/components/schemas/AccessToken'
-        idToken:
-          $ref: '#/components/schemas/IDToken'
-    OTPChallengeResponse:
-      type: object
-      title: OTPChallengeResponse
-      x-stoplight:
-        id: flc3tvrlwt18y
-      required:
-      - expiresAt
-      - session
-      properties:
-        expiresAt:
-          description: The timestamp when the OTP will expire
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/fUrz7DdiN1w
-        remainingAttempts:
-          type: integer
-          description: The number of attempts remaining for the user to enter OTP
-          format: int32
-          minimum: 0
-          maximum: 5
-          examples:
-          - 3
-        session:
-          $ref: '#/components/schemas/OTPAuthSession'
-    OTPChallengeAnswer:
-      type: object
-      title: OTPChallengeAnswer
-      x-stoplight:
-        id: o3ws0wqyuieha
-      required:
-      - session
-      - otp
-      properties:
-        session:
-          $ref: '#/components/schemas/OTPAuthSession'
-        otp:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/BjPbf7v8HHs
-    MobileAndPan:
-      type: object
-      title: MobileAndPan
-      x-stoplight:
-        id: w09k4eguwygih
-      required:
-      - mobileNo
-      - pan
-      properties:
-        mobileNo:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/LT9qrA1aRC4
-        pan:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/iQ8vF5vM3JE
-    AccessToken:
-      type: object
-      title: AccessToken
-      description: The access tokem
-      x-stoplight:
-        id: htg0m1yjnmnmt
-      required:
-      - token
-      - expiresAt
-      properties:
-        token:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/ZTFcuZFw8X0
-        expiresAt:
-          x-unresolved-stoplight-ref: stoplight://resources/overrides/Dudc9ZZNUk4
     ValidationError:
       type: object
       x-stoplight:
@@ -319,19 +219,35 @@ components:
           - ERROR
           x-stoplight:
             id: kcvbyilxmlci5
-    OTPResendRequest:
-      title: OTPResendRequest
-      x-stoplight:
-        id: sfzvrc1f6tv7q
+    IDToken:
       type: object
-      description: 'Request for resending OTP  '
+      title: IDToken
+      description: The ID token
+      x-stoplight:
+        id: q19i5cca208yy
       required:
-      - session
+      - token
+      - expiresAt
       properties:
-        session:
-          $ref: '#/components/schemas/OTPAuthSession'
-          x-stoplight:
-            id: fg52rp1kugcmt
+        token:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/ZTFcuZFw8X0
+        expiresAt:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/Dudc9ZZNUk4
+    OTPChallengeRequest:
+      type: object
+      title: OTPChallengeRequest
+      x-stoplight:
+        id: r7ybne8md89ak
+      required:
+      - channelId
+      - identity
+      properties:
+        channelId:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/GirFFZFRFvU
+        identity:
+          oneOf:
+          - $ref: '#/components/schemas/MobileAndDob'
+          - $ref: '#/components/schemas/MobileAndPan'
     ProblemJson:
       type: object
       x-stoplight:
@@ -392,6 +308,41 @@ components:
             $ref: '#/components/schemas/ValidationError'
           x-stoplight:
             id: uxclbrhmspafm
+    OTPChallengeResponse:
+      type: object
+      title: OTPChallengeResponse
+      x-stoplight:
+        id: flc3tvrlwt18y
+      required:
+      - expiresAt
+      - session
+      properties:
+        expiresAt:
+          description: The timestamp when the OTP will expire
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/fUrz7DdiN1w
+        remainingAttempts:
+          type: integer
+          description: The number of attempts remaining for the user to enter OTP
+          format: int32
+          minimum: 0
+          maximum: 5
+          examples:
+          - 3
+        session:
+          $ref: '#/components/schemas/OTPAuthSession'
+    OTPResendRequest:
+      title: OTPResendRequest
+      x-stoplight:
+        id: sfzvrc1f6tv7q
+      type: object
+      description: 'Request for resending OTP  '
+      required:
+      - session
+      properties:
+        session:
+          $ref: '#/components/schemas/OTPAuthSession'
+          x-stoplight:
+            id: fg52rp1kugcmt
     MobileAndDob:
       type: object
       title: MobileAndDob
@@ -405,12 +356,12 @@ components:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/LT9qrA1aRC4
         dob:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/UEKAfGKnXtA
-    IDToken:
+    AccessToken:
       type: object
-      title: IDToken
-      description: The ID token
+      title: AccessToken
+      description: The access tokem
       x-stoplight:
-        id: q19i5cca208yy
+        id: htg0m1yjnmnmt
       required:
       - token
       - expiresAt
@@ -419,6 +370,55 @@ components:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/ZTFcuZFw8X0
         expiresAt:
           x-unresolved-stoplight-ref: stoplight://resources/overrides/Dudc9ZZNUk4
+    OTPAuthResponse:
+      type: object
+      title: OTPAuthResponse
+      x-stoplight:
+        id: 8gfzq9ydu7h4h
+      required:
+      - accessToken
+      properties:
+        accessToken:
+          $ref: '#/components/schemas/AccessToken'
+        idToken:
+          $ref: '#/components/schemas/IDToken'
+    OTPChallengeAnswer:
+      type: object
+      title: OTPChallengeAnswer
+      x-stoplight:
+        id: o3ws0wqyuieha
+      required:
+      - session
+      - otp
+      properties:
+        session:
+          $ref: '#/components/schemas/OTPAuthSession'
+        otp:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/BjPbf7v8HHs
+    OTPAuthSession:
+      type: string
+      title: OTPAuthSession
+      description: Encrypted string that contains OTP Auth session information
+      pattern: ^.*$
+      minLength: 1
+      maxLength: 1000
+      examples:
+      - dsf23rfvdf
+      x-stoplight:
+        id: hlir38dud4lqd
+    MobileAndPan:
+      type: object
+      title: MobileAndPan
+      x-stoplight:
+        id: w09k4eguwygih
+      required:
+      - mobileNo
+      - pan
+      properties:
+        mobileNo:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/LT9qrA1aRC4
+        pan:
+          x-unresolved-stoplight-ref: stoplight://resources/overrides/iQ8vF5vM3JE
 x-stoplight:
   id: znydl40fblitz
 x-source: https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml

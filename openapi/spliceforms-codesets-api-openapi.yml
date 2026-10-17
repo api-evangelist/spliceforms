@@ -145,111 +145,6 @@ paths:
       - codesets
 components:
   schemas:
-    Codeset:
-      type: object
-      x-stoplight:
-        id: j6sffy52noqvn
-      title: Codeset
-      description: It represents a standardized collection of related codes used within the system
-      required:
-      - name
-      - codes
-      properties:
-        name:
-          type: string
-          description: The name of the codeset.
-          pattern: ^[a-zA-Z0-9]+$
-          minLength: 1
-          maxLength: 100
-          example: interestPaymentFrequency
-          x-stoplight:
-            id: a7cixbzfr3zl9
-        codes:
-          type: array
-          description: List of codes in a codeset
-          uniqueItems: true
-          items:
-            x-stoplight:
-              id: wv6q4syd23oe0
-            $ref: '#/components/schemas/Code'
-          x-stoplight:
-            id: nyhslubm2deqr
-    Code:
-      type: object
-      x-stoplight:
-        id: hsqnh5jhmn1wf
-      title: Code
-      description: Code against active Codeset
-      required:
-      - code
-      - name
-      properties:
-        code:
-          type: string
-          description: The code is one of the unique value in a codeset
-          pattern: ^[a-zA-Z0-9]+$
-          minLength: 1
-          maxLength: 100
-          examples:
-          - R
-          x-stoplight:
-            id: a50h5rj8ud405
-        name:
-          type: string
-          pattern: ^[a-zA-Z0-9]+$
-          minLength: 1
-          maxLength: 500
-          description: The human-readable name of the code, designed for display in user interfaces or logging purposes.
-          example: reinvestment
-          x-stoplight:
-            id: 85dn7af93nnmr
-    PaginatedResponse:
-      type: object
-      x-stoplight:
-        id: cd03j7c25sy2q
-      title: PaginatedResponse
-      required:
-      - totalRecords
-      - totalPages
-      - pageNo
-      - pageSize
-      properties:
-        totalRecords:
-          type: integer
-          description: Total number of records available.
-          format: int32
-          example: 45
-          minimum: 1
-          maximum: 10000
-          x-stoplight:
-            id: ng7t6wdgbqolv
-        totalPages:
-          type: integer
-          description: Total number of pages.
-          example: 4
-          minimum: 1
-          maximum: 1000
-          format: int32
-          x-stoplight:
-            id: tnb60gemsmgcg
-        pageNo:
-          type: integer
-          description: Current page number.
-          example: 2
-          minimum: 1
-          maximum: 100
-          format: int32
-          x-stoplight:
-            id: 2lvw64mf3ljcq
-        pageSize:
-          type: integer
-          description: Number of records per page.
-          example: 10
-          minimum: 1
-          maximum: 100
-          format: int32
-          x-stoplight:
-            id: lswzbcgxb87ul
     ValidationError:
       type: object
       x-stoplight:
@@ -358,6 +253,111 @@ components:
             $ref: '#/components/schemas/ValidationError'
           x-stoplight:
             id: uxclbrhmspafm
+    Codeset:
+      type: object
+      x-stoplight:
+        id: j6sffy52noqvn
+      title: Codeset
+      description: It represents a standardized collection of related codes used within the system
+      required:
+      - name
+      - codes
+      properties:
+        name:
+          type: string
+          description: The name of the codeset.
+          pattern: ^[a-zA-Z0-9]+$
+          minLength: 1
+          maxLength: 100
+          example: interestPaymentFrequency
+          x-stoplight:
+            id: a7cixbzfr3zl9
+        codes:
+          type: array
+          description: List of codes in a codeset
+          uniqueItems: true
+          items:
+            x-stoplight:
+              id: wv6q4syd23oe0
+            $ref: '#/components/schemas/Code'
+          x-stoplight:
+            id: nyhslubm2deqr
+    Code:
+      type: object
+      x-stoplight:
+        id: hsqnh5jhmn1wf
+      title: Code
+      description: Code against active Codeset
+      required:
+      - code
+      - name
+      properties:
+        code:
+          type: string
+          description: The code is one of the unique value in a codeset
+          pattern: ^[a-zA-Z0-9]+$
+          minLength: 1
+          maxLength: 100
+          examples:
+          - R
+          x-stoplight:
+            id: a50h5rj8ud405
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9]+$
+          minLength: 1
+          maxLength: 500
+          description: The human-readable name of the code, designed for display in user interfaces or logging purposes.
+          example: reinvestment
+          x-stoplight:
+            id: 85dn7af93nnmr
+    PaginatedResponse:
+      type: object
+      x-stoplight:
+        id: cd03j7c25sy2q
+      title: PaginatedResponse
+      required:
+      - totalRecords
+      - totalPages
+      - pageNo
+      - pageSize
+      properties:
+        totalRecords:
+          type: integer
+          description: Total number of records available.
+          format: int32
+          example: 45
+          minimum: 1
+          maximum: 10000
+          x-stoplight:
+            id: ng7t6wdgbqolv
+        totalPages:
+          type: integer
+          description: Total number of pages.
+          example: 4
+          minimum: 1
+          maximum: 1000
+          format: int32
+          x-stoplight:
+            id: tnb60gemsmgcg
+        pageNo:
+          type: integer
+          description: Current page number.
+          example: 2
+          minimum: 1
+          maximum: 100
+          format: int32
+          x-stoplight:
+            id: 2lvw64mf3ljcq
+        pageSize:
+          type: integer
+          description: Number of records per page.
+          example: 10
+          minimum: 1
+          maximum: 100
+          format: int32
+          x-stoplight:
+            id: lswzbcgxb87ul
 x-stoplight:
   id: p2yovmp4rufcv
 x-internal: true
