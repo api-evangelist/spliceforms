@@ -153,6 +153,8 @@ apis:
     https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
   baseURL: https://api.stitch.spliceforms.com/auth
   tags:
+  - Branches
+  tags_raw:
   - branches
   properties:
   - type: OpenAPI
@@ -212,6 +214,8 @@ apis:
     https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
   baseURL: https://api.stitch.spliceforms.com/auth
   tags:
+  - Calculators
+  tags_raw:
   - calculators
   properties:
   - type: OpenAPI
@@ -330,6 +334,8 @@ apis:
     https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
   baseURL: https://api.stitch.spliceforms.com/auth
   tags:
+  - Consents
+  tags_raw:
   - consents
   properties:
   - type: OpenAPI
@@ -507,6 +513,8 @@ apis:
     https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
   baseURL: https://api.stitch.spliceforms.com/auth
   tags:
+  - Location
+  tags_raw:
   - location
   properties:
   - type: OpenAPI
@@ -684,6 +692,8 @@ apis:
     https://github.com/spliceforms/stoplight-projects/blob/main/stitch-capture-services/auth-services-v1.0.yaml
   baseURL: https://api.stitch.spliceforms.com/auth
   tags:
+  - Submission
+  tags_raw:
   - submission
   properties:
   - type: OpenAPI
