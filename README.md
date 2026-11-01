@@ -64,5 +64,173 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Spliceforms is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github) and added to the network as a stub for full-pipeline profiling.
-- https://spliceforms.com/
+Spliceforms Enterprise Solutions (CIN U72200MH2022PTC395237) is a private limited company incorporated in India on 13 December 2022 that operates apibanking.com, an API and embedded-banking platform for financial institutions. It provides an API factory, a docs content platform and developer portal, and a partner management portal with SDKs, sandboxes and sample apps, to help banks, fintechs and corporates build partner integrations. It also publishes a Spectral API style guide on GitHub.
+
+**Areas:** Company · API Banking · Open Banking · Embedded Banking · Fintech · Developer Portal · Banking · India
+
+## Spliceforms on APIs.io
+
+Everything profiled for Spliceforms is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/spliceforms/](https://apis.io/providers/spliceforms/)** — or go straight to one of the APIs or properties below.
+
+### APIs (11)
+
+- [Spliceforms account data inquiry API](https://apis.io/apis/spliceforms/spliceforms-account-data-inquiry-api/) — Endpoints to inquire customer accounts information
+- [Spliceforms Branches API](https://apis.io/apis/spliceforms/spliceforms-branches-api/) — Endpoints for retrieving and managing bank branch information.
+- [Spliceforms Calculators API](https://apis.io/apis/spliceforms/spliceforms-calculators-api/) — Endpoints to fetch calculator results
+- [Spliceforms Codesets API](https://apis.io/apis/spliceforms/spliceforms-codesets-api/) — Endpoints to retrieve codesets information
+- [Spliceforms Consents API](https://apis.io/apis/spliceforms/spliceforms-consents-api/) — Endpoints dealing with consent management and definitions.
+- [Spliceforms data validations API](https://apis.io/apis/spliceforms/spliceforms-data-validations-api/) — Endpoints to verify customer information
+- [Spliceforms Form Capture API](https://apis.io/apis/spliceforms/spliceforms-form-capture-api/) — API endpoints for filling the application form information and submit for processing
+- [Spliceforms Location API](https://apis.io/apis/spliceforms/spliceforms-location-api/) — Endpoints related to geographical locations, including states and cities.
+- [Spliceforms OTP Auth API](https://apis.io/apis/spliceforms/spliceforms-otp-auth-api/) — API endpoints for token issuance on successful OTP authentication
+- [Spliceforms Status Tracking API](https://apis.io/apis/spliceforms/spliceforms-status-tracking-api/) — API endpoints for tracking the status of application processing
+- [Spliceforms Submission API](https://apis.io/apis/spliceforms/spliceforms-submission-api/) — API endpoints to initiate the application processing
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Spliceforms Stitch MCP (candidate)](https://apis.io/servers/spliceforms/spliceforms-stitch-mcp-candidate/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Spliceforms Agentic Access](https://apis.io/agentic-access/spliceforms/spliceforms-agentic-access/)
+
+#### JSON Schema (24)
+
+The data models the API reads and writes.
+
+- [ApplicationStatus92828](https://apis.io/schemas/spliceforms/spliceforms-application-status92828/)
+- [BankAccountOwnershipCheckRequest](https://apis.io/schemas/spliceforms/spliceforms-bank-account-ownership-check-request/)
+- [Branch](https://apis.io/schemas/spliceforms/spliceforms-branch/)
+- [City](https://apis.io/schemas/spliceforms/spliceforms-city/)
+- [ConsentDefinition](https://apis.io/schemas/spliceforms/spliceforms-consent-definition/)
+- [ETBFDApplicationForm](https://apis.io/schemas/spliceforms/spliceforms-etbfdapplication-form/)
+- [FDAccountWithOptionalPayout](https://apis.io/schemas/spliceforms/spliceforms-fdaccount-with-optional-payout/)
+- [FDMaturity](https://apis.io/schemas/spliceforms/spliceforms-fdmaturity/)
+- [FDMaturityCalculationRequest](https://apis.io/schemas/spliceforms/spliceforms-fdmaturity-calculation-request/)
+- [Form92828](https://apis.io/schemas/spliceforms/spliceforms-form92828/)
+- [Nominee](https://apis.io/schemas/spliceforms/spliceforms-nominee/)
+- [NomineeInquiryRequest](https://apis.io/schemas/spliceforms/spliceforms-nominee-inquiry-request/)
+- [OtherBankBranch](https://apis.io/schemas/spliceforms/spliceforms-other-bank-branch/)
+- [OTPAuthResponse](https://apis.io/schemas/spliceforms/spliceforms-otpauth-response/)
+- [OTPChallengeAnswer](https://apis.io/schemas/spliceforms/spliceforms-otpchallenge-answer/)
+- [OTPChallengeRequest](https://apis.io/schemas/spliceforms/spliceforms-otpchallenge-request/)
+- [OTPChallengeResponse](https://apis.io/schemas/spliceforms/spliceforms-otpchallenge-response/)
+- [OTPResendRequest](https://apis.io/schemas/spliceforms/spliceforms-otpresend-request/)
+- [PaginatedResponse](https://apis.io/schemas/spliceforms/spliceforms-paginated-response/)
+- [PayinRequest](https://apis.io/schemas/spliceforms/spliceforms-payin-request/)
+- [PayinSourcePreference](https://apis.io/schemas/spliceforms/spliceforms-payin-source-preference/)
+- [Staff](https://apis.io/schemas/spliceforms/spliceforms-staff/)
+- [State](https://apis.io/schemas/spliceforms/spliceforms-state/)
+- [VPAOwnershipCheckRequest](https://apis.io/schemas/spliceforms/spliceforms-vpaownership-check-request/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Spliceforms Context](https://apis.io/jsonld/spliceforms/spliceforms-context/)
+
+#### Overlays (5)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Spliceforms Auth Services Overlay](https://apis.io/overlays/spliceforms/spliceforms-auth-services-overlay/)
+- [Spliceforms Capture Services Overlay](https://apis.io/overlays/spliceforms/spliceforms-capture-services-overlay/)
+- [Spliceforms Data Services Overlay](https://apis.io/overlays/spliceforms/spliceforms-data-services-overlay/)
+- [Spliceforms Inquiry Services Overlay](https://apis.io/overlays/spliceforms/spliceforms-inquiry-services-overlay/)
+- [Spliceforms Processing Service Overlay](https://apis.io/overlays/spliceforms/spliceforms-processing-service-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Spliceforms API Rules](https://apis.io/rules/spliceforms/spliceforms-rules/)
+- [Spliceforms — stoplight projects rules](https://apis.io/rules/spliceforms/spliceforms-stoplight-projects-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Spliceforms Authentication](https://apis.io/security/spliceforms/spliceforms-authentication/)
+- [Spliceforms Domain Security](https://apis.io/security/spliceforms/spliceforms-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Spliceforms Plans Pricing](https://apis.io/plans/spliceforms/spliceforms-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Spliceforms Rate Limits](https://apis.io/rate-limits/spliceforms/spliceforms-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://spliceforms.com/)
+- [Support](https://apibanking.com/contact-us/)
+- [Blog](https://apibanking.substack.com/)
+- [GitHub](https://github.com/spliceforms)
+
+## API Evangelist rating
+
+**Kin Score 30.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 64.7 |
+| Contract governance | 62.9 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 8.9 |
+| Access clarity | 0.0 |
+
+**Agent readiness 29.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 8.7** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/spliceforms/](https://apis.io/providers/spliceforms/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Spliceforms: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/spliceforms/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
